@@ -1,0 +1,47 @@
+.titlo{
+    font-family: "Fredoka", sans-serif;
+    font-size: 3em;
+    text-align: center;
+    color: var(--main);
+}
+
+.container{
+    padding: 1em;
+}
+
+.actionsContainer{
+    text-align: right;
+}
+
+.actionsContainer button{
+    margin:10px;
+}
+
+.dataContainer{
+    width: 80%;
+    margin: auto;
+}
+.dataContainer div{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--main);
+}
+
+
+.secondContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+
+}
+
+.box{
+    text-align: center;
+    width: 300px;
+    height: 400px;
+    background-color: var(--secondary);
+    padding: 1em;
+    font-weight: bolder;
+}

@@ -7,4 +7,71 @@ body,
   box-sizing: border-box;
   margin: 0;
   font-family: "Inter", sans-serif;
+
+}
+
+:root {
+  --main: #31851e;
+  --mainDarker: #1b4a11;
+  --mainLighter: #caf1c2;
+  --secondary:#FFF2CC;
+  --red:#851e1e;
+  --lightRed: #eab8b8;
+  --yellow:#b58a0a;
+  --white:#f7f7f7;
+  --black:#393939;
+  --lightGray:#ebebeb;
+  --darkGray:#5b5b5b;
+  font-family: "Inter", sans-serif;
+
+}
+*{
+  font-family: "Inter", sans-serif;
+
+}
+
+.mainButtonGreen{
+  background-color: var(--mainLighter);
+  color: var(--mainDarker);
+  font-weight: 600;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+
+}
+.mainButtonGreen:hover{
+  color: var(--white);
+}
+
+
+.mainButtonRed{
+  background-color: var(--lightRed);
+  color: var(--red);
+  font-weight: 600;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+
+}
+.mainButtonRed:hover{
+  color: var(--white);
+}
+
+.mainButtonYellow{
+  background-color: var(--secondary);
+  color: var(--yellow);
+  font-weight: 600;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+
+}
+.mainButtonYellow:hover{
+  color: var(--white);
 }

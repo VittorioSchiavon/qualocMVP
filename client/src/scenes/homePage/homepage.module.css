@@ -1,0 +1,94 @@
+.firstRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
+.leftSection {
+  width: 50%;
+  align-items: center;
+  text-align: center;
+}
+
+.motto {
+  font-weight: 900;
+  color: var(--main);
+  font-family: "Fredoka", sans-serif;
+  font-size: 3em;
+  text-align: center;
+  margin: auto;
+}
+.spiegazione {
+  margin: auto;
+  display: block;
+  width: 500px;
+  text-align: left;
+  margin-top: 2em;
+  font-weight: 600;
+}
+
+.leftSection button {
+  margin: 2em;
+}
+.rightSection {
+  text-align: center;
+}
+
+.rightSection img {
+  height: 400px;
+}
+
+.secondRow {
+  background-color: var(--main);
+  transform: translateY(-5px);
+  padding: 4em;
+}
+
+.title {
+  color: white;
+  font-family: "Fredoka", Arial, Helvetica, sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+}
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5em;
+}
+.step {
+  text-align: center;
+  height: 10em;
+  width: 10em;
+  border-radius: 25% 75% 40% 60% / 56% 25% 75% 44%;
+  background-color: #fff2cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1em;
+  margin: 1em;
+}
+.step .num {
+  color: var(--main);
+  font-family: "Fredoka", Arial, Helvetica, sans-serif;
+  font-size: 4em;
+}
+.step .text {
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #434343;
+  padding-bottom: 1em;
+}
+
+.reverseWave {
+  transform: rotate(180deg) translateY(10px);
+}
+
+.secondRow button {
+  display: block;
+  text-align: center;
+  margin: auto;
+}

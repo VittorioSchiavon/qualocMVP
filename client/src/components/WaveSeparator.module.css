@@ -1,0 +1,9 @@
+.wavesContainer{
+    display: flex;
+    overflow-x: hidden;
+    user-select: none;
+}
+
+.wave{
+    height: 3em;
+}
