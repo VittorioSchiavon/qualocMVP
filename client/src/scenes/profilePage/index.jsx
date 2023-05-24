@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.token);
   const userId = useSelector((state) => state.user._id);
+  const isOwner= useSelector((state) => state.user.isOwner)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,8 +22,20 @@ const ProfilePage = () => {
   if (token==null) {
     return null;
   }
+
+  var link=`http://localhost:3001/users`
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(link, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  var link=`http://localhost:3001/users`
+  const deleteUser = async () => {
+    const response = await fetch(link, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -49,6 +62,14 @@ const ProfilePage = () => {
           >
             Logout
           </button>
+          {user.isOwner?           <button
+            className="mainButtonGreen"
+            onClick={() => {
+              navigate("/ilMioNegozio");
+            }}
+          >
+            Gestisci negozio
+          </button>:""}
           <button className="mainButtonGreen">Modifica</button>
           <button className="mainButtonRed">Elimina Account</button>
         </div>

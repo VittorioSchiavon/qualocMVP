@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import storeRoutes from "./routes/stores.js"
+import cartRoutes from "./routes/carts.js"
 
 //CONFIG
 const __filename = fileURLToPath(import.meta.url)
@@ -49,6 +50,7 @@ app.use("/auth", authRoutes);
 
 app.use("/users", userRoutes);
 app.use("/stores", storeRoutes);
+app.use("/carts", cartRoutes);
 /* ROUTES WITH FILES 
 app.use("/posts", postRoutes);
 */

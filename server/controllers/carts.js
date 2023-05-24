@@ -1,14 +1,15 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+
 import Cart from "../models/Cart.js";
 
 
 export const getCart = async (req, res) => {
     try {
-      const { userId } = req.params;
+      const userId = req.user.id;
       const cart = await Cart.findOne({ userID: userId });
       if (!cart) return res.status(400).send("Cart does not exist");
-      res.send(cart.products);
+
+      res.send(cart);
+
     } catch (err) {
       res.status(404).json({ message: err.message });
     }

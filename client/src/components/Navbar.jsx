@@ -34,9 +34,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  console.log(user)
-
-  
+ 
   const handleClick = () => {
     navigate('/');
   };
@@ -60,7 +58,7 @@ const Navbar = () => {
           :
           <div className={NavbarCSS.topnavIcons}>
             
-          <ShoppingCart className={NavbarCSS.icons}/>
+          <ShoppingCart onClick={() => navigate('/carrello')} className={NavbarCSS.icons}/>
           <Notifications className={NavbarCSS.icons}/>
           <button className="mainButtonGreen" onClick={() => navigate('/ilMioProfilo')}>{user.firstName}</button>
           </div>}

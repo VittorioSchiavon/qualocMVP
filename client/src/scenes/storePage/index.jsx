@@ -1,4 +1,4 @@
-import styles from "./profilePage.module.css";
+import styles from "./storePage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { useEffect, useState } from "react";
@@ -7,8 +7,10 @@ import { useParams } from "react-router-dom";
 
 const StorePage = () => {
   const navigate = useNavigate();
-  //var storeId = useParams();
-  var storeId="64688294cd9a48ecdfeac97a"
+  var storeId = useParams();
+  console.log("ciao")
+  console.log(storeId.id)
+  //var storeId="64688294cd9a48ecdfeac97a"
   if(!storeId) storeId="64688294cd9a48ecdfeac97a"
   const [store, setStore] = useState(null);
 
@@ -17,7 +19,7 @@ const StorePage = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getStore = async () => {
-    const response = await fetch(`http://localhost:3001/stores/${storeId}`, {
+    const response = await fetch(`http://localhost:3001/stores/${storeId.id}`, {
       method: "GET",
     });
     const data = await response.json();

@@ -1,13 +1,15 @@
 import express from "express";
 import {
-  getStore, getStores} from "../controllers/stores.js";
+  getStore, getStores, getMyStore} from "../controllers/stores.js";
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
 /* READ */
+router.get("/myStore",verifyToken, getMyStore);
 router.get("/:id", getStore);
-router.get("/", verifyToken, getStores);
+
+router.get("/", getStores);
 
 
 /* UPDATE */

@@ -14,14 +14,15 @@ const registerSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
 
-  shopName: yup.string(),
+  name: yup.string(),
   phone: yup.string(),
   tags: yup.string(),
   description: yup.string(),
   street: yup.string(),
+  streetNumber: yup.string(),
   city: yup.string(),
-  state: yup.string(),
-  zip: yup.string(),
+  country: yup.string(),
+  postalCode: yup.string(),
 });
 
 const initialValuesRegister = {
@@ -29,14 +30,14 @@ const initialValuesRegister = {
   lastName: "",
   email: "",
   password: "",
-  shopName: "",
+  name: "",
   phone: "",
   tags: "",
   description: "",
   street: "",
   city: "",
-  state: "",
-  zip: "",
+  country: "",
+  postalCode: "",
 };
 
 const Form = () => {
@@ -46,8 +47,9 @@ const Form = () => {
   const register = async (values, onSubmitProps) => {
     console.log("here");
     console.log(values);
+    values={...values, isOwner: true }
     const savedStoreResponse = await fetch(
-      "http://localhost:3001/auth/registerStore",
+      "http://localhost:3001/auth/registerUser",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -131,10 +133,10 @@ const Form = () => {
                 label="Nome negozio"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.shopName}
-                name="shopName"
-                error={Boolean(touched.shopName) && Boolean(errors.shopName)}
-                helperText={touched.shopName && errors.shopName}
+                value={values.name}
+                name="name"
+                error={Boolean(touched.name) && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
               />
               <TextField
                 label="Telefono"
@@ -174,6 +176,15 @@ const Form = () => {
                 error={Boolean(touched.street) && Boolean(errors.street)}
                 helperText={touched.street && errors.street}
               />
+                            <TextField
+                label="Numero"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.streetNumber}
+                name="streetNumber"
+                error={Boolean(touched.streetNumber) && Boolean(errors.streetNumber)}
+                helperText={touched.streetNumber && errors.streetNumber}
+              />
               <TextField
                 label="Città"
                 onBlur={handleBlur}
@@ -187,19 +198,19 @@ const Form = () => {
                 label="Stato"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.state}
-                name="state"
-                error={Boolean(touched.state) && Boolean(errors.state)}
-                helperText={touched.state && errors.state}
+                value={values.country}
+                name="country"
+                error={Boolean(touched.country) && Boolean(errors.country)}
+                helperText={touched.country && errors.country}
               />
               <TextField
                 label="ZIP"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.zip}
-                name="zip"
-                error={Boolean(touched.zip) && Boolean(errors.zip)}
-                helperText={touched.zip && errors.zip}
+                value={values.postalCode}
+                name="postalCode"
+                error={Boolean(touched.postalCode) && Boolean(errors.postalCode)}
+                helperText={touched.postalCode && errors.postalCode}
               />
             </div>
 

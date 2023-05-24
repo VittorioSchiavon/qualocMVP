@@ -2,11 +2,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Store from "../models/Store.js";
+import Cart from "../models/Cart.js";
 
 /* REGISTER USER */
 export const registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, isOwner } = req.body;
     console.log(req.body);
 
     const salt = await bcrypt.genSalt();
@@ -17,15 +18,49 @@ export const registerUser = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
+      isOwner,
     });
     const savedUser = await newUser.save();
+
+    const cart = new Cart({
+      userID: savedUser._id,
+      products: [],
+    });
+    const savedCart = await cart.save();
+
+    if (isOwner) {
+      const {
+        name,
+        description,
+        street,
+        streetNumber,
+        city,
+        country,
+        postalCode,
+        tags,
+      } = req.body;
+      console.log(req.body);
+
+      const newStore = new Store({
+        name,
+        description,
+        ownerID: savedUser._id,
+        street,
+        streetNumber,
+        city,
+        country,
+        postalCode,
+        tags: tags.split(","),
+      });
+      const savedStore = await newStore.save();
+    }
     res.status(201).json(savedUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-/* REGISTER STORE */
+/* REGISTER STORE 
 export const registerStore = async (req, res) => {
   try {
     const {
@@ -66,15 +101,13 @@ export const registerStore = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
+*/
 /* LOGGING IN */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    const store = await Store.findOne({ email: email });
-    if (!user && !store)
-      return res.status(400).json({ msg: "User or Store do not exist. " });
+    if (!user) return res.status(400).json({ msg: "User do not exist. " });
 
     if (user != null) {
       const isMatch = await bcrypt.compare(password, user.password);
@@ -85,16 +118,6 @@ export const login = async (req, res) => {
       delete user.password;
       res.status(200).json({ token, user });
     }
-    if (store != null) {
-      const isMatch = await bcrypt.compare(password, store.password);
-      if (!isMatch)
-        return res.status(400).json({ msg: "Invalid credentials. " });
-
-      const token = jwt.sign({ id: store._id }, process.env.JWT_SECRET);
-      delete store.password;
-      res.status(200).json({ token, store });
-    }
-    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

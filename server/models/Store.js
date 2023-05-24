@@ -2,52 +2,44 @@ import mongoose from "mongoose";
 
 const StoreSchema = new mongoose.Schema(
   {
-    firstName:{
+    name: {
       type: String,
       required: true,
-  },
-  lastName:{
+    },
+    description: {
+      type: String,
+    },
+    ownerID: {
       type: String,
       required: true,
-  },
-  shopName:{
+    },
+    street: {
       type: String,
       required: true,
-  },
-  email:{
+    },
+    streetNumber: {
+        type: Number,
+        required: true,
+      },
+    city: {
       type: String,
       required: true,
-      unique: true,
-  },
-  phone:{
-      type: String,
-  },
-  tags:{
-      type: [String],
-      required: true,
-  },
-  password:{
+    },
+    country: {
       type: String,
       required: true,
-  },
-  description:{
+    },
+    postalCode: {
       type: String,
       required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    tags: [String],
   },
-  street:{
-      type: String,
-  },
-  city:{
-      type: String,
-      required: true,
-  },
-  state:{
-      type: String,
-  },
-  zip:{
-      type: String,
-  }
-  },
+
   { timestamps: true }
 );
 

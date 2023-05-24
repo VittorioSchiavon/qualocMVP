@@ -5,7 +5,8 @@ import ProfilePage from 'scenes/profilePage';
 import NewProfilePage from 'scenes/newProfilePage';
 import NewStorePage from 'scenes/newStorePage';
 import StorePage from 'scenes/storePage';
-
+import CartPage from 'scenes/cartPage';
+import MyStorePage from 'scenes/myStorePage';
 function App() {
   return (
     <div className="app">
@@ -16,7 +17,9 @@ function App() {
         <Route path="/creaNegozio" element={<NewStorePage/>}/>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/ilMioProfilo" element={<ProfilePage/>}/>
+        <Route path="/ilMioNegozio" element={<MyStorePage/>}/>
         <Route path="/negozio/:id" element={<StorePage/>}/>
+        <Route path="/carrello" element={<CartPage/>}/>
       </Routes>
       </BrowserRouter>
 
