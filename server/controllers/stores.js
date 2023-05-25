@@ -6,9 +6,8 @@ const { ObjectId } = mongoose.Types;
 /* READ */
 export const getStore = async (req, res) => {
   try {
-    console.log("addwawadawdadassdacisc ")
-    const id = req.params;
-    const store = await Store.findById(id);
+    const store = await Store.findOne({ _id: req.params.id });
+    console.log(store)
     res.status(200).json(store);
   } catch (err) {
     res.status(404).json({ message: err.message });

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "state";
 import { useNavigate } from "react-router-dom";
+import CartProduct from "components/CartProduct";
 
 const CartPage = () => {
 
@@ -23,6 +24,7 @@ const CartPage = () => {
     });
     const data = await response.json();
     setCart(data);
+    console.log("carrello", data)
 
   };
 
@@ -33,12 +35,17 @@ const CartPage = () => {
       <Navbar />
 
       <div className={styles.container}>
+      <div className={styles.title}>Carrello</div>
         <div className={styles.contentContainer}>
-          <div>Carrello</div>
-          <div>
-            {cart.userID }
-          </div>
+            {cart.products.map((prod)=>{
+              return <CartProduct product={prod}/>
+            })}
+                    <div>
+          totale: 2345
+          <button className="mainButtonYellow">Acquista</button>
         </div>
+        </div>
+
       </div>
       <Footer />
     </>

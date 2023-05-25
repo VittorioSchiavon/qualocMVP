@@ -1,0 +1,22 @@
+.card{
+    height: fit-content;
+    background-color: var(--secondary);
+    display: flex;
+    flex-wrap: wrap ;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 2em;
+    margin: 1em;
+}
+
+.icon{
+    height: 100px;
+    width: 100px;
+    mix-blend-mode: darken;
+}
+
+
+.name{
+    font-weight: bolder;
+}

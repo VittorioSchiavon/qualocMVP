@@ -12,8 +12,8 @@ export const getProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const Product = await Product.find();
-    res.status(200).json(Product);
+    const product = await Product.find();
+    res.status(200).json(product);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -42,10 +42,12 @@ export const addProduct = async (req, res) => {
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
+    brand: req.body.brand,
     shippingCost: req.body.shippingCost,
-    shopId: req.user._id,
+    shopID: req.user.id,
     tags: req.body.tags.split(","),
     options: req.body.options.split(","),
+    isTemp: false,
   });
   try {
     console.log(product);

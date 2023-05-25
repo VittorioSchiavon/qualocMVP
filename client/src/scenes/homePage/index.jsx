@@ -1,8 +1,8 @@
 import Navbar from "components/Navbar.jsx";
 import Footer from "components/Footer";
 import styles from "./homepage.module.css";
-import StoreCard from "components/StoreCard";
 import StoreCarousel from "components/StoreCarousel";
+import ProductCarousel from "components/ProductCarousel";
 const HomePage = () => {
   return (
     <div>
@@ -92,6 +92,8 @@ const HomePage = () => {
         </svg>
         <div>I migliori negozi della tua zona</div>
         <StoreCarousel/>
+        <div>I migliori prodotti della tua zona</div>
+        <ProductCarousel/>
       <Footer />
     </div>
   );
