@@ -24,7 +24,10 @@ const StorePage = () => {
     });
     const data = await response.json();
     setStore(data);
+    console.log("🚀 ~ file: index.jsx:29 ~ getStore ~ data:", data)
+
   };
+  
 
 
   if (!store) return null;
@@ -33,21 +36,23 @@ const StorePage = () => {
     <>
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.titlo}>{store.shopName}</div>
+        <img src="/assets/storeIcon.png" alt="" className={styles.storeImg}/>
         <div className={styles.tagContainer}>
-          <div className="mainButtonYellow">test</div>
+          {store.tags!=null && store.tags.map((el)=>{
+            return <div className="mainButtonYellow">{el}</div>
+          })}
         </div>
+        <div className={styles.titlo}>{store.name}</div>
+
         <div className={styles.dataContainer}>
           <div className={styles.dataContainer}>
             <div className={styles.name}>
-              nome: {store.firstName + " " + store.lastName}
+              {store.street + " " + store.streetNumber+ ", " + store.city + " " + store.postalCode}
             </div>
-            <div className={styles.email}>email: {store.email}</div>
+            <div className={styles.email}>{store.description}</div>
           </div>
         </div>
         <div className={styles.secondContainer}>
-        <div className={styles.box}>il mio carrello</div>
-            <div className={styles.box}>I miei ordini</div>
         </div>
       </div>
       <Footer />

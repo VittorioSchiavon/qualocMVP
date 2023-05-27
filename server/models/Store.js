@@ -18,9 +18,9 @@ const StoreSchema = new mongoose.Schema(
       required: true,
     },
     streetNumber: {
-        type: Number,
-        required: true,
-      },
+      type: Number,
+      required: true,
+    },
     city: {
       type: String,
       required: true,

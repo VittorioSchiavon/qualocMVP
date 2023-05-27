@@ -37,10 +37,10 @@ const CartProduct = (props) => {
       },
         body: JSON.stringify(props.product),
       }
-    ).then((result) => { 
-      window.location.reload();
-        })
+    )
+       
     const savedStore = await savedStoreResponse.json();
+    window.location.reload();
 
   };
 
@@ -54,7 +54,7 @@ const CartProduct = (props) => {
           <div
             className={styles.name}
             onClick={() => {
-              navigate("/prodotto/" + product.productID);
+              navigate("/prodotto/" + product._id);
             }}
           >
             {product.name}

@@ -15,7 +15,6 @@ const registerSchema = yup.object().shape({
   password: yup.string().required("required"),
 
   name: yup.string(),
-  phone: yup.string(),
   tags: yup.string(),
   description: yup.string(),
   street: yup.string(),
@@ -31,7 +30,6 @@ const initialValuesRegister = {
   email: "",
   password: "",
   name: "",
-  phone: "",
   tags: "",
   description: "",
   street: "",
@@ -137,15 +135,6 @@ const Form = () => {
                 name="name"
                 error={Boolean(touched.name) && Boolean(errors.name)}
                 helperText={touched.name && errors.name}
-              />
-              <TextField
-                label="Telefono"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.phone}
-                name="phone"
-                error={Boolean(touched.phone) && Boolean(errors.phone)}
-                helperText={touched.phone && errors.phone}
               />
               <TextField
                 label="Tags(separa con',')"

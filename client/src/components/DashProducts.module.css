@@ -1,0 +1,41 @@
+.container{
+    align-items: center;
+
+}
+.container:first-child{
+    margin-left:1em ;
+}
+.product{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    padding-left: 3em;
+    padding-right:3em;
+    align-items: center;
+
+    border: 1px solid black;
+}
+
+form{
+    display: flex;
+    flex-wrap: wrap;
+}
+input{
+    display: block;
+    width: 80%;
+    border-radius: 20px;
+    background-color: var(--secondary);
+    border: none;
+    height: 2em;
+    padding: 1em;
+    margin: 10px;
+    padding-left: 3em;
+}
+
+.actions{
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    gap: 2em;
+}

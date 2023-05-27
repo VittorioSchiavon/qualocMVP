@@ -28,34 +28,28 @@ export const registerUser = async (req, res) => {
     });
     const savedCart = await cart.save();
 
-    if (isOwner) {
-      const {
-        name,
-        description,
-        street,
-        streetNumber,
-        city,
-        country,
-        postalCode,
-        tags,
-      } = req.body;
-      console.log(req.body);
+    if (!isOwner) return res.status(200).json(savedUser);
 
-      const newStore = new Store({
-        name,
-        description,
-        ownerID: savedUser._id,
-        street,
-        streetNumber,
-        city,
-        country,
-        postalCode,
-        tags: tags.split(","),
-      });
-      const savedStore = await newStore.save();
-    }
-    res.status(201).json(savedUser);
+    console.log(req.body);
+
+    const newStore = new Store({
+      name: req.body.name,
+      description: req.body.description,
+      ownerID: savedUser._id,
+      street: req.body.street,
+      streetNumber: req.body.streetNumber,
+      city: req.body.city,
+      country: req.body.country,
+      postalCode: req.body.postalCode,
+      tags: req.body.tags.split(","),
+    });
+    console.log("newStore", newStore);
+    const savedStore = await newStore.save();
+    console.log("saved store", savedStore);
+
+    res.status(200).json(savedUser);
   } catch (err) {
+    console.log(err.message);
     res.status(500).json({ error: err.message });
   }
 };

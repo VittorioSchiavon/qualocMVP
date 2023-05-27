@@ -28,8 +28,8 @@ const store= props.store
     <img className={styles.icon} src="/assets/storeIcon.png"/>
 
     <div>
-    <div className={styles.name}>{store.shopName}</div>
-    <div className={styles.street}>{store.street}</div>
+    <div className={styles.name}>{store.name}</div>
+    <div className={styles.street}>{store.street +" "+ store.streetNumber}</div>
     </div>
 
   </div>

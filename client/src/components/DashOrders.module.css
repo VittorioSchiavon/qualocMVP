@@ -1,0 +1,43 @@
+.container{
+    background-color: var(--secondary);
+    align-items: center;
+    text-align: center;
+    padding: 3em;
+
+}
+
+.card{
+    background-color: white;
+    padding: 2em;
+    border-radius: 20px;
+    align-items: center;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1em;
+}
+
+.cardTitle{
+    font-weight: bolder;
+    color: var(--main);
+    text-align: left;
+}
+
+.order{
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid rgb(178, 178, 178) 1px ;
+}
+
+.products{
+    cursor: pointer;
+}
+
+.seeMore{
+    color: var(--main);
+    margin-top: 2em;
+    display: block;
+
+}

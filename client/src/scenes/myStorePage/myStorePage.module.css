@@ -1,7 +1,7 @@
 .titlo{
     font-family: "Fredoka", sans-serif;
-    font-size: 3em;
-    text-align: center;
+    font-size: 2em;
+    text-align: left;
     color: var(--main);
 }
 
@@ -44,4 +44,30 @@
     background-color: var(--secondary);
     padding: 1em;
     font-weight: bolder;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    
+}
+.navbar li{
+    text-decoration: none;
+    list-style-type: none;
+    cursor: pointer;
+    background-color: var(--secondary);
+    width: 100px;
+    height: 100%;
+    padding: 1em;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.navbar li:hover{
+    color: var(--main);
+    background-color: white;
+
 }

@@ -45,3 +45,16 @@
     padding: 1em;
     font-weight: bolder;
 }
+
+.storeImg{
+    width: 20em;
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.tagContainer{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}

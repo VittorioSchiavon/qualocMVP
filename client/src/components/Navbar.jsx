@@ -43,7 +43,7 @@ const Navbar = () => {
     <div>
       <div id={NavbarCSS.topnav}>
         <img
-          src="assets/logo.png"
+          src="/assets/logo.png"
           alt="logo"
           id={NavbarCSS.logo}
           onClick={handleClick}
@@ -61,6 +61,14 @@ const Navbar = () => {
           <ShoppingCart onClick={() => navigate('/carrello')} className={NavbarCSS.icons}/>
           <Notifications className={NavbarCSS.icons}/>
           <button className="mainButtonGreen" onClick={() => navigate('/ilMioProfilo')}>{user.firstName}</button>
+          {user.isOwner?           <button
+            className="mainButtonGreen"
+            onClick={() => {
+              navigate("/ilMioNegozio");
+            }}
+          >
+            Gestisci negozio
+          </button>:""}
           </div>}
         </div>
       

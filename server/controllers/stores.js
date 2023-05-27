@@ -26,10 +26,8 @@ export const getStores = async (req, res) => {
 export const getMyStore = async (req, res) => {
   console.log("i'jnc sdcisc ")
   try {
-    console.log("i'jnc sdcisc ")
-    const ownerId = new ObjectId(req.user.id);
     console.log(req.user.id)
-    const store = await Store.findOne({ ownerID: ownerId });
+    const store = await Store.findOne({ ownerID: req.user.id });
     res.status(200).json(store);
   } catch (err) {
     console.log(err)

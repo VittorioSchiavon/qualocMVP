@@ -1,0 +1,59 @@
+.cardContainer {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 4em;
+    text-align: center;
+    flex-wrap: wrap;
+}
+.container{
+    background-color: var(--secondary);
+    align-items: center;
+    text-align: center;
+
+}
+
+.card{
+    background-color: white;
+    padding: 2em;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    text-align: center;
+    -webkit-box-shadow: 2px 3px 18px 1px #C9C9C9;
+    -moz-box-shadow: 2px 3px 18px 1px #C9C9C9;
+    -o-box-shadow: 2px 3px 18px 1px #C9C9C9;
+    box-shadow: 2px 3px 18px 1px #C9C9C9;
+}
+
+.icon{
+    font-size: 4em;
+    width: 50%;
+}
+
+.data{
+    font-size: 2em;
+    font-weight: bolder;
+    color: var(--main);
+    text-align: center;
+    width: 50%;
+}
+.secondRow{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+.topSelling{
+    height: 400px;
+    background-color: white;
+    padding: 2em;
+    border-radius: 20px;
+    align-items: center;
+    width: 400px;
+
+}
