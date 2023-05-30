@@ -9,6 +9,7 @@ import CartPage from 'scenes/cartPage';
 import MyStorePage from 'scenes/myStorePage';
 import NewProductPage from 'scenes/newProductPage';
 import ProductPage from 'scenes/productPage';
+import ChatPage from 'scenes/chatPage';
 function App() {
   return (
     <div className="app">
@@ -24,6 +25,7 @@ function App() {
         <Route path="/carrello" element={<CartPage/>}/>
         <Route path="/aggiungiProdotto" element={<NewProductPage/>}/>
         <Route path="/prodotto/:id" element={<ProductPage/>}/>
+        <Route path="/chat" element={<ChatPage/>}/>
       </Routes>
       </BrowserRouter>
 

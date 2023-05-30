@@ -8,7 +8,6 @@ const router = express.Router();
 /* READ */
 router.get("/myStore",verifyToken, getMyStore);
 router.get("/:id", getStore);
-
 router.get("/", getStores);
 
 

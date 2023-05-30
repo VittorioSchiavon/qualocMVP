@@ -1,0 +1,19 @@
+.conversation{
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    cursor: pointer;
+}
+.conversationIcon{
+    background-color: var(--main);
+    border-radius: 100%;
+    height: 2em;
+    width: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+    font-weight: 900;
+    margin-right: 1em;
+}

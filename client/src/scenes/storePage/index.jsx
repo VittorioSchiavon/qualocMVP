@@ -2,11 +2,15 @@ import styles from "./storePage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const StorePage = () => {
   const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
+
   var storeId = useParams();
   console.log("ciao")
   console.log(storeId.id)
@@ -29,6 +33,24 @@ const StorePage = () => {
   };
   
 
+    const createConversation = async () => {
+      
+      const conv={receiverID: store.ownerID}
+      const savedConversationResponse = await fetch(
+        "http://localhost:3001/conversations/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(conv),
+        }
+      );
+      const savedConversation = await savedConversationResponse.json();
+      navigate("/chat")
+    }; 
+    
 
   if (!store) return null;
 
@@ -36,6 +58,7 @@ const StorePage = () => {
     <>
       <Navbar />
       <div className={styles.container}>
+        <button className="mainButtonGreen" onClick={createConversation}>Manda un messaggio!</button>
         <img src="/assets/storeIcon.png" alt="" className={styles.storeImg}/>
         <div className={styles.tagContainer}>
           {store.tags!=null && store.tags.map((el)=>{

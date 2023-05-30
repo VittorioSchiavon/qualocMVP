@@ -1,7 +1,6 @@
 import Store from "../models/Store.js";
+import User from "../models/User.js";
 import mongoose from "mongoose";
-
-const { ObjectId } = mongoose.Types;
 
 /* READ */
 export const getStore = async (req, res) => {
