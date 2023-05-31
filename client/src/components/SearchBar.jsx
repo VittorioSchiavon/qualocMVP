@@ -1,11 +1,15 @@
 import styles from "./SearchBar.module.css";
 import { Search } from "@mui/icons-material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
+  const [query, setQuery] = useState("");
+
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/search"+"lol");
+    
+    navigate("/cerca/"+ query);
   };
 
   return (
@@ -14,8 +18,9 @@ const SearchBar = () => {
       action="search.html"
       className={styles.searchContainer}
     >
-      <input type="text" placeholder="cerca..." />
-      <button type="submit" onClick={handleClick}>
+      <input type="text" value={query}  placeholder="cerca..." onChange={(e) => setQuery(e.target.value)
+    } />
+      <button type="submit" onClick={handleClick} > 
         <div>
           <Search />
         </div>

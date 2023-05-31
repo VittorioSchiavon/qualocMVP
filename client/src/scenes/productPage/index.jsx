@@ -11,13 +11,15 @@ const ProductPage = () => {
   const navigate = useNavigate();
   var productId = useParams();
   const token = useSelector((state) => state.token);
+  const [option, setOption] = useState("");
+
 
   console.log("ciao")
   console.log(productId.id)
   //var productId="64688294cd9a48ecdfeac97a"
   if(!productId) productId="64688294cd9a48ecdfeac97a"
   const [product, setProduct] = useState(null);
-
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     getProduct();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -28,14 +30,15 @@ const ProductPage = () => {
     });
     const data = await response.json();
     setProduct(data);
+    setOption(data.options[0])
+    console.log("product",product)
   };
 
   const addToCart = async () => {
-    console.log("here");
     const values={
       productID: product._id,
-      quantity: 1,
-      option: product.options[0],
+      quantity: quantity,
+      option: option,
       price: product.price
     }
     console.log(values);
@@ -67,7 +70,12 @@ const ProductPage = () => {
             <div className={styles.name}>
               Spedizione: {product.shippingCost + "€ "}
             </div>
-            <div className={styles.email}>opzioni: {product.options}</div>
+            <span>opzioni:</span>
+            <select className={styles.email} value={option} onChange={(e) => setOption(e.target.value)} >
+              {product?.options.map((opt)=> <option value={opt}>{opt}</option> )}</select>
+              <span>quantità:</span>
+              <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
+
           </div>
         </div>
         <button className="mainButtonGreen" onClick={addToCart}>Aggiungi al carrello</button>

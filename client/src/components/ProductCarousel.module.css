@@ -3,5 +3,8 @@
     gap: 1em;
     align-items: center;
     justify-content: center;
-    
+    max-width: 100%;
+    overflow-x: scroll;
+    padding-left:300px;
+
 }

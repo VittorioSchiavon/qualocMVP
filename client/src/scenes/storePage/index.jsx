@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import ProductCarousel from "components/ProductCarousel";
 
 const StorePage = () => {
   const navigate = useNavigate();
@@ -76,6 +77,8 @@ const StorePage = () => {
           </div>
         </div>
         <div className={styles.secondContainer}>
+          <div className={styles.title}>Prodotti del negozio</div>
+          <ProductCarousel storeID={store._id}/>
         </div>
       </div>
       <Footer />

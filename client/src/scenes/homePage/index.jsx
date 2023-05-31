@@ -93,7 +93,7 @@ const HomePage = () => {
         <div>I migliori negozi della tua zona</div>
         <StoreCarousel/>
         <div>I migliori prodotti della tua zona</div>
-        <ProductCarousel/>
+        <ProductCarousel storeID=""/>
       <Footer />
     </div>
   );

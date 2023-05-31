@@ -60,6 +60,7 @@ const CartProduct = (props) => {
             {product.name}
           </div>
           <div className={styles.street}>{props.product.quantity}</div>
+          <div className={styles.street}>{props.product.option}</div>
           <div className={styles.street}>{props.product.price}</div>
           <button className="mainButtonRed"             onClick={() => {
               removeProduct();

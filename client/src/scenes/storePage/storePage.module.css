@@ -29,14 +29,16 @@
 
 
 .secondContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+
     margin: 2em;
 
 }
-
+.secondContainer .title{
+    text-align: center;
+    font-size: 2em;
+    font-weight: 900;
+    color: var(--main);
+}
 .box{
     text-align: center;
     width: 300px;

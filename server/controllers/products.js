@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import Fuse from 'fuse.js';
 
 /* READ */
 export const getProduct = async (req, res) => {
@@ -49,6 +50,7 @@ export const editProduct = async (req, res) => {
 
 export const getStoreProduct = async (req, res) => {
   try {
+    console.log("prodi di store")
     const products = await Product.find({ shopID: req.params.id });
     console.log(products)
     res.json(products);
@@ -78,3 +80,32 @@ export const addProduct = async (req, res) => {
     res.status(400).send(err);
   }
 };
+
+
+
+export const searchProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    const options = {
+      minMatchCharLength: 2,
+      keys: [
+          
+        "name",
+        "tags",
+        "description"
+      ]
+    };
+    
+    const fuse = new Fuse(products, options);
+    var fuseResults=fuse.search(req.params.query);
+    let finalResults=[];
+    fuseResults.forEach(el=>{
+        finalResults.push(el.item)
+    })
+    res.status(200).send(finalResults);
+  } catch (err) {
+    console.log(err)
+    res.status(400).send(err);
+  }
+};
+

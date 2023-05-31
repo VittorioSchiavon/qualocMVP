@@ -1,11 +1,12 @@
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import styles from "./chatPage.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import Conversation from "components/Conversation";
+import Message from "components/Message";
 
 const ChatPage = () => {
 
@@ -17,6 +18,7 @@ const ChatPage = () => {
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
+  const divRef = useRef(null);
   useEffect(() => {
     getConversations();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -46,6 +48,7 @@ const ChatPage = () => {
       }
     };
     getMessages();
+    divRef?.current?.scrollIntoView({ behavior: 'smooth' });
   }, [currentChat]);
 
   
@@ -76,6 +79,7 @@ const ChatPage = () => {
   };
 
 
+
   return (
     <>
       <div className={styles.container}>
@@ -88,19 +92,26 @@ const ChatPage = () => {
             </div>
           ))}
       </div>
+      {currentChat ? (
+
+     
       <div className={styles.chat}>
         <div className={styles.mexContainer}>
         {messages.map((m) => (
-                    <div>
-                    {m.text}
-                    </div>
+          <Message message={m} own={m.senderID === user._id}/>
                   ))}
+                  <div ref={divRef} />
         </div>
         <form className={styles.newMex}>
           <input type="text" onChange={(e) => setNewMessage(e.target.value)} placeholder="scrivi un messaggio..." value={newMessage}/>
           <button type="submit" class="mainButtonGreen" onClick={handleSubmit}>invia</button>
         </form>
       </div>
+      ):(
+      <span className="noConversationText">
+      Open a conversation to start a chat.
+    </span>
+      )}
       </div>
 
     </>

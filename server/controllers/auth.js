@@ -43,7 +43,6 @@ export const registerUser = async (req, res) => {
       postalCode: req.body.postalCode,
       tags: req.body.tags.split(","),
     });
-    console.log("newStore", newStore);
     const savedStore = await newStore.save();
     console.log("saved store", savedStore);
 

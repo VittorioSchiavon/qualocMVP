@@ -57,7 +57,7 @@ const Navbar = () => {
           </div>
           :
           <div className={NavbarCSS.topnavIcons}>
-            
+            <Message onClick={() => navigate('/chat')} className={NavbarCSS.icons}/>
           <ShoppingCart onClick={() => navigate('/carrello')} className={NavbarCSS.icons}/>
           <Notifications className={NavbarCSS.icons}/>
           <button className="mainButtonGreen" onClick={() => navigate('/ilMioProfilo')}>{user.firstName}</button>
