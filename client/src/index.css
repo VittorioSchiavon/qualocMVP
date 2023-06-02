@@ -14,7 +14,7 @@ body,
   --main: #31851e;
   --mainDarker: #1b4a11;
   --mainLighter: #caf1c2;
-  --secondary:#FFF2CC;
+  --secondary:#fff1e0;
   --red:#851e1e;
   --lightRed: #eab8b8;
   --yellow:#b58a0a;
@@ -27,22 +27,23 @@ body,
 }
 *{
   font-family: "Inter", sans-serif;
-
+  transition: 0.2s ease-in-out;
 }
 
 .mainButtonGreen{
   background-color: var(--mainLighter);
   color: var(--mainDarker);
-  font-weight: 600;
+  font-weight: 800;
   padding: 1em 2em;
   border: none;
-  border-radius: 20px;
+  border-radius: 34567px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
 
 }
 .mainButtonGreen:hover{
-  color: var(--white);
+  background-color: var(--main);
+  color: white;
 }
 
 
@@ -74,4 +75,19 @@ body,
 }
 .mainButtonYellow:hover{
   color: var(--white);
+}
+
+
+.shadow{
+  box-shadow: 1px 1px 6px 1px #C9C9C9;
+}
+
+.mainTitle{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  font-family: "Fredoka", sans-serif;
+  color: var(--main);
+
 }

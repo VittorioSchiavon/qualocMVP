@@ -5,6 +5,7 @@
     justify-content: center;
     max-width: 100%;
     overflow-x: scroll;
-    padding-left:300px;
-
+    padding: 5em;
+    flex-wrap: wrap;
 }
+

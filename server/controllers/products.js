@@ -90,9 +90,9 @@ export const searchProducts = async (req, res) => {
       minMatchCharLength: 2,
       keys: [
           
-        "name",
+        "name"/*,
         "tags",
-        "description"
+        "description"*/
       ]
     };
     

@@ -31,7 +31,7 @@ const ProductPage = () => {
     const data = await response.json();
     setProduct(data);
     setOption(data.options[0])
-    console.log("product",product)
+    console.log("product",data)
   };
 
   const addToCart = async () => {
@@ -65,10 +65,11 @@ const ProductPage = () => {
         <div className={styles.titlo}>{product.name}</div>
           <div className={styles.dataContainer}>
             <div className={styles.name}>
-              prezzo: {product.price + "€ "}
+              prezzo: {product.price + "€ " + product.shippingCost + "€ (spedizione)"}
             </div>
+            {product?.tags.map((tag)=> <span>{tag+"-"}</span> )}
             <div className={styles.name}>
-              Spedizione: {product.shippingCost + "€ "}
+              {product.description}
             </div>
             <span>opzioni:</span>
             <select className={styles.email} value={option} onChange={(e) => setOption(e.target.value)} >

@@ -26,7 +26,9 @@ const StoreCarousel = () => {
   if (!stores) return null;
   console.log(stores)
   return (
+
     <div className={styles.container}>
+      <div className="mainTitle">I Migliori Negozi</div>
     {stores.map((store) =>
     <StoreCard store={store}/>)}
     </div>

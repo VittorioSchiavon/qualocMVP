@@ -28,6 +28,7 @@ const ProductCarousel = ({storeID}) => {
   if (!products) return null;
   return (
     <div className={styles.container}>
+      <div className="mainTitle">I Migliori Prodotti</div>
     {products.map((product) =>
     <ProductCard product={product}/>)}
     </div>
