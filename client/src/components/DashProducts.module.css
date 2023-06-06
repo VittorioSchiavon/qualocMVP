@@ -16,11 +16,11 @@
     border: 1px solid black;
 }
 
-form{
+.form{
     display: flex;
     flex-wrap: wrap;
 }
-input{
+.input{
     display: block;
     width: 80%;
     border-radius: 20px;

@@ -1,0 +1,81 @@
+.container{
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 1em;
+}
+.card{
+  width: 60vw;
+  border-radius: 5px;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 3em;
+  margin:auto;
+}
+
+.message{
+  max-width: 70%;
+}
+.info{
+  background-color: var(--lightBlue);
+  border: 2px solid var(--blue);
+  color: var(--blue);
+}
+.error{
+  background-color: var(--lightRed);
+  border: 2px solid var(--red);
+  color: var(--red);
+}
+.warning{
+  background-color: var(--lightYellow);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+}
+.success{
+  background-color: var(--mainLighter);
+  border: 2px solid var(--main);
+  color: var(--main);
+}
+.label{
+  font-weight: 800;
+}
+.closeButton{
+  all: unset;
+  cursor: pointer;
+  opacity: 0.6;
+  font-weight: 900;
+}
+
+.closeButton:hover{
+  opacity: 1;
+}
+
+.infoIcon{
+  width: 2em;
+  color: var(--blue);
+  fill: var(--blue)!important;
+
+}
+
+.warningIcon{
+  width: 2em;
+  color: var(--yellow);
+  fill: var(--yellow)!important;
+
+}
+.errorIcon{
+  width: 2em;
+  color: var(--red);
+  fill: var(--red)!important;
+
+}
+.successIcon{
+  width: 2em;
+  color: var(--main);
+  fill: var(--main)!important;
+
+}

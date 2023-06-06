@@ -1,17 +1,18 @@
 import styles from "./productPage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {  useSelector } from "react-redux";
-
+import { PopupContext } from "App";
 
 const ProductPage = () => {
   const navigate = useNavigate();
   var productId = useParams();
   const token = useSelector((state) => state.token);
   const [option, setOption] = useState("");
+  const [popup, setPopup] =useContext(PopupContext)
 
 
   console.log("ciao")
@@ -53,6 +54,7 @@ const ProductPage = () => {
       }
     );
     const savedStore = await savedStoreResponse.json();
+    setPopup({type:"success", message:"prodotto aggiunto al carrello!"})
   };
 
 

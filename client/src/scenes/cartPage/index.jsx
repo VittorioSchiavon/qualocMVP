@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 import CartProduct from "components/CartProduct";
 
 const CartPage = () => {
-
-
   const [cart, setCart] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
   const token = useSelector((state) => state.token);
   const userId = useSelector((state) => state.user._id);
   useEffect(() => {
@@ -24,28 +23,36 @@ const CartPage = () => {
     });
     const data = await response.json();
     setCart(data);
-    console.log("carrello", data)
-
+    var tot = 0;
+    cart?.products.map((prod) => {
+      tot = tot + prod.price;
+    });
+    setTotalPrice(tot);
+    console.log("carrello", data);
   };
 
-  if(!cart) return
+  if (!cart) return;
 
   return (
     <>
       <Navbar />
 
       <div className={styles.container}>
-      <div className={styles.title}>Carrello</div>
+        <div className={styles.title}>Carrello ({cart?.products?.length} {cart?.products?.length==1?"prodotto": "prodotti"})</div>
         <div className={styles.contentContainer}>
-            {cart.products.map((prod)=>{
-              return <CartProduct product={prod}/>
-            })}
-                    <div>
-          totale: 2345
-          <button className="mainButtonYellow">Acquista</button>
-        </div>
-        </div>
+          {cart?.products.length != 0 ? (
+            cart?.products.map((prod) => {
+              return <CartProduct product={prod} />;
+            })
+          ) : (
+            <div>nessun prodotto nel carrello</div>
+          )}
+          <div className={styles.tot}>
+            totale: {totalPrice} €
+          </div>
+          <button className="mainButtonGreen">Procedi all'acquisto</button>
 
+        </div>
       </div>
       <Footer />
     </>

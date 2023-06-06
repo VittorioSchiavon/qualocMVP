@@ -11,9 +11,19 @@ import NewProductPage from 'scenes/newProductPage';
 import ProductPage from 'scenes/productPage';
 import ChatPage from 'scenes/chatPage';
 import SearchPage from 'scenes/SearchPage';
+import Popup from 'components/Popup';
+import { createContext, useState } from 'react';
+
+
+export const PopupContext= createContext();
+
 function App() {
+
+  const [popup, setPopup]= useState({type: null, message:null})
+
   return (
     <div className="app">
+      <PopupContext.Provider value={[popup, setPopup]}>
       <BrowserRouter>
       <Routes>
       <Route path="/selezionaTipologia" element={<NewProfilePage/>}/>
@@ -30,7 +40,8 @@ function App() {
         <Route path="/cerca/:query" element={<SearchPage/>}/>
       </Routes>
       </BrowserRouter>
-
+      {popup.type!=null && <Popup message={popup.message} type={popup.type}/>}
+      </PopupContext.Provider>
     </div>
   );
 }

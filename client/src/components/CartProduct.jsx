@@ -1,8 +1,9 @@
 import styles from "./CartProduct.module.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Alert } from "@mui/material";
+import { PopupContext } from "App";
 
 const CartProduct = (props) => {
   const productId = props.product.productID;
@@ -10,6 +11,7 @@ const CartProduct = (props) => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const [product, setProduct] = useState(null);
+  const [popup, setPopup] =useContext(PopupContext)
 
   useEffect(() => {
     getProduct();
@@ -23,8 +25,9 @@ const CartProduct = (props) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log("response",response);
+    if (response.statusText!="OK") setPopup({type:"error", message:"Operazione non riuscita"})
     const data = await response.json();
-    console.log("ottenuto",data);
     setProduct(data);
   };
 
@@ -40,8 +43,9 @@ const CartProduct = (props) => {
     )
        
     const savedStore = await savedStoreResponse.json();
-    window.location.reload();
+    setPopup({type:"error", message:"prodotto eliminato consuccesso ! mex finto"})
 
+    window.location.reload();
   };
 
 
@@ -61,7 +65,7 @@ const CartProduct = (props) => {
           </div>
           <div className={styles.street}>{props.product.quantity}</div>
           <div className={styles.street}>{props.product.option}</div>
-          <div className={styles.street}>{props.product.price}</div>
+          <div className={styles.street}>{props.product.price} €</div>
           <button className="mainButtonRed"             onClick={() => {
               removeProduct();
               

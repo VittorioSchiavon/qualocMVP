@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Formik } from "formik";
+import { useContext, useState } from "react";
+import { Field, Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,9 @@ import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import { TextField } from "@mui/material";
 import styles from "./loginPage.module.css"
+import Popup from "components/Popup";
+import { PopupContext } from "App";
+
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
@@ -37,6 +40,7 @@ const Form = () => {
   const navigate = useNavigate();
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+  const [popup, setPopup] =useContext(PopupContext)
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
@@ -46,7 +50,7 @@ const Form = () => {
       console.log(values[value])
       formData.append(value, values[value]);
     }
-    console.log(formData)*/
+    console.log(formData)
     const savedUserResponse = await fetch(
       "http://localhost:3001/auth/registerUser",
       {
@@ -57,10 +61,12 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-
     if (savedUser) {
       setPageType("login");
-    }
+      
+    }*/
+    setPopup({type:"info", message:"ciao" })
+
   };
 
   const login = async (values, onSubmitProps) => {
@@ -89,7 +95,10 @@ const Form = () => {
     if (isRegister) await register(values, onSubmitProps);
   };
 
+
   return (
+    <>
+
     <Formik
       onSubmit={handleFormSubmit}
       initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -114,19 +123,24 @@ const Form = () => {
           <div>
             {isRegister && (
               <>
-                <TextField className={styles.input}
+                <Field className={styles.input}
+                                type="text"
+
                   label="Nome"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.firstName}
                   name="firstName"
+                  placeholder="Nome"
                   error={
                     Boolean(touched.firstName) && Boolean(errors.firstName)
                   }
                   helperText={touched.firstName && errors.firstName}
-                />
-                <TextField
+                /> 
+                <Field className={styles.input}
+                type="text"
                   label="Cognome"
+                  placeholder="Cognome"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.lastName}
@@ -140,22 +154,27 @@ const Form = () => {
               </>
             )}
 
-            <TextField
+            <Field className={styles.input}
+                            type="email"
+
               label="Email"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
+              placeholder="Email"
               name="email"
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
             />
-            <TextField
+            <Field className={styles.input}
               label="Password"
               type="password"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.password}
               name="password"
+              placeholder="Password"
+
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
             />
@@ -179,6 +198,7 @@ const Form = () => {
         </form>
       )}
     </Formik>
+    </>
   );
 };
 
