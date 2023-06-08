@@ -52,8 +52,7 @@ const Navbar = () => {
 
           {user===null ?
            <div className={NavbarCSS.topnavIcons}>
-          <button className="mainButtonGreen" onClick={() => navigate('/login')}>Accedi</button>
-          <button className="mainButtonGreen" onClick={() => navigate('/selezionaTipologia')}>Registrati</button>
+          <button className="mainButtonGreen" onClick={() => navigate('/login')}>Accedi o Registrati</button>
           </div>
           :
           <div className={NavbarCSS.topnavIcons}>

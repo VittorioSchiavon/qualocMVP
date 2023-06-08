@@ -25,6 +25,18 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
+    picturePath: {
+      type: String,
+      default: "",
+    },
+    phone: {
+      type: String,
+      default: "",
+    },
+    address: {
+      type: String,
+      default: "",
+    },
     isOwner: {
       type: Boolean,
       default: false,

@@ -11,7 +11,7 @@ router.get("/:id", getProduct);
 router.get("/store/:id", getStoreProduct);
 router.get("/", getProducts);
 router.get("/search/:query", searchProducts);
-router.post("/addProduct", verifyToken, addProduct)
+//router.post("/addProduct", verifyToken, addProduct)
 router.post("/editProduct", verifyToken, editProduct)
 router.get("/deleteProduct/:productID", verifyToken, deleteProduct)
 

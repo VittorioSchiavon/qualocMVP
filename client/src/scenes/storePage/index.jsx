@@ -60,7 +60,15 @@ const StorePage = () => {
       <Navbar />
       <div className={styles.container}>
         <button className="mainButtonGreen" onClick={createConversation}>Manda un messaggio!</button>
-        <img src="/assets/storeIcon.png" alt="" className={styles.storeImg}/>
+        {store?.picture ? (
+                <img
+                  src={"http://localhost:3001/assets/" + store?.picture}
+                  alt=""
+                  className={styles.storeImg}
+                />
+              ) : (
+<img src="/assets/storeIcon.png" alt="" className={styles.storeImg}/>
+              )}
         <div className={styles.tagContainer}>
           {store.tags!=null && store.tags.map((el)=>{
             return <div className="mainButtonYellow">{el}</div>

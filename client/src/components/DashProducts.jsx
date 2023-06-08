@@ -21,6 +21,7 @@ const DashProducts = (props) => {
     shopID: props.storeID,
     tags: "",
     options: "",
+    pictures: "",
   });
   useEffect(() => {
     getMyProducts();
@@ -161,6 +162,13 @@ const DashProducts = (props) => {
                 value={formData.description}
                 placeholder="descrizione"
                 name="description"
+                onChange={handleChange}
+              />
+              <input
+                type="input"
+                value={formData.pictures}
+                placeholder="pictures"
+                name="pictures"
                 onChange={handleChange}
               />
               <input

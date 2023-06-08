@@ -31,3 +31,52 @@ export const getMyStore = async (req, res) => {
   }
 };
 
+
+
+export const createStore = async (req, res) => {
+  try {
+    const {
+        name,
+        tags,
+        description,
+        street,
+        streetNumber,
+        city,
+        country,
+        postalCode,
+        phone,
+        picture,
+    } = req.body;
+
+    const newStore = new Store({
+      name,
+      tags: req.body.tags.split(","),
+      description,
+      ownerID: req.user.id,
+      street,
+      streetNumber,
+      city,
+      country,
+      postalCode,
+      phone,
+      picture,
+    });
+    console.log("req.user", req.user)
+    const store = await Store.findOne({ ownerID: req.user.id });
+    if(store){
+      console.log("esiste già uno store")
+      return res.status(400).json({ error: "esiste già uno store" });
+    }else{
+      const savedStore = await newStore.save();
+      console.log("saved store", savedStore);
+    const editUser = await User.findByIdAndUpdate(req.user.id,
+      { isOwner: true  });
+  
+      res.status(200).json(savedStore);
+    }
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ error: err.message });
+  }
+};

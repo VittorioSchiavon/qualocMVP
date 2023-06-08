@@ -19,10 +19,13 @@ export const authSlice = createSlice({
             console.log("logged out")
             state.user = null
             state.token = null
+        },
+        setIsOwner: (state) =>{
+            state.user.isOwner = true
         }
 
     }
 })
 
-export const {setLogin, setLogout} =authSlice.actions
+export const {setLogin, setLogout, setIsOwner} =authSlice.actions
 export default authSlice.reducer

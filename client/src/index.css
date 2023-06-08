@@ -49,6 +49,11 @@ body,
   color: white;
 }
 
+button:disabled{
+  filter: grayscale(1);
+  cursor: pointer;
+}
+
 
 .mainButtonRed{
   background-color: var(--lightRed);

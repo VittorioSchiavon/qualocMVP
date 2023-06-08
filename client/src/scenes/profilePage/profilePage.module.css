@@ -10,7 +10,7 @@
 }
 
 .actionsContainer{
-    text-align: right;
+    text-align: center;
 }
 
 .actionsContainer button{
@@ -18,14 +18,15 @@
 }
 
 .dataContainer{
-    width: 80%;
+    max-width: 1000px;
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+    align-items: center;
 }
-.dataContainer div{
-    font-weight: bold;
-    font-size: 1.2em;
-    color: var(--main);
-}
+
 
 
 .secondContainer{
@@ -44,4 +45,58 @@
     background-color: var(--secondary);
     padding: 1em;
     font-weight: bolder;
+}
+
+.profilePicture{
+    width: 300px;
+    border-radius: 20px;
+}
+
+.noProfilePic{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    fill: var(--main);
+}
+
+
+.data .dataLabel{
+    font-weight: 700;
+    color: var(--mainDarker);
+    font-size: 1.2em;
+    margin: 2em;
+}
+
+.data{
+    font-weight: 600;
+}
+
+.bigButton{
+    width: 50%;
+    height: 3em;
+    font-size: 2em;
+    font-weight: 700;
+    margin: auto;
+    background-color: var(--mainLighter);
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--mainDarker);
+    fill: var(--mainDarker);
+}
+
+.bigButton .icon{
+    height: 2em;
+    margin-right: 1em;
+    
+
+}
+
+.bigButton:hover{
+    background-color: var(--mainDarker);
+    color: white;
+    fill: white;
 }

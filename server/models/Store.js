@@ -17,6 +17,10 @@ const StoreSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+      default: "",
+    },
     streetNumber: {
       type: Number,
       required: true,
@@ -38,6 +42,10 @@ const StoreSchema = new mongoose.Schema(
       default: true,
     },
     tags: [String],
+    picture: {
+      type: String,
+      default: "",
+    },
   },
 
   { timestamps: true }

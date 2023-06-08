@@ -6,6 +6,6 @@
     max-width: 100%;
     overflow-x: scroll;
     padding:5em;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     
 }

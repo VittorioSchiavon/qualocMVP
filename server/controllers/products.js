@@ -70,6 +70,7 @@ export const addProduct = async (req, res) => {
     shopID: req.body.shopID,
     tags: req.body.tags.split(","),
     options: req.body.options.split(","),
+    pictures: req.body.pictures,
     isTemp: false,
   });
   try {

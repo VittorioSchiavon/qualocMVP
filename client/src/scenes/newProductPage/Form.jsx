@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Formik } from "formik";
+import { useContext, useState } from "react";
+import { Field, Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import { TextField } from "@mui/material";
 import styles from "./newProductPage.module.css";
+import { PopupContext } from "App";
 
 const productSchema = yup.object().shape({
   name: yup.string(),
@@ -16,6 +17,7 @@ const productSchema = yup.object().shape({
   shippingCost: yup.string(),
   tags: yup.string(),
   options: yup.string(),
+  pictures: yup.string(),
 });
 
 const initialValuesProduct = {
@@ -26,6 +28,7 @@ const initialValuesProduct = {
   shippingCost: "",
   tags: "",
   options: "",
+  pictures: ""
 };
 
 const Form = () => {
@@ -33,18 +36,24 @@ const Form = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
 
+
   const addProduct = async (values, onSubmitProps) => {
-    console.log("addprod");
-    console.log(values);
+    
+    const formData = new FormData();
+    for (let value in values) {
+      console.log(values[value])
+      formData.append(value, values[value]);
+    }
+    console.log(formData)
+    formData.append("picturePath", values.picture.name);
     const savedProductResponse = await fetch(
       "http://localhost:3001/products/addProduct",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(values),
+        body: formData,
       }
     );
     const savedProduct = await savedProductResponse.json();
@@ -146,6 +155,27 @@ const Form = () => {
                 error={Boolean(touched.options) && Boolean(errors.options)}
                 helperText={touched.options && errors.options}
               />
+              
+              <Dropzone
+                      acceptedFiles=".jpg,.jpeg,.png"
+                      multiple={false}
+                      onDrop={(acceptedFiles) =>
+                        setFieldValue("picture", acceptedFiles[0])
+                      }
+                    >
+                      {({ getRootProps, getInputProps }) => (
+                        <div
+                          {...getRootProps()}
+                        >
+                          <input {...getInputProps()} type="file"/>
+                          {!values.picture ? (
+                            <p>Inserisci l'immagine profilo</p>
+                          ) : (
+                            <div>{values.pictures.name}</div>
+                          )}
+                        </div>
+                      )}
+                    </Dropzone>
             </div>
 
             {/* BUTTONS */}

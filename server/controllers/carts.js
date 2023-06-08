@@ -78,7 +78,7 @@ export const addProduct = async (req, res) => {
     });
     console.log(index);
     if (index != -1) {
-      tempArray[index].quantity+=1
+      tempArray[index].quantity+=parseInt(req.body.quantity)
     }else{
       tempArray.push({
         productID: product._id,
@@ -118,7 +118,7 @@ export const removeProduct = async (req, res) => {
       { userID: req.user.id },
       { $set: { products: tempArray } }
     );
-    res.status(200)
+    res.status(200).send(updatedCart)
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

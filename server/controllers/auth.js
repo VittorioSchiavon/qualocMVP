@@ -7,8 +7,16 @@ import Cart from "../models/Cart.js";
 /* REGISTER USER */
 export const registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, isOwner } = req.body;
-    console.log(req.body);
+    const {
+      firstName,
+      lastName,
+      email,
+      picturePath,
+      password,
+      phone,
+      address,
+      isOwner,
+    } = req.body;
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -18,6 +26,9 @@ export const registerUser = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
+      picturePath,
+      phone,
+      address,
       isOwner,
     });
     const savedUser = await newUser.save();
@@ -27,25 +38,6 @@ export const registerUser = async (req, res) => {
       products: [],
     });
     const savedCart = await cart.save();
-
-    if (!isOwner) return res.status(200).json(savedUser);
-
-    console.log(req.body);
-
-    const newStore = new Store({
-      name: req.body.name,
-      description: req.body.description,
-      ownerID: savedUser._id,
-      street: req.body.street,
-      streetNumber: req.body.streetNumber,
-      city: req.body.city,
-      country: req.body.country,
-      postalCode: req.body.postalCode,
-      tags: req.body.tags.split(","),
-    });
-    const savedStore = await newStore.save();
-    console.log("saved store", savedStore);
-
     res.status(200).json(savedUser);
   } catch (err) {
     console.log(err.message);

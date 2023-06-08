@@ -19,6 +19,7 @@
 
 .logo{
     height: 4em;
+    cursor: pointer;
 }
 
 .changeType{
@@ -57,3 +58,19 @@
     font-weight: 500;
 
 }
+
+.addImageIcon{
+    width: 2em;
+    fill: var(--mainDarker);
+}
+
+.dropFile{
+    padding: 2em;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    border: 2px dotted var(--mainDarker);
+    justify-content: center;
+    cursor: pointer;
+}
+

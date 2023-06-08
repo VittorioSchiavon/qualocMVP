@@ -1,81 +1,76 @@
 .container{
-    padding: 4em;
-
+    height: 100vh;
+    display: flex;
+    background-color: var(--secondary);
 }
 
-.contentContainer{
-    display: flex;
+.dataContainer{
     height: fit-content;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: fit-content;
-    background-color: var(--secondary);
+    width: 500px;
+    background-color: var(--white);
     text-align: center;
     margin: auto;
     padding: 4em;
-    border-radius: 30px;
+    border-radius: 20px;
     gap: 2em;
-}
-.left{
-    align-items: center;
     text-align: center;
-    width: 600px;
-
 }
 
-@media only screen and (max-width: 600px){
-    .left{
-        display: none;
-    }
-}
-.right{
-    width: 600px;
-}
+
 .logo{
-    height: 5em;
-}
-.motto{
-    font-size: 1.5em;
-    font-family: "fredoka", sans-serif;
-    color: var(--main);
-
-}
-
-
-
-.icon{
-    height: 20em;
-    margin: 2em;
+    height: 4em;
+    cursor: pointer;
 }
 
 .changeType{
     text-decoration: underline;
     color: var(--main);
+    cursor: pointer;
 }
 
-.form{
-    height:100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
 
 .form button{
     margin: 2em;
 }
 
 .titleForm{
-    font-size: 3em;
+    font-size: 2em;
     width: fit-content;
     padding: 1em;
     margin: auto;
+    font-weight: 900;
 
     margin-bottom: 1em;
-    font-family: "Fredoka", sans-serif;
     color: var(--main);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    background-color: var(--mainLighter);
 
 }
+
+.input{
+    border-radius: 5px;
+    width: 90%;
+    display: block;
+    margin: 20px;
+    height: 40px;
+    border: 2px solid var(--main);
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 1em;
+    font-weight: 500;
+
+}
+
+.addImageIcon{
+    width: 2em;
+    fill: var(--mainDarker);
+}
+
+.dropFile{
+    padding: 2em;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    border: 2px dotted var(--mainDarker);
+    justify-content: center;
+    cursor: pointer;
+}
+

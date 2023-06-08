@@ -72,3 +72,9 @@
     font-size: 1.5em;
     color: var(--mainDarker);
 }
+
+.noProd{
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 2em;
+}

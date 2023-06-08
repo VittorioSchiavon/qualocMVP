@@ -7,11 +7,11 @@ import { PopupContext } from "App";
 
 const CartProduct = (props) => {
   const productId = props.product.productID;
-  console.log("prop",props.product)
+  console.log("prop", props.product);
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const [product, setProduct] = useState(null);
-  const [popup, setPopup] =useContext(PopupContext)
+  const [popup, setPopup] = useContext(PopupContext);
 
   useEffect(() => {
     getProduct();
@@ -25,29 +25,12 @@ const CartProduct = (props) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log("response",response);
-    if (response.statusText!="OK") setPopup({type:"error", message:"Operazione non riuscita"})
+    console.log("response", response);
+    if (response.statusText != "OK")
+      setPopup({ type: "error", message: "Operazione non riuscita" });
     const data = await response.json();
     setProduct(data);
   };
-
-  const removeProduct = async () => {
-    const savedStoreResponse = await fetch(
-      "http://localhost:3001/carts/removeProduct",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` 
-      },
-        body: JSON.stringify(props.product),
-      }
-    )
-       
-    const savedStore = await savedStoreResponse.json();
-    setPopup({type:"error", message:"prodotto eliminato consuccesso ! mex finto"})
-
-    window.location.reload();
-  };
-
 
   if (!product) return null;
   return (
@@ -55,23 +38,21 @@ const CartProduct = (props) => {
       <div className={styles.card}>
         <img className={styles.icon} src="/assets/productIcon.png" />
 
-          <div
-            className={styles.name}
-            onClick={() => {
-              navigate("/prodotto/" + product._id);
-            }}
-          >
-            {product.name}
-          </div>
-          <div className={styles.street}>{props.product.quantity}</div>
-          <div className={styles.street}>{props.product.option}</div>
-          <div className={styles.street}>{props.product.price} €</div>
-          <button className="mainButtonRed"             onClick={() => {
-              removeProduct();
-              
-            }}>X</button>
+        <div
+          className={styles.name}
+          onClick={() => {
+            navigate("/prodotto/" + product._id);
+          }}
+        >
+          {product.name}
         </div>
-
+        <div className={styles.street}>{props.product.quantity}</div>
+        <div className={styles.street}>{props.product.option}</div>
+        <div className={styles.street}>{props.product.price} €</div>
+        <button className="mainButtonRed" onClick={()=>{props.removeProduct(props.product)}}>
+          X
+        </button>
+      </div>
     </>
   );
 };

@@ -25,7 +25,15 @@ const store= props.store
   <div className={styles.card}             onClick={() => {
               navigate("/negozio/"+store._id);
             }}>
-    <img className={styles.icon} src="/assets/storeIcon.png"/>
+            {store?.picture ? (
+                <img
+                  src={"http://localhost:3001/assets/" + store?.picture}
+                  alt=""
+                  className={styles.icon}
+                />
+              ) : (
+<img src="/assets/storeIcon.png" alt="" className={styles.icon}/>
+              )}
 
     <div>
     <div className={styles.street}>{store.street +" "+ store.streetNumber}</div>
