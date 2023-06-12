@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import StoreCard from "./StoreCard";
+import GenericCarousel from "./GenericCarousel";
 
 const StoreCarousel = () => {
   const navigate = useNavigate();
@@ -26,12 +27,7 @@ const StoreCarousel = () => {
   if (!stores) return null;
   console.log(stores)
   return (
-
-    <div className={styles.container}>
-      <div className="mainTitle">I Migliori Negozi</div>
-    {stores.map((store) =>
-    <StoreCard store={store}/>)}
-    </div>
+    <GenericCarousel type={"store"} collection={stores} title={"I Migliori Negozi"}/>
   );
 };
 

@@ -1,0 +1,75 @@
+.userImage{
+    height: 70px;
+    width: 70px;
+    border-radius: 14567890px;
+}
+.userIcon{
+    height: 3em;
+
+}
+.userData{
+    display: flex;
+    align-items: center;
+}
+.userName{
+    font-weight: 700;
+    color: var(--mainDarker);
+    margin: 1em;
+}
+.container{
+    width: 80%;
+    margin: auto;
+    padding: 2em;
+    border-left: 4px solid var(--main) ;
+    margin-top: 1em;
+}
+
+.firstRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ratingsContainer{
+    display: flex;
+    gap: 2em;
+    align-items: center;
+}
+
+.rating{
+    text-align: center;
+}
+
+.ratingValue{
+    font-size: 1.5em;
+    font-weight: 900;
+    color: var(--main);
+}
+.ratingLabel{
+    font-size: 1em;
+    font-weight: 900;
+    color: var(--mainDarker);
+}
+
+.content{
+    width: 70%;
+    margin: auto;
+
+}
+
+.date{
+    color: var(--darkGray);
+    margin-top: 3px;
+    font-size: 0.9em;
+    text-align: right;
+}
+
+.deleteButton{
+    all: unset;
+    text-decoration: underline;
+    color: var(--red);
+    font-weight: 700;
+    text-align: right;
+    width: 100%;
+    cursor: pointer;
+}

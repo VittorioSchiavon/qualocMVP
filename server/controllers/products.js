@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import Fuse from 'fuse.js';
+import Store from "../models/Store.js";
 
 /* READ */
 export const getProduct = async (req, res) => {
@@ -61,20 +62,21 @@ export const getStoreProduct = async (req, res) => {
 
 export const addProduct = async (req, res) => {
   /*NON E' SAFE !!!*/
+  const store = await Store.findOne({ ownerID: req.user.id });
+  console.log("req.body", req.body)
   const product = new Product({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     brand: req.body.brand,
     shippingCost: req.body.shippingCost,
-    shopID: req.body.shopID,
+    shopID: store._id,
     tags: req.body.tags.split(","),
     options: req.body.options.split(","),
-    pictures: req.body.pictures,
+    picture: req.body.picture,
     isTemp: false,
   });
   try {
-    console.log(product);
     const savedProduct = await product.save();
     res.status(200).send(savedProduct);
   } catch (err) {

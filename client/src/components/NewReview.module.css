@@ -1,0 +1,80 @@
+.form{
+    width: 80%;
+    margin: auto;
+}
+.container{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    padding: 2em;
+}
+.userImage{
+    height: 70px;
+    width: 70px;
+    border-radius: 14567890px;
+}
+.userIcon{
+    height: 3em;
+
+}
+.userData{
+    display: flex;
+    align-items: center;
+}
+.userName{
+    font-weight: 700;
+    color: var(--mainDarker);
+    margin: 1em;
+}
+
+.content{
+    width: 80%;
+    margin: auto;
+    display: block;
+    padding: 2em;
+    margin: 3em;
+}
+
+.title{
+    font-weight: 700;
+    color: var(--main);
+    margin: 1em;
+    text-align: center;
+
+}
+
+.optionButton{
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 3456789px;
+    border: none;
+    cursor: pointer;
+
+}
+.optionButton:hover{
+    background-color: var(--mainLighter);
+
+}
+.selected{
+    background-color: var(--main) !important;
+}
+
+.ratingButtonsContainer{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+}
+
+.ratingsContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form button{
+    margin: auto;
+    margin-top: 1em;
+}

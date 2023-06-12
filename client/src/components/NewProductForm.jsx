@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import { TextField } from "@mui/material";
-import styles from "./newProductPage.module.css";
+import styles from "./NewProductForm.module.css";
 import { PopupContext } from "App";
 
 const productSchema = yup.object().shape({
@@ -31,7 +31,7 @@ const initialValuesProduct = {
   picture: ""
 };
 
-const Form = () => {
+const NewProductForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
@@ -220,4 +220,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default NewProductForm;

@@ -1,31 +1,23 @@
-.titlo{
+.name{
     font-family: "Fredoka", sans-serif;
     font-size: 3em;
-    text-align: center;
-    color: var(--main);
+    color: var(--black);
 }
 
 .container{
     padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 3em;
 }
 
-.actionsContainer{
-    text-align: right;
-}
-
-.actionsContainer button{
-    margin:10px;
-}
 
 .dataContainer{
-    width: 80%;
-    margin: auto;
+    width: 500px;
 }
-.dataContainer div{
-    font-weight: bold;
-    font-size: 1.2em;
-    color: var(--main);
-}
+
 
 
 .secondContainer{
@@ -44,4 +36,97 @@
     background-color: var(--secondary);
     padding: 1em;
     font-weight: bolder;
+}
+
+.productImg{
+    width: 400px;
+    border-radius: 10px;
+}
+
+.tagContainer{
+    width: 80vw;
+    margin: 0.5em;
+    display: flex;
+    gap: 1em;
+    justify-content: end;
+}
+
+.price{
+    font-size: 2em;
+    color: var(--main);
+    font-weight: 900;
+    margin: 1em;
+}
+
+.price .shippingCost{
+    font-size: 0.5em ;
+}
+
+.descriptionContainer{
+    width: 80vw;
+    margin: auto;
+}
+
+.descriptionTitle{
+    font-weight: 700;
+    color: var(--mainDarker);
+    font-size: 1.1em;
+}
+
+.description{
+    padding: 1.5em;
+}
+
+.label{
+    font-weight: 700;
+    color: var(--mainDarker);
+    font-size: 1.1em;
+}
+
+.optionContainer{
+    display: flex;
+    gap: 1em;
+    margin: 0.5em;
+}
+
+.optionButton{
+    font-size: 1em;
+    font-weight: 700;
+    background-color: transparent;
+    border: 2px solid var(--mainLighter);
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0.5em;
+
+}
+
+.optionButton:hover{
+    color: var(--mainDarker);
+}
+
+.quantity{
+    font-size: 1em;
+    font-weight: 700;
+    background-color: transparent;
+    border: 2px solid var(--mainLighter);
+    border-radius: 10px;
+    padding: 0.5em;
+    margin: 0.5em;
+    width: 5em;
+    text-align: center;
+}
+
+.addToCart{
+    display: block;
+}
+
+.actionContainer{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+}
+
+.addToCartIcon{
+    width: 2em;
+    fill: var(--mainDarker);
 }

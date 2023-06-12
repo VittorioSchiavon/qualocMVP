@@ -1,8 +1,8 @@
 .titlo{
     font-family: "Fredoka", sans-serif;
-    font-size: 3em;
-    text-align: center;
+    font-size: 2em;
     color: var(--main);
+    margin: 10px;
 }
 
 .container{
@@ -18,10 +18,15 @@
 }
 
 .dataContainer{
-    width: 80%;
-    margin: auto;
+    max-width: 400px;
+    min-width: 200px;
+    height:inherit;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items:flex-start;
 }
-.dataContainer div{
+.data{
     font-weight: bold;
     font-size: 1.2em;
     color: var(--main);
@@ -49,14 +54,69 @@
 }
 
 .storeImg{
-    width: 20em;
+    height: 300px;
     text-align: center;
     margin: auto;
     display: block;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .tagContainer{
     display: flex;
     justify-content: center;
     gap: 1em;
+}
+
+.storeRow{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 2em;
+
+}
+
+.address{
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--black);
+}
+
+
+
+
+
+.socialIcon{
+    fill: var(--main);
+    height: 2em;
+}
+
+.socialIcon:hover{
+    fill: var(--mainDarker);
+    cursor: pointer;
+}
+.social{
+    text-align: center;
+    display: flex;
+    gap: 1em;
+}
+
+.description{
+    max-width: 100%;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--black);
+    text-align: center;
+    margin: 2em;
+}
+
+.showMore{
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
 }

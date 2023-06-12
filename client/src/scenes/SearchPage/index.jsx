@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductCard from "components/ProductCard";
+import GenericCarousel from "components/GenericCarousel";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -37,13 +38,8 @@ const SearchPage = () => {
       <Navbar />
       <div className={styles.title}>risultati per: "{params.query}"</div>
       {products.length!=0?
-      <div className={styles.container}>
-        {products?.map((product) => (
-          <ProductCard product={product} />
-        ))}
-        </div>
+      <GenericCarousel type={"product"} collection={products} title={""}/>
         :
-      
       <div>no products</div>
       }
       

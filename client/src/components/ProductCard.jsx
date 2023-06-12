@@ -30,8 +30,15 @@ const ProductCard = (props) => {
           navigate("/prodotto/" + product._id);
         }}
       >
-        <img className={styles.icon} src="/assets/productIcon.png" />
-
+        {product?.picture ? (
+                <img
+                  src={"http://localhost:3001/assets/" + product?.picture}
+                  alt=""
+                  className={styles.icon}
+                />
+              ) : (
+<img src="/assets/productIcon.png" alt="" className={styles.icon}/>
+              )}
         <div>
           <div className={styles.name}>{product.name}</div>
           <div className={styles.price}>{product.price + "€"}</div>

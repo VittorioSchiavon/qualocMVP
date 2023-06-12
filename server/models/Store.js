@@ -46,6 +46,10 @@ const StoreSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    rating: {
+      type: Number,
+      default:0,
+    }
   },
 
   { timestamps: true }

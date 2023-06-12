@@ -37,18 +37,16 @@ const ProductSchema= new mongoose.Schema({
         default: false,
         //required: true,
     }, 
-       pictures: {
-        type: [String],
+       picture: {
+        type: String,
         default: "",
-      },/*,
+      },
     
     
     rating:{
         type: Number,
-    },
-    images:{
-        type: [String],
-    }*/
+        default:0
+    }
 })
 
 const Product = mongoose.model("Product", ProductSchema);

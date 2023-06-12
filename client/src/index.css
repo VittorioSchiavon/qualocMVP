@@ -42,7 +42,8 @@ body,
   border-radius: 34567px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
-
+  display: flex;
+  align-items: center;
 }
 .mainButtonGreen:hover{
   background-color: var(--main);
@@ -95,7 +96,7 @@ button:disabled{
   width: 100%;
   text-align: center;
   font-size: 2em;
-  font-family: "Fredoka", sans-serif;
   color: var(--main);
+  font-weight: 900;
 
 }

@@ -1,0 +1,22 @@
+
+
+.optionButton{
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 349px;
+    border: none;
+
+}
+
+.selected{
+    background-color: var(--main) !important;
+}
+
+.ratingButtonsContainer{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+}
+

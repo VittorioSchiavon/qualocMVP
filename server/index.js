@@ -15,6 +15,7 @@ import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import storeRoutes from "./routes/stores.js"
 import cartRoutes from "./routes/carts.js"
+import reviewRoutes from "./routes/reviews.js"
 import productRoutes from "./routes/products.js"
 import ConversationRoutes from "./routes/conversations.js";
 import MessagesRoutes from "./routes/messages.js";
@@ -43,17 +44,28 @@ const storage = multer.diskStorage({
         cb(null, "public/assets");
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, req.user.id + "-" + Math.floor(Math.random()*90000)+ "-"+ file.originalname)
     },
 });
-const upload = multer({ storage });
+const upload = multer({
+    storage: storage, limits: {
+        fileSize: 1024 * 1024 * 5
+    }, fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+})
 
 /* ROUTES WITH FILES */
 
 app.post("/auth/registerUser", upload.single("picture"), registerUser);
-app.post("/stores/createStore", upload.single("picture"), verifyToken, createStore);
+app.post("/stores/createStore", verifyToken , upload.single("picture"), createStore);
 
-app.post("/products/addProduct", upload.array("pictures"), verifyToken, addProduct)
+app.post("/products/addProduct", verifyToken, upload.single("picture"), addProduct)
 
 //app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
@@ -66,6 +78,7 @@ app.use("/carts", cartRoutes);
 app.use("/products", productRoutes);
 app.use("/conversations", ConversationRoutes);
 app.use("/messages", MessagesRoutes);
+app.use("/reviews", reviewRoutes);
 /* ROUTES WITH FILES 
 app.use("/posts", postRoutes);
 */

@@ -5,19 +5,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import GenericCarousel from "./GenericCarousel";
 
-const ProductCarousel = ({storeID}) => {
+const ProductCarousel = ({ storeID }) => {
   const navigate = useNavigate();
   //var storeId = useParams();
   const [products, setProducts] = useState(null);
-
+  const [trans, setTrans] = useState(0);
   useEffect(() => {
     getProducts();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const cardWidth = 400;
+
   const getProducts = async () => {
-    var link="http://localhost:3001/products"
-    if (storeID!="") link = "http://localhost:3001/products/store/"+storeID
+    var link = "http://localhost:3001/products";
+    if (storeID != "") link = "http://localhost:3001/products/store/" + storeID;
     const response = await fetch(link, {
       method: "GET",
     });
@@ -27,11 +30,9 @@ const ProductCarousel = ({storeID}) => {
 
   if (!products) return null;
   return (
-    <div className={styles.container}>
-      <div className="mainTitle">I Migliori Prodotti</div>
-    {products.map((product) =>
-    <ProductCard product={product}/>)}
-    </div>
+    <>
+    <GenericCarousel type={"product"} collection={products} title={"I Migliori Prodotti"}/>
+    </>
   );
 };
 

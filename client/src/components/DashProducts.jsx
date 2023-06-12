@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NewProductForm from "components/NewProductForm";
 
 const DashProducts = (props) => {
   const navigate = useNavigate();
@@ -34,29 +35,11 @@ const DashProducts = (props) => {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addProduct();
-  };
   const handleSubmitEdit = (event) => {
     event.preventDefault();
     editProduct(type._id);
   };
 
-  const addProduct = async () => {
-    const savedProductResponse = await fetch(
-      "http://localhost:3001/products/addProduct",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      }
-    );
-    const savedProduct = await savedProductResponse.json();
-  };
   const editProduct = async (id) => {
     var values=formData
     values={
@@ -147,81 +130,7 @@ const DashProducts = (props) => {
             )}
           </div></>
         )}
-        {type == "new" && (
-          <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={formData.name}
-                placeholder="nome"
-                name="name"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.description}
-                placeholder="descrizione"
-                name="description"
-                onChange={handleChange}
-              />
-              <input
-                type="input"
-                value={formData.pictures}
-                placeholder="pictures"
-                name="pictures"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.brand}
-                placeholder="marca"
-                name="brand"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.tags}
-                placeholder="tags (separa con',')"
-                name="tags"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.options}
-                placeholder="options (separa con',')"
-                name="options"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.price}
-                placeholder="prezzo"
-                name="price"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                value={formData.shippingCost}
-                placeholder="costi di spedizione"
-                name="shippingCost"
-                onChange={handleChange}
-              />
-              <div className={styles.actions}>
-                <button
-                  className="mainButtonRed"
-                  onClick={() => {
-                    setType("productView");
-                  }}
-                >
-                  annulla
-                </button>
-                <button type="submit" className="mainButtonGreen">
-                  modifica
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+        {type == "new" && <NewProductForm/>}
         {(type!="new"&&type!="productView")&&
         
           <div className={styles.formContainer}>
