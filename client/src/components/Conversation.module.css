@@ -1,8 +1,11 @@
 .conversation{
     display: flex;
     align-items: center;
-    padding: 1em;
+    padding: 1.5em;
     cursor: pointer;
+}
+.conversation:hover{
+    background-color: var(--white);
 }
 .conversationIcon{
     background-color: var(--main);
@@ -16,4 +19,9 @@
     color: white;
     font-weight: 900;
     margin-right: 1em;
+}
+
+.conversationName{
+    font-weight: 800;
+    color: var(--mainDarker);
 }

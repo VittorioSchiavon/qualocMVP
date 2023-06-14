@@ -1,0 +1,61 @@
+.form{
+    max-width: 700px;
+    margin: auto;
+    display: flex;
+    align-items:center;
+    height: fit-content;
+    height: fit-content;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin: auto;
+    align-items: center;
+    gap: 10px;
+    padding: 2em 4em;
+    background-color: var(--secondary);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.userImage{
+    height: 70px;
+    width: 70px;
+    border-radius: 14567890px;
+}
+.userIcon{
+    height: 3em;
+
+}
+.userData{
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+.userName{
+    font-weight: 700;
+    color: var(--mainDarker);
+    margin: 1em;
+}
+
+.content{
+    width: 80%;
+    margin: auto;
+    display: block;
+    padding: 2em;
+    border-radius: 20px;
+    font-weight: 600;
+    border: none;
+}
+
+.title{
+    font-weight: 700;
+    width: 100%;
+    color: var(--main);
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+
+

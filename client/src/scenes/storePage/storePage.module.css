@@ -1,8 +1,9 @@
 .titlo{
-    font-family: "Fredoka", sans-serif;
     font-size: 2em;
-    color: var(--main);
+    color: var(--mainDarker);
     margin: 10px;
+    font-weight: 900;
+    text-align: left;
 }
 
 .container{
@@ -66,6 +67,7 @@
     display: flex;
     justify-content: center;
     gap: 1em;
+    font-size: 1em;
 }
 
 .storeRow{
@@ -119,4 +121,13 @@
     text-decoration: underline;
     cursor: pointer;
     text-align: center;
+}
+
+
+.firstRow{
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: space-between;
+    gap: 2em;
 }

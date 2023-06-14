@@ -1,49 +1,83 @@
-.container{
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
 }
 
-.list{
-    background-color: var(--secondary);
-    width: 50%;
-    height: 100%;
-
-
+.list {
+  background-color: white;
+  width: 50%;
+  height: 100vh;
 }
-.list button{
+.list button {
+  width: 100%;
+  height: 3em;
+  cursor: pointer;
+}
+.chat {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.newMex {
+  display: flex;
+  justify-content: center;
+  height: 10vh;
+  align-items: center;
+}
+
+.newMex input {
+  width: 80%;
+  border: none;
+  padding-left: 1em;
+  font-weight: 500;
+}
+
+.newMex input:focus {
+  outline: none;
+}
+
+.mexContainer {
+  max-height: 90vh;
+  height: 90vh;
+  background-color: var(--white);
+  max-width: 100%;
+  padding: 4em;
+  overflow-y: auto;
+}
+
+.listTitle {
+  font-weight: 900;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 1em;
+}
+
+
+.noConversationText{
+    text-align: center;
+    font-weight: 800;
+    color: var(--main);
     width: 100%;
-    height: 3em;
-    cursor: pointer;
+    padding: 2em;
 }
-.chat{
+
+.sendMessageButton{
+    height: 100px;
+    width: 100px;
+    all: unset;
     background-color: var(--main);
-    width: 50%;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-        overflow-y: scroll;
-
+    fill: white;
+    border-radius: 234567px;
+    cursor: pointer;
+    padding: 1em;
 }
-
-.newMex{
-    display: flex;
-    height: 10vh;
+.sendMessageButton svg{
+    height: 1.5em;
 }
-
-.newMex input{
-    width: 50%;
-    border: none;
-}
-.newMex input:active{
-    border: none;
-}
-
-.mexContainer{
-    max-height: 90vh;
-    background-color: white;
-    max-width: 100%;
-    padding: 4em;
-    overflow-y: scroll;
+.sendMessageButton:hover{
+    background-color: var(--mainDarker);
 }

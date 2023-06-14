@@ -15,6 +15,7 @@ const ChatPage = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const navigate = useNavigate();
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
@@ -30,9 +31,14 @@ const ChatPage = () => {
     });
     const data = await response.json();
     setConversations(data);
-    console.log("convs", data)
 
   };
+
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    divRef.current?.scrollIntoView({behavior: 'smooth'});
+  }, [messages]);
+
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -41,10 +47,8 @@ const ChatPage = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();
-        console.log(data)
         setMessages(data);
       } catch (err) {
-        console.log(err);
       }
     };
     getMessages();
@@ -75,7 +79,6 @@ const ChatPage = () => {
     const savedMessage = await savedMessagetResponse.json();
     setMessages([...messages, savedMessage]);
     setNewMessage("");
-    console.log("savedMessaget",savedMessage)
   };
 
 
@@ -84,11 +87,14 @@ const ChatPage = () => {
     <>
       <div className={styles.container}>
       <div className={styles.list}>
+        <button onClick={()=>{navigate("/")}} >homepage</button>
+        <div className={styles.listTitle}>Chat</div>
       {conversations!=null && conversations.map((el)=>(
-        <div onClick={() => {console.log("hi")
+        <div onClick={() => {
         setCurrentChat(el)
-        console.log("current", currentChat)}}>
-            <Conversation conversation={el} />
+        }}>
+            <Conversation conversation={el} isActive={el==currentChat}/>
+            
             </div>
           ))}
       </div>
@@ -104,13 +110,16 @@ const ChatPage = () => {
         </div>
         <form className={styles.newMex}>
           <input type="text" onChange={(e) => setNewMessage(e.target.value)} placeholder="scrivi un messaggio..." value={newMessage}/>
-          <button type="submit" class="mainButtonGreen" onClick={handleSubmit}>invia</button>
+          <button type="submit" class={styles.sendMessageButton} onClick={handleSubmit}>
+          <svg 
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.815 12.197-7.532 1.256a.5.5 0 0 0-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 0 0 0-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 0 0 .386.319l7.532 1.255a.2.2 0 0 1 0 .394Z"/></svg>
+          </button>
         </form>
       </div>
       ):(
-      <span className="noConversationText">
-      Open a conversation to start a chat.
-    </span>
+      <div className={styles.noConversationText}>
+      Seleziona una conversazione
+    </div>
       )}
       </div>
 
