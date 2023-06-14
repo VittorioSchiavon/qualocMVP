@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductCard from "components/ProductCard";
 import GenericCarousel from "components/GenericCarousel";
+import GenericDisplay from "components/GenericDisplay";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const SearchPage = () => {
       <Navbar />
       <div className={styles.title}>risultati per: "{params.query}"</div>
       {products.length!=0?
-      <GenericCarousel type={"product"} collection={products} title={""}/>
+      <GenericDisplay type={"product"} collection={products} title={""}/>
         :
       <div>no products</div>
       }

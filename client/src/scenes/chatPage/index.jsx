@@ -7,7 +7,8 @@ import { setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import Conversation from "components/Conversation";
 import Message from "components/Message";
-
+import { io } from "socket.io-client";
+//import bellSound from "../assets/bellSound.mp3"
 const ChatPage = () => {
 
 
@@ -16,6 +17,8 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const navigate = useNavigate();
+  const socket = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
@@ -23,6 +26,46 @@ const ChatPage = () => {
   useEffect(() => {
     getConversations();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+  function playSound(){
+    new Audio("../../assets/bellSound.mp3").play()
+  }
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");/*
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });*/
+  }, []);
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+    playSound()
+
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUsers", (users) => {
+      console.log(users)
+    });
+  }, [user]);
 
   const getConversations = async () => {
     const response = await fetch(`http://localhost:3001/conversations/`, {
@@ -63,6 +106,15 @@ const ChatPage = () => {
       text: newMessage,
       conversationID: currentChat._id,
     }
+
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: newMessage,
+    });
     const savedMessagetResponse = await fetch(
       "http://localhost:3001/messages/",
       {
@@ -78,6 +130,7 @@ const ChatPage = () => {
 
     const savedMessage = await savedMessagetResponse.json();
     setMessages([...messages, savedMessage]);
+    
     setNewMessage("");
   };
 
@@ -109,6 +162,7 @@ const ChatPage = () => {
                   <div ref={divRef} />
         </div>
         <form className={styles.newMex}>
+          
           <input type="text" onChange={(e) => setNewMessage(e.target.value)} placeholder="scrivi un messaggio..." value={newMessage}/>
           <button type="submit" class={styles.sendMessageButton} onClick={handleSubmit}>
           <svg 

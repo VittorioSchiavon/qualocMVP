@@ -2,25 +2,24 @@
     min-width: 200px;
     height: 300px;
     background-color: var(--secondary);
-    display: flex;
-    flex-wrap: wrap ;
-    align-items: center;
-    justify-content: center;
+
     border-radius: 10px;
     cursor: pointer;
     color: var(--mainDarker);
+    overflow: hidden;
 
 }
 
 .icon{
     height: 150px;
-    width: 150px;
+    width: 200px;
     mix-blend-mode: darken;
     transition: 1s;
+    object-fit: cover;
 }
 
 .card:hover .icon{
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .name{
@@ -30,3 +29,17 @@
     margin: 5px;
 }
 
+
+.textDataContainer{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.street{
+    font-size: 0.9em;
+    font-weight: 600;
+}

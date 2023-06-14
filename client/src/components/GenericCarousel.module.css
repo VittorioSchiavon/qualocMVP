@@ -16,6 +16,8 @@
     max-width: 100vw;
     flex-wrap: nowrap;
     padding: 1em;
+    width: 90vw;
+    margin: auto;
     
 }
 .arrow{

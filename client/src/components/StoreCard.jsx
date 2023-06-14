@@ -1,6 +1,7 @@
 import styles from "./StoreCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import RatingStars from "./RatingStars";
 const StoreCard = (props) => {
 const store= props.store
   const navigate = useNavigate();
@@ -35,10 +36,14 @@ const store= props.store
 <img src="/assets/storeIcon.png" alt="" className={styles.icon}/>
               )}
 
-    <div>
-    <div className={styles.street}>{store.street +" "+ store.streetNumber}</div>
+    <div className={styles.textDataContainer}>
+      <RatingStars rating={store.rating}/>
+
 
     <div className={styles.name}>{store.name}</div>
+    <div className={styles.tag}>{store.tags[0]}</div>
+
+
     </div>
 
   </div>

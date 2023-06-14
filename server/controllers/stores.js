@@ -59,7 +59,7 @@ export const createStore = async (req, res) => {
       country,
       postalCode,
       phone,
-      picture,
+      picture: req.file.filename,
     });
     console.log("req.user", req.user)
     const store = await Store.findOne({ ownerID: req.user.id });

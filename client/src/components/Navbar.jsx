@@ -59,7 +59,7 @@ const Navbar = () => {
             <Message onClick={() => navigate('/chat')} className={NavbarCSS.icons}/>
           <ShoppingCart onClick={() => navigate('/carrello')} className={NavbarCSS.icons}/>
           <Notifications className={NavbarCSS.icons}/>
-          <button className="mainButtonGreen" onClick={() => navigate('/ilMioProfilo')}>{user.firstName}</button>
+          <button className="mainButtonGreen" onClick={() => navigate('/ilMioProfilo')}>il mio profilo</button>
           {user.isOwner?           <button
             className="mainButtonGreen"
             onClick={() => {

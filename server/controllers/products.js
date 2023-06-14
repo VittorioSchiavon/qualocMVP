@@ -73,7 +73,7 @@ export const addProduct = async (req, res) => {
     shopID: store._id,
     tags: req.body.tags.split(","),
     options: req.body.options.split(","),
-    picture: req.body.picture,
+    picture: req.file.filename,
     isTemp: false,
   });
   try {

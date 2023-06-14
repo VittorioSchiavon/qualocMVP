@@ -36,7 +36,7 @@ const Conversation = (props) => {
               />
             ) : (
 <div
-        className={styles.conversationIcon}>{friend?.firstName[0].toUpperCase()}</div>
+        className={styles.conversationIcon}>j</div>
             )}
       <span className={styles.conversationName}>{friend?.firstName+" "+ friend?.lastName}</span>
     </div>

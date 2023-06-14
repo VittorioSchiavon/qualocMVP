@@ -14,7 +14,7 @@ body,
   --main: #31851e;
   --mainDarker: #1b4a11;
   --mainLighter: #caf1c2;
-  --secondary:#fff1e0;
+  --secondary:#fff8ef;
   --red:#851e1e;
   --lightRed: #eab8b8;
   --yellow:#b58a0a;
@@ -26,6 +26,7 @@ body,
   --lightGray:#ebebeb;
   --darkGray:#5b5b5b;
   font-family: "Inter", sans-serif;
+  box-sizing: border-box;
 
 }
 *{
@@ -43,6 +44,7 @@ body,
   cursor: pointer;
   font-family: "Inter", sans-serif;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 .mainButtonGreen:hover{

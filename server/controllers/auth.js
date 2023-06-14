@@ -7,6 +7,7 @@ import Cart from "../models/Cart.js";
 /* REGISTER USER */
 export const registerUser = async (req, res) => {
   try {
+    console.log("req.body",req.body)
     const {
       firstName,
       lastName,
@@ -26,7 +27,7 @@ export const registerUser = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturePath,
+      picturePath: req.file.filename,
       phone,
       address,
       isOwner,

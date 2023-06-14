@@ -44,7 +44,10 @@ const storage = multer.diskStorage({
         cb(null, "public/assets");
     },
     filename: function (req, file, cb) {
-        cb(null, req.user.id + "-" + Math.floor(Math.random()*90000)+ "-"+ file.originalname)
+        var id= req.user?.id
+        if (!id) id= req.body?.firstName + req.body?.lastName
+
+        cb(null, id + "-" + Math.floor(Math.random()*90000)+ "-"+ file.originalname)
     },
 });
 const upload = multer({

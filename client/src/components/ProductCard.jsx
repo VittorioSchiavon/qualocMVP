@@ -1,6 +1,7 @@
 import styles from "./ProductCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import RatingStars from "./RatingStars";
 const ProductCard = (props) => {
   const product = props.product;
   const navigate = useNavigate();
@@ -39,7 +40,8 @@ const ProductCard = (props) => {
               ) : (
 <img src="/assets/productIcon.png" alt="" className={styles.icon}/>
               )}
-        <div>
+        <div className={styles.textDataContainer}>
+          <RatingStars rating={product.rating} />
           <div className={styles.name}>{product.name}</div>
           <div className={styles.price}>{product.price + "€"}</div>
         </div>

@@ -21,7 +21,7 @@ const HomePage = () => {
             acquistare prodotti di alta qualità, pagando un prezzo equo e
             ragionevole.
           </div>
-          <button className="mainButtonGreen">Scopri</button>
+          <button className="mainButtonGreen" onClick={()=>{window.location="/CreaNegozio"}}>Crea un negozio</button>
         </div>
         <div className={styles.rightSection}>
           <img src="/assets/flaticon.png" alt="" />

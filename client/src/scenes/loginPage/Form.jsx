@@ -195,11 +195,11 @@ const Form = () => {
                     <Field
                       className={styles.input}
                       type="text"
-                      label="Phone"
+                      label="phone"
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={values.phone}
-                      name="Phone"
+                      name="phone"
                       placeholder="Telefono"
                       error={
                         Boolean(touched.phone) && Boolean(errors.phone)
