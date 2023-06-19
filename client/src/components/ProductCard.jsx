@@ -33,7 +33,7 @@ const ProductCard = (props) => {
       >
         {product?.picture ? (
                 <img
-                  src={"http://localhost:3001/assets/" + product?.picture}
+                  src={"http://localhost:3001/assets/" + product?.picture[0]}
                   alt=""
                   className={styles.icon}
                 />

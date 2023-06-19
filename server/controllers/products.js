@@ -62,6 +62,9 @@ export const getStoreProduct = async (req, res) => {
 
 export const addProduct = async (req, res) => {
   /*NON E' SAFE !!!*/
+  var imageNames =[]
+  req.files.forEach(image=> imageNames.push(image.filename))
+
   const store = await Store.findOne({ ownerID: req.user.id });
   console.log("req.body", req.body)
   const product = new Product({
@@ -73,7 +76,7 @@ export const addProduct = async (req, res) => {
     shopID: store._id,
     tags: req.body.tags.split(","),
     options: req.body.options.split(","),
-    picture: req.file.filename,
+    picture: imageNames,
     isTemp: false,
   });
   try {

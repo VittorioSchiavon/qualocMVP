@@ -43,8 +43,8 @@ const StoreSchema = new mongoose.Schema(
     },
     tags: [String],
     picture: {
-      type: String,
-      default: "",
+      type: [String],
+      default: [],
     },
     rating: {
       type: Number,

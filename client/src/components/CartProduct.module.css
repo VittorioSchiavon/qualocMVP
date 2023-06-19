@@ -10,9 +10,9 @@
     margin: 1em;
 }
 
-.icon{
+.image{
     height: 100px;
-    width: 100px;
+    max-width: 200px;
     mix-blend-mode: darken;
 }
 

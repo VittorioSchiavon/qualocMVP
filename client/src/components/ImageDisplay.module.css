@@ -1,0 +1,20 @@
+.activeImg{
+    width: 400px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+.productImg{
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.fullImageList{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}

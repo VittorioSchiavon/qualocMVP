@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import NewProductForm from "components/NewProductForm";
+import NewProductForm from "components/ProductForm";
 
 const DashProducts = (props) => {
   const navigate = useNavigate();

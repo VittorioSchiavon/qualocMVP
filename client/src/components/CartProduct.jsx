@@ -36,7 +36,7 @@ const CartProduct = (props) => {
   return (
     <>
       <div className={styles.card}>
-        <img className={styles.icon} src="/assets/productIcon.png" />
+        <img className={styles.image} src={"http://localhost:3001/assets/" + product.picture[0]}/>
 
         <div
           className={styles.name}

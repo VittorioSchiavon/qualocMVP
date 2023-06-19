@@ -17,7 +17,6 @@ const storeSchema = yup.object().shape({
   country: yup.string(),
   postalCode: yup.string(),
   phone: yup.string(),
-  picture:yup.string(),
 });
 
 
@@ -31,7 +30,6 @@ const initialValues= {
   country: "",
   postalCode: "",
   phone: "",
-  picture:"",
 };
 
 const Form = () => {
@@ -39,6 +37,7 @@ const Form = () => {
   const navigate = useNavigate();
   const [popup, setPopup] = useContext(PopupContext);
   const token = useSelector((state) => state.token);
+  const [images, setImages] = useState([]);
 
   const createStore = async (values, onSubmitProps) => {
     // this allows us to send form info with image
@@ -48,14 +47,21 @@ const Form = () => {
       console.log(values[value])
       formData.append(value, values[value]);
     }
-    values?.picture?.name && formData.append("picture", values.picture.name);
-    console.log("formData",formData)
+    //values?.picture?.name && formData.append("picture", values.picture.name);
+    images.forEach((image) => {
+      console.log("picture",image)
+      formData.append("picture", image);
+    });
+    for (const value of formData.values()) {
+      console.log(value);
+    }
 
     const savedStoreResponse = await fetch(
       "http://localhost:3001/stores/createStore",
       {
         method: "POST",
         headers: {
+          //"Content-Type": 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
         body: formData,
@@ -63,16 +69,17 @@ const Form = () => {
       }
     );
     const savedStore = await savedStoreResponse.json();
-    /*onSubmitProps.resetForm();*/
+    //onSubmitProps.resetForm();
     if (savedStore) {
         dispatch(
           setIsOwner()
         );
         setPopup({ type: "success", message: "Negozio creato con successo" });      
-        navigate("/")
+        //navigate("/")
     }else{
       setPopup({ type: "error", message: "Negozio NON creato, per favore riprova" });
     }
+    
   };
 
 
@@ -146,18 +153,21 @@ const Form = () => {
                       }
                       helperText={touched.description && errors.description}
                     />
+                    
+    
 
                     <Dropzone
                       acceptedFiles=".jpg,.jpeg,.png"
-                      multiple={false}
+                      multiple
                       onDrop={(acceptedFiles) =>
-                        setFieldValue("picture", acceptedFiles[0])
-                      }
+                        acceptedFiles.forEach((file) => {
+                          setImages((prevState) => [...prevState, file]);
+                        })}
                     >
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()}>
                           <input {...getInputProps()} type="file" />
-                          {!values.picture ? (
+                          {images.length==0? (
                             <p className={styles.dropFile}>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +180,7 @@ const Form = () => {
                             </p>
                           ) : (
                             <div className={styles.dropFile}>
-                              {values.picture.name}
+                              {images.length} immagini caricate
                             </div>
                           )}
                         </div>

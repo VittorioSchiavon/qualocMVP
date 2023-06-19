@@ -34,6 +34,9 @@ export const getMyStore = async (req, res) => {
 
 
 export const createStore = async (req, res) => {
+  var imageNames =[]
+  req.files.forEach(image=> imageNames.push(image.filename))
+  console.log(imageNames)
   try {
     const {
         name,
@@ -45,8 +48,8 @@ export const createStore = async (req, res) => {
         country,
         postalCode,
         phone,
-        picture,
     } = req.body;
+
 
     const newStore = new Store({
       name,
@@ -59,11 +62,11 @@ export const createStore = async (req, res) => {
       country,
       postalCode,
       phone,
-      picture: req.file.filename,
+      picture: imageNames,
     });
-    console.log("req.user", req.user)
+
     const store = await Store.findOne({ ownerID: req.user.id });
-    if(store){
+    if(!store){
       console.log("esiste già uno store")
       return res.status(400).json({ error: "esiste già uno store" });
     }else{

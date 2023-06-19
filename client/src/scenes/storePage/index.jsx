@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import ProductCarousel from "components/ProductCarousel";
 import RatingStars from "components/RatingStars";
 import SendMessage from "components/SendMessage";
+import ImageDisplay from "components/ImageDisplay";
 
 const StorePage = () => {
   const navigate = useNavigate();
@@ -78,19 +79,7 @@ const StorePage = () => {
             })}
         </div>
         <div className={styles.storeRow}>
-          {store?.picture ? (
-            <img
-              src={"http://localhost:3001/assets/" + store?.picture}
-              alt=""
-              className={styles.storeImg}
-            />
-          ) : (
-            <img
-              src="/assets/storeIcon.png"
-              alt=""
-              className={styles.storeImg}
-            />
-          )}
+        <ImageDisplay collection={store.picture}/>
 
           <div className={styles.dataContainer}>
           <div className={styles.firstRow}>

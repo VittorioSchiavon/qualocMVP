@@ -35,6 +35,17 @@ const CartPage = () => {
     setTot()
   };
 
+  const checkout = async () => {
+    const response = await fetch("http://localhost:3001/checkout/", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    console.log(data);
+    window.location=data.url
+  
+  };
+
   const setTot = ()=>{
     var tot = 0;
     cart?.products.map((prod) => {
@@ -82,7 +93,9 @@ const CartPage = () => {
           <div className={styles.tot}>
             totale: {totalPrice} €
           </div>
-          <button className="mainButtonGreen" disabled={!(cart?.products?.length>0)}>Procedi all'acquisto</button>
+          <button className="mainButtonGreen" disabled={!(cart?.products?.length>0)}
+          
+          onClick={checkout}>Procedi all'acquisto</button>
 
         </div>
       </div>

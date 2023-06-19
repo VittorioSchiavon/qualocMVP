@@ -28,7 +28,7 @@ const store= props.store
             }}>
             {store?.picture ? (
                 <img
-                  src={"http://localhost:3001/assets/" + store?.picture}
+                  src={"http://localhost:3001/assets/" + store?.picture[0]}
                   alt=""
                   className={styles.icon}
                 />
