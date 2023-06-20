@@ -9,9 +9,7 @@ const stripe = new Stripe("sk_test_51NJEo0Kja0rAPefmCyCLK4Lx6tIuIPNcnvdjq7Q2R8vn
 
 export const getCheckout = async (req, res) => {
   try {
-    console.log("Heloooooooooo")
     const cart = await Cart.findOne({ userID: req.user.id });
-    console.log(cart)
     if (!cart) return res.status(400).send("Cart does not exist");
     //check products in cart (quantity and location)
     var products = []
@@ -40,7 +38,7 @@ export const getCheckout = async (req, res) => {
     var costumerEmail= costumer.email+".com"
     //const shippingC = await getShippingCost(req.user.id)
     const session = await stripe.checkout.sessions.create({
-      client_reference_id: req.user._id,
+      client_reference_id: costumer._id.toString(),
       customer_email: costumerEmail,
       payment_method_types: ['card'],
       mode: 'payment',
@@ -68,10 +66,9 @@ export const getCheckout = async (req, res) => {
           }
         }
       ],*/
-      success_url: `http://localhost:3000/success/{CHECKOUT_SESSION_ID}`,
+      success_url: `http://localhost:3000/`,
       cancel_url: "http://localhost:3000/carrello",
     })
-    console.log("before payment",session)
     return res.status(200).send({ url: session.url })
   } catch (err) {
     console.log(err.message)

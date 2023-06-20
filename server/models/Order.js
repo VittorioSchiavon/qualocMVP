@@ -9,10 +9,6 @@ const OrderSchema= new mongoose.Schema({
         type: String,
         required: true,
     },
-    shopEmail:{
-        type: String,
-        required: true,
-    },
     address:{
         type: String,
     },
@@ -44,9 +40,11 @@ const OrderSchema= new mongoose.Schema({
     },
     totalPrice:{
         type: Number,
+        default:0,
     },
     totalProductPrice:{
         type: Number,
+        default:0,
     },
     shippingPrice:{
         type: Number,

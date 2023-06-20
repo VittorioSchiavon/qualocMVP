@@ -30,9 +30,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 dotenv.config()
 const app = express()
-app.use(bodyParser.json({ limit: "50mb", extended: true }))
-app.use(express.json())
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
+
 
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
@@ -40,6 +38,11 @@ app.use(morgan("common"))
 app.use(cors())
 app.use("/assets", express.static(path.join(__dirname, "public/assets")))
 
+app.use('/stripe',  express.raw({type: 'application/json'}), StripeWebhookRoute)
+
+app.use(express.json())
+app.use(bodyParser.json({ limit: "50mb", extended: true }))
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
 //FILE STORAGE
 
 const storage = multer.diskStorage({
@@ -93,7 +96,6 @@ app.use("/messages", MessagesRoutes);
 app.use("/reviews", reviewRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/orders', ordersRoutes);
-app.use('/stripe', express.raw({ type: '*/*' }), StripeWebhookRoute)
 
 /* ROUTES WITH FILES 
 app.use("/posts", postRoutes);
