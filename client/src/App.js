@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route  } from 'react-router-dom';
 import LoginPage from 'scenes/loginPage';
 import HomePage from 'scenes/homePage';
 import ProfilePage from 'scenes/profilePage';
@@ -13,6 +13,7 @@ import ChatPage from 'scenes/chatPage';
 import SearchPage from 'scenes/SearchPage';
 import Popup from 'components/Popup';
 import { createContext, useState } from 'react';
+import MessagePage from 'scenes/messagePage';
 
 
 export const PopupContext= createContext();
@@ -38,6 +39,11 @@ function App() {
         <Route path="/prodotto/:id" element={<ProductPage/>}/>
         <Route path="/chat" element={<ChatPage/>}/>
         <Route path="/cerca/:query" element={<SearchPage/>}/>
+        <Route path="/404" element={<MessagePage message={"404"}/>} />
+        <Route path="/successo" element={<MessagePage message={"successo"}/>} />
+        <Route path="/fallimento" element={<MessagePage message={"fallimento"}/>} />
+
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
       </BrowserRouter>
       {popup.type!=null && <Popup message={popup.message} type={popup.type}/>}

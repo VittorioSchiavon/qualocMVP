@@ -1,0 +1,26 @@
+.container{
+    padding: 1em;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.negativeMex{
+    font-weight: 900;
+    font-size: 2em;
+    color: var(--red);
+}
+.positiveMex{
+    font-weight: 900;
+    font-size: 2em;
+    color: var(--main);
+}
+
+.link{
+    cursor: pointer;
+    text-decoration: underline;
+    margin: 1em;
+
+}
