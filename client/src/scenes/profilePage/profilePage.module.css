@@ -30,18 +30,14 @@
 
 
 .secondContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+
     margin: 2em;
 
 }
 
 .box{
     text-align: center;
-    width: 300px;
-    height: 400px;
+ 
     background-color: var(--secondary);
     padding: 1em;
     font-weight: bolder;

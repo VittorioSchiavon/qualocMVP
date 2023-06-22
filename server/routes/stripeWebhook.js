@@ -4,6 +4,9 @@ import User from "../models/User.js";
 import Cart from "../models/Cart.js";
 import Order from "../models/Order.js";
 import Stripe from "stripe";
+
+import nodemailer from "nodemailer"
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const router = express.Router();
@@ -68,12 +71,15 @@ async function fulfillOrder(session) {
   //const
   //clean cart
   try {
-    orderCreated = await createOrders(cart, session, lineItems);
+    var orderCreated = await createOrders(cart, session, lineItems);
+    sendEmail(orderCreated, "email")
+
     cart.products = [];
-    //const savedCart = await cart.save();
+    const savedCart = await cart.save();
     //console.log("cleared cart", cart);
   } catch (err) {
     console.log("can't clear cart of:", session.client_reference_id);
+    console.log("because:", err)
   }
   //notify/email people
 
@@ -123,7 +129,6 @@ async function createOrders(cart, session, lineItems) {
           /*ShippingDate: Date(Date.now() + 3),
           shippingAttempt: 0,*/
         };
-        console.log("order", order);
         allOrders.push(order);
         alreadyCheckedShop.push(activeShop);
         activeShop = "";
@@ -131,11 +136,42 @@ async function createOrders(cart, session, lineItems) {
       }
     });
 
-    console.log(" ecco tutti gli ordini", allOrders);
-    const savedOrders = await Order.create(allOrders);
-    console.log("savedOrders", savedOrders);
+    const savedOrders = await Order.create(allOrders);   
+    return savedOrders
   } catch (err) {
     console.log(err);
   }
 }
 export default router;
+
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'scrotusauro69@gmail.com',
+    pass: "hrtlrnwnytfurgyn",
+    }
+});
+
+async function sendEmail(orders, email){
+  console.log("sending email to user", email)
+
+  let info = await transporter.sendMail({
+      from: {
+        name: "qualoc",
+        address: 'scrotusauro69@gmail.com'
+      },
+      to: "vittorioschiavon99@gmail.com", // list of receivers
+      subject: "Email di conferma ordine", // Subject line
+      html: `<h1>Ordine confermato</h1>
+      <h2>Ciao!</h2>
+      <p>Grazie per aver acquistato tramite qualoc. L'ordine che hai effettuato sta venendo processato in questo momento.
+      Per ulteriori formazioni visita la sezione dedicata sul nostro sito</p>
+      <div>ecco tutte le info: ${JSON.stringify(orders)}</div>
+      </div>`,
+  });
+  console.log("sent email to user", email)
+}

@@ -51,9 +51,7 @@ export const editProduct = async (req, res) => {
 
 export const getStoreProduct = async (req, res) => {
   try {
-    console.log("prodi di store")
     const products = await Product.find({ shopID: req.params.id });
-    console.log(products)
     res.json(products);
   } catch (err) {
     res.status(400).send(err);

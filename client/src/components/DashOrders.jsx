@@ -4,26 +4,43 @@ import Footer from "components/Footer";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import OrdersSection from "./OrdersSection";
 
 const DashOrders = () => {
   const navigate = useNavigate();
   //var storeId = useParams();
-  const [stores, setStores] = useState(null);
+  const [orders, setOrders] = useState(null);
+  const token = useSelector((state) => state.token);
+
 
   useEffect(() => {
-    getStores();
+    getOrders();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const getStores = async () => {
-    const response = await fetch(`http://localhost:3001/stores`, {
+  const getOrders = async () => {
+    const response = await fetch(`http://localhost:3001/orders/shopOrders/all`, {
       method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+
     });
     const data = await response.json();
-    setStores(data);
+    setOrders(data);
+    console.log("ordini", data)
   };
 
   return (
     <>
+    <OrdersSection type="store"/>
+    </>
+  );
+};
+
+export default DashOrders;
+
+
+/*
+
     <div className={styles.container}>
 
   
@@ -88,9 +105,4 @@ const DashOrders = () => {
 
     </div>
 
-    </div>
-    </>
-  );
-};
-
-export default DashOrders;
+    </div>*/

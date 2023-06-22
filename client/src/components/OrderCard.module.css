@@ -1,0 +1,30 @@
+.status{
+    font-size: 1em;
+    color: var(--main);
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1em;
+    align-items: center;
+    border-bottom: 2px solid var(--main);
+
+}
+
+.storeName{
+    font-size: 1.2em;
+}
+.date{
+    font-size: 0.9em;
+}
+
+.name{
+    font-size: 1.2em;
+}
+
+.info{
+    font-size: 0.9em;
+
+}

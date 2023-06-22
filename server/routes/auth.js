@@ -1,9 +1,11 @@
 import express from "express";
-import { login, registerUser } from "../controllers/auth.js";
+import { login, verify } from "../controllers/auth.js";
+import {  } from "jsonwebtoken";
 
 const router = express.Router();
 
 router.post("/login", login);
+router.get("/verify/:id", verify);
 
 //router.post("/registerUser", registerUser);
 

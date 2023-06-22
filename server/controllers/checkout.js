@@ -13,10 +13,11 @@ export const getCheckout = async (req, res) => {
     if (!cart) return res.status(400).send("Cart does not exist");
     //check products in cart (quantity and location)
     var products = []
-    cart.products.forEach(async (item) => {
+    
+    for await (const item of cart.products){
+      console.log(item)
 
       const prod = await Product.findById(item.productID);
-      //console.log(item)
       products.push({
         price_data: {
           currency: 'eur',
@@ -32,7 +33,7 @@ export const getCheckout = async (req, res) => {
         },
         quantity: item.quantity,
       })
-    });
+    }
     console.dir(products, {depth: 100})
     const costumer= await User.findOne({ _id: req.user.id});
     var costumerEmail= costumer.email+".com"

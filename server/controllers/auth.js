@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Store from "../models/Store.js";
 import Cart from "../models/Cart.js";
-
+import nodemailer from "nodemailer"
 /* REGISTER USER */
 export const registerUser = async (req, res) => {
   try {
@@ -31,6 +31,7 @@ export const registerUser = async (req, res) => {
       phone,
       address,
       isOwner,
+      verified: false,
     });
     const savedUser = await newUser.save();
 
@@ -39,6 +40,7 @@ export const registerUser = async (req, res) => {
       products: [],
     });
     const savedCart = await cart.save();
+    sendEmail(savedUser._id, savedUser.email)
     res.status(200).json(savedUser);
   } catch (err) {
     console.log(err.message);
@@ -92,7 +94,7 @@ export const registerStore = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email, verified: true });
     if (!user) return res.status(400).json({ msg: "User do not exist. " });
 
     if (user != null) {
@@ -107,4 +109,53 @@ export const login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'scrotusauro69@gmail.com',
+    pass: "hrtlrnwnytfurgyn"
+  }
+});
+async function sendEmail(id, email){
+  console.log("sending email to user", email)
+
+  let info = await transporter.sendMail({
+      from: {
+        name: "qualoc",
+        address: 'scrotusauro69@gmail.com'
+      },
+      to: "vittorioschiavon99@gmail.com", // list of receivers
+      subject: "Email di co", // Subject line
+      html: `<h1>Email Confirmation</h1>
+      <h2>Hello!</h2>
+      <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
+      <a href=http://localhost:3001/auth/verify/${id}> Click here</a>
+      </div>`,
+  });
+  console.log("sent email to user", email)
+}
+
+  export const verify = async (req, res) => {
+
+  const user = await User.findOne({ _id: req.params.id });
+  if (!user) return res.status(400).send("There is no user");
+  console.log("verified user", req.params.id)
+
+
+  try{
+      user.verified=true;
+      const userUpdated= await user.save();
+      console.log("verified user", req.params.id)
+      res.status(200).redirect('http://localhost:3000/login');
+  }catch (err){
+      res.status(400).redirect('http://localhost:3000/login');
+  }
+  
 };

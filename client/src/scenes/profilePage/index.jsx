@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "state";
 import { useNavigate } from "react-router-dom";
+import OrdersSection from "components/OrdersSection";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -126,7 +127,9 @@ const ProfilePage = () => {
                   )}
           <div className={styles.secondContainer}>
             <div className={styles.box}>il mio carrello</div>
-            <div className={styles.box}>I miei ordini</div>
+            <div className={styles.box}>I miei ordini
+            <OrdersSection type={"client"}/>
+            </div>
           </div>
         </div>
       ) : (
