@@ -1,49 +1,89 @@
 .message {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  .messageTop{
-      display: flex;
-  }
-  
-  .messageImg {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  .messageText{
-      padding: 10px;
-      border-radius: 20px;
-      background-color: var(--main);
-      color: white;
-      max-width: 300px;
-      overflow-wrap: break-word;
-  }
-  
-  .messageBottom{
-      font-size: 12px;
-      margin-top: 10px;
-  }
-  
-  .myMessage{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-      align-items: flex-end;
-  }
-  
-  .myMessage .messageText{
-      background-color: rgb(245, 241, 241);
-      color: black;
-  }
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
 
-  .messageImage{
-    width: 300px;
-    border-radius: 15px;
-    cursor: pointer;
-  }
+.messageTop {
+  display: flex;
+}
+
+.messageImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.messageText {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: var(--main);
+  color: white;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+.messageBottom {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.myMessage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: flex-end;
+}
+
+.myMessage .messageText {
+  background-color: rgb(245, 241, 241);
+  color: black;
+}
+
+.messageImage {
+  width: 300px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.tempProductContainer {
+  width: 100%;
+  background-color: var(--main);
+  border-radius: 10px;
+  padding: 2em;
+}
+
+.tempProductName {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: white;
+}
+
+.addToCartIcon {
+  width: 2em;
+}
+
+.addToCart {
+  background-color: white;
+  border-radius: 10px;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  font-weight: 700;
+}
+.addToCart:hover {
+  transform: scale(1.05);
+}
+
+.price {
+  font-weight: 700;
+  margin:1em;
+  color: white;
+}

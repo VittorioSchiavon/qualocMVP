@@ -14,7 +14,7 @@ export const getProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const product = await Product.find();
+    const product = await Product.find({isTemp: false });
     res.status(200).json(product);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -51,7 +51,7 @@ export const editProduct = async (req, res) => {
 
 export const getStoreProduct = async (req, res) => {
   try {
-    const products = await Product.find({ shopID: req.params.id });
+    const products = await Product.find({ shopID: req.params.id, isTemp: false });
     res.json(products);
   } catch (err) {
     res.status(400).send(err);
@@ -85,6 +85,25 @@ export const addProduct = async (req, res) => {
   }
 };
 
+
+export const addTempProduct = async (req, res) => {
+  console.log("i'm heree")
+  const store = await Store.findOne({ ownerID: req.user.id });
+  console.log("temp producttttttreq.body\n", req.body)
+  const product = new Product({
+    name: req.body.name,
+    price: req.body.price,
+    shippingCost: req.body.shippingCost,
+    shopID: store._id,
+    isTemp: true,
+  });
+  try {
+    const savedProduct = await product.save();
+    res.status(200).send(savedProduct);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
 
 
 export const searchProducts = async (req, res) => {

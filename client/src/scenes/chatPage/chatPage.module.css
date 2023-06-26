@@ -188,3 +188,32 @@ z-index: -1;
   height: 16px;
   margin-right: 4px;
 }
+
+
+.proposalForm{
+  background-color: white;
+  border-radius: 20px;
+  padding: 2em;
+
+
+}
+
+.propClose{
+  all: unset;
+  cursor: pointer;
+  color: var(--red);
+  font-size: 2em;
+}
+
+.proposalContainer{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128,0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

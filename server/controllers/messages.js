@@ -36,7 +36,7 @@ export const sendMessage = async (req, res) => {
       senderID: req.user.id,
       conversationID: convID,
       text: req.body.text,
-      isImage: req.body.isImage
+      type: req.body.type
     });
 
     const savedMessage = await newMessage.save();

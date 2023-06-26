@@ -4,6 +4,7 @@
   bottom: 0;
   left: 0;
   margin-bottom: 1em;
+  z-index: 9999999999999999999999999999999999999;
 }
 .card{
   width: 60vw;

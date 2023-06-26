@@ -20,6 +20,12 @@ const ChatPage = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [hidden, setHidden] = useState(false);
   const [image, setImage] = useState();
+  const [showForm, setShowForm] = useState(false);
+  const [purchaseProposal, setPurchaseProposal] = useState({
+    name: "",
+    price: 0,
+    shippingCost:0,
+  });
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
@@ -35,7 +41,7 @@ const ChatPage = () => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
-        isImage: data.isImage,
+        type: data?.type,
         createdAt: Date.now(),
       });
     });
@@ -60,7 +66,7 @@ const ChatPage = () => {
     const data = await response.json();
     setConversations(data);
   };
-  
+
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
     divRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -84,7 +90,23 @@ const ChatPage = () => {
     divRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [currentChat]);
 
-  const submitImage= async ()=>{
+  const submitProposal = async () => {
+    const savedProposalResponse = await fetch(
+      "http://localhost:3001/products/addTempProduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(purchaseProposal),
+      }
+    );
+    const savedProposal = await savedProposalResponse.json();
+    return savedProposal._id;
+  };
+
+  const submitImage = async () => {
     const formData = new FormData();
     formData.append("picture", image);
     const savedImageResponse = await fetch(
@@ -98,16 +120,25 @@ const ChatPage = () => {
       }
     );
     const savedImage = await savedImageResponse.json();
-    return savedImage
-  }
+    return savedImage;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var imageName=""
-    if(image) imageName= await submitImage()
+    var content=newMessage
+    var type=""
+    if (image){
+      content = await submitImage();
+      type="image"
+    } 
+    if (showForm){
+      content=await submitProposal();
+      type="product"
+    }
+
     const message = {
       senderID: user._id,
-      text: imageName===""? newMessage: imageName,
-      isImage: image? true: false,
+      text: content,
+      type: type,
       conversationID: currentChat._id,
     };
 
@@ -116,8 +147,8 @@ const ChatPage = () => {
     );
     socket.current.emit("sendMessage", {
       senderID: user._id,
-      text: imageName===""? newMessage: imageName,
-      isImage: image? true: false,
+      text: content,
+      type: type,
       conversationID: currentChat._id,
     });
     const savedMessagetResponse = await fetch(
@@ -135,7 +166,11 @@ const ChatPage = () => {
     const savedMessage = await savedMessagetResponse.json();
     setMessages([...messages, savedMessage]);
     setNewMessage("");
-    setImage("")
+    setImage("");
+    setPurchaseProposal({    name: "",
+    price: 0,
+    shippingCost:0,})
+    setShowForm(false)
   };
 
   return (
@@ -211,11 +246,10 @@ const ChatPage = () => {
                 className={styles.fileInput}
                 id="fileInput"
                 type="file"
-                onChange={(e) =>{
-
-                  setImage(e.target.files[0])
-                  setNewMessage(e.target.files[0].name)
-                } }
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  setNewMessage(e.target.files[0].name);
+                }}
               />
               <label className={styles.fileInputLabel} htmlFor="fileInput">
                 <svg
@@ -235,6 +269,40 @@ const ChatPage = () => {
                 </svg>
                 <span>Invia immagine</span>
               </label>
+              {user.isOwner &&<button type="button" onClick={() => setShowForm(!showForm)}>
+                Crea Proposta di Acquisto
+              </button>}
+              {(showForm&& user.isOwner==true) && (
+                <div class={styles.proposalContainer}>
+                  <form class={styles.proposalForm}>
+                    <button
+                      type="button"
+                      class={styles.propClose}
+                      onClick={() => setShowForm(!showForm)}
+                    >
+                      X
+                    </button>
+                    <div>Invia una proposta di Acquisto</div>
+                    <input type="text" placeholder="Nome prodotto"  value={purchaseProposal.name}            onChange={(e) => {
+                  setPurchaseProposal({...purchaseProposal, name:e.target.value});
+                }}/>
+                    <input type="number" placeholder="Prezzo" value={purchaseProposal.price}  onChange={(e) => {
+                  setPurchaseProposal({...purchaseProposal, price:e.target.value});
+                }}/>
+                    <input type="number" value={purchaseProposal.shippingCost} placeholder="spedizione"  onChange={(e) => {
+                  setPurchaseProposal({...purchaseProposal, shippingCost:e.target.value});
+                }}/>
+
+                    <button type="submit" onClick={handleSubmit}>
+                      Invia
+                    </button>
+                    <div>cos'è una "proposta di acquisto?</div>
+                    <div>
+                      E' un modo semplice e veloce per permettere bla bla bla
+                    </div>
+                  </form>
+                </div>
+              )}
 
               <button
                 type="submit"

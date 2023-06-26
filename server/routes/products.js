@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  getProduct, getProducts, getStoreProduct, deleteProduct, addProduct, editProduct, searchProducts
+  getProduct, getProducts, getStoreProduct, deleteProduct, addTempProduct, editProduct, searchProducts
 } from "../controllers/products.js";
 import { verifyToken } from "../middleware/auth.js";
 
@@ -14,6 +14,7 @@ router.get("/search/:query", searchProducts);
 //router.post("/addProduct", verifyToken, addProduct)
 router.post("/editProduct", verifyToken, editProduct)
 router.get("/deleteProduct/:productID", verifyToken, deleteProduct)
+router.post("/addTempProduct", verifyToken, addTempProduct)
 
 /* UPDATE */
 
