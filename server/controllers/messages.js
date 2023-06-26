@@ -35,12 +35,24 @@ export const sendMessage = async (req, res) => {
     const newMessage = new Message({
       senderID: req.user.id,
       conversationID: convID,
-      text: req.body.text
+      text: req.body.text,
+      isImage: req.body.isImage
     });
 
     const savedMessage = await newMessage.save();
     res.status(200).json(savedMessage);
   } catch (err) {
     res.status(404).json({ message: err.message });
+  }
+};
+
+
+export const uploadMessageImage = async (req, res) => {
+  try {
+    console.log(req.file)
+    res.status(200).json( req.file.filename);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ error: err.message });
   }
 };

@@ -5,6 +5,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: fit-content;
+    margin: auto;
+    width: 500px;
+    max-width: 500px;
   }
   
   .searchContainer input{
@@ -12,12 +16,15 @@
       border: none;
       color: var(--black);
       font-weight: bolder;
-      width: clamp(20px,20vw,1000px);
+      width: 100%;
       padding: 0.1rem 1.5rem;
+
   
   }
   .searchContainer input:focus{
-      border:transparent
+      border:transparent;
+      outline: none;
+
   }
   .searchContainer button{
       background-color: transparent;

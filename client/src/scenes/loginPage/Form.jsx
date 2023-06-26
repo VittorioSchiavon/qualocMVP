@@ -81,6 +81,7 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
+    if (loggedInResponse.ok){
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     console.log("here oklgofk");
@@ -94,6 +95,10 @@ const Form = () => {
       );
       navigate("/");
     }
+  }else{
+    setPopup({ type: "error", message: "Accesso non eseguito. I dati inseriti non sono corretti" });
+
+  }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {

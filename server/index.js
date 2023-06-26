@@ -24,6 +24,7 @@ import ConversationRoutes from "./routes/conversations.js";
 import MessagesRoutes from "./routes/messages.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createStore } from "./controllers/stores.js";
+import { uploadMessageImage } from "./controllers/messages.js";
 
 //CONFIG
 const __filename = fileURLToPath(import.meta.url)
@@ -77,6 +78,8 @@ const upload = multer({
 /* ROUTES WITH FILES */
 
 app.post("/auth/registerUser", upload.single("picture"), registerUser);
+app.post("/messages/uploadImage",verifyToken, upload.single("picture"), uploadMessageImage);
+
 app.post("/stores/createStore", verifyToken , upload.any("picture"), createStore);
 
 

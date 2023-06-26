@@ -12,8 +12,16 @@ var min = date.getMinutes()
   return  (
     <div className={own ? styles.myMessage: styles.message}>
       <div className={styles.messageTop}>
-
+        {message.isImage ? 
+                  <img
+                  src={"http://localhost:3001/assets/" + message.text}
+                  className={styles.messageImage}
+                  alt={message.text}
+                />
+        :
         <p className={styles.messageText}>{message.text}</p>
+
+        }
       </div>
       <div className={styles.messageBottom}>{d + "/"+ m + " "+ h + ":" + min}</div>
     </div>

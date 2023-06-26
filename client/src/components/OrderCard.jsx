@@ -9,6 +9,7 @@ const OrderCard = ({ order, type }) => {
   const [user, setUser] = useState(null);
   const [store, setStore] = useState(null);
   const [products, setProducts] = useState([]);
+  const [orderState, setOrderState] = useState(order);
   const [date, setDate] = useState(new Date(order.updatedAt));
 
   const userAccount = useSelector((state) => state.user);
@@ -22,7 +23,7 @@ const OrderCard = ({ order, type }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getProducts = async () => {
-    for await (const product of order.products) {
+    for await (const product of orderState.products) {
       var link = "http://localhost:3001/products/" + product.productID;
       const response = await fetch(link, {
         method: "GET",
@@ -30,7 +31,7 @@ const OrderCard = ({ order, type }) => {
 
       const data = await response.json();
       product.name = data.name;
-      setUser(user);
+      setProducts([...products, product]);
       //tempProd = [...tempProd, data];
     }
   };
@@ -46,7 +47,7 @@ const OrderCard = ({ order, type }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    order.status = newStatus;
+    orderState.status = newStatus;
     console.log("ordini", data);
   };
 
@@ -90,7 +91,7 @@ const OrderCard = ({ order, type }) => {
         </div>
 
         <div className={styles.productList}>
-          {order.products?.map((prod) => (
+          {products?.map((prod) => (
             <div>
               <span className={styles.name}>{prod.name} </span>
               <span className={styles.info}>

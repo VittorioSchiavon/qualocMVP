@@ -12,7 +12,6 @@ export const registerUser = async (req, res) => {
       firstName,
       lastName,
       email,
-      picturePath,
       password,
       phone,
       address,
@@ -27,7 +26,7 @@ export const registerUser = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturePath: req.file.filename,
+      picturePath: req.file?.filename? req.file?.filename: "",
       phone,
       address,
       isOwner,
@@ -94,7 +93,7 @@ export const registerStore = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email, verified: true });
+    const user = await User.findOne({ email: email/*, verified: true*/ });
     if (!user) return res.status(400).json({ msg: "User do not exist. " });
 
     if (user != null) {

@@ -36,14 +36,23 @@ export const getCheckout = async (req, res) => {
     }
     console.dir(products, {depth: 100})
     const costumer= await User.findOne({ _id: req.user.id});
-    var costumerEmail= costumer.email+".com"
+    var costumerEmail= costumer.email
     //const shippingC = await getShippingCost(req.user.id)
     const session = await stripe.checkout.sessions.create({
       client_reference_id: costumer._id.toString(),
-      customer_email: costumerEmail,
+     customer_email: costumerEmail,
+     locale: "it",
+     phone_number_collection: {
+      enabled: true,
+    },
       payment_method_types: ['card'],
       mode: 'payment',
-      line_items: products,/*
+      shipping_address_collection: {
+        allowed_countries: ['IT'],
+      },
+      line_items: products,
+   /*
+      customer_details:{address:"ciaone",name:costumer.firstName + costumer.lastName, phone: costumer.phone},
       shipping_options: [
         {
           shipping_rate_data: {
@@ -67,7 +76,7 @@ export const getCheckout = async (req, res) => {
           }
         }
       ],*/
-      success_url: `http://localhost:3000/`,
+      success_url: `http://localhost:3000/successo`,
       cancel_url: "http://localhost:3000/carrello",
     })
     return res.status(200).send({ url: session.url })

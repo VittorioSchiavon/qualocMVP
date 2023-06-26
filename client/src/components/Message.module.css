@@ -22,6 +22,7 @@
       background-color: var(--main);
       color: white;
       max-width: 300px;
+      overflow-wrap: break-word;
   }
   
   .messageBottom{
@@ -39,4 +40,10 @@
   .myMessage .messageText{
       background-color: rgb(245, 241, 241);
       color: black;
+  }
+
+  .messageImage{
+    width: 300px;
+    border-radius: 15px;
+    cursor: pointer;
   }

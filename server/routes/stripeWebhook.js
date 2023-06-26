@@ -45,6 +45,9 @@ router.post("/webhook", async (request, response) => {
           expand: ["line_items", "line_items.data.price.product"],
         }
       );
+      console.log("sessioneeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        console.dir(sessionWithLineItems, { depth: null });
+
 
       //console.log("session \n", sessionWithLineItems);
       if (sessionWithLineItems.payment_status === "paid") {
@@ -120,7 +123,7 @@ async function createOrders(cart, session, lineItems) {
         const order = {
           shopID: activeShop,
           clientID: session.client_reference_id,
-          address: JSON.stringify(session.customer_details.address),
+          address: session.customer_details.address.line1  +" "+ session.customer_details.address.line2+" "+ session.customer_details.address.city  +", "+ session.customer_details.address.postal_code,
           products: activeProducts,
           totalPrice: totalProductPrice /*+ shippingCost*/,
           totalProductPrice: totalProductPrice,

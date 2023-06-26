@@ -14,6 +14,8 @@ import SearchPage from 'scenes/SearchPage';
 import Popup from 'components/Popup';
 import { createContext, useState } from 'react';
 import MessagePage from 'scenes/messagePage';
+import FAQPage from 'scenes/aboutUsPage';
+import AboutUsPage from 'scenes/aboutUsPage';
 
 
 export const PopupContext= createContext();
@@ -25,6 +27,7 @@ function App() {
   return (
     <div className="app">
       <PopupContext.Provider value={[popup, setPopup]}>
+        
       <BrowserRouter>
       <Routes>
       <Route path="/selezionaTipologia" element={<NewProfilePage/>}/>
@@ -42,7 +45,8 @@ function App() {
         <Route path="/404" element={<MessagePage message={"404"}/>} />
         <Route path="/successo" element={<MessagePage message={"successo"}/>} />
         <Route path="/fallimento" element={<MessagePage message={"fallimento"}/>} />
-
+        <Route path="/FAQ" element={<FAQPage/>} />
+        <Route path="/chiSiamo" element={<AboutUsPage/>} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
       </BrowserRouter>

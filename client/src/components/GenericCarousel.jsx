@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import StoreCard from "./StoreCard";
+import Draggable from 'react-draggable';
 
 const GenericCarousel = ({collection, type, title}) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const GenericCarousel = ({collection, type, title}) => {
 
     <>
       <div className="mainTitle">{title}</div>
-
+      
       <div className={styles.container}>
       <button  className={styles.buttonArrow}
         onClick={() => {

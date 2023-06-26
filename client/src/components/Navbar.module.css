@@ -1,16 +1,20 @@
-#topnav {
+.topnav {
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
   padding: 10px;
   justify-content: space-between;
+  padding-left: clamp(15px, 5%, 100px);
+  padding-right: clamp(15px, 5%, 100px);
+  margin: auto;
   align-items: center;
   background-color: var(--secondary);
 }
 
 #logo {
-  height: 40px;
-  margin: 5px;
+  height: 35px;
+  margin: 8px;
+  margin-left: 12px;
   cursor: pointer;
 }
 
@@ -25,10 +29,34 @@
 .icons{
     color: var(--black);
     cursor: pointer;
-
+    height: 2em;
+    position: relative;
 
 }
 
 .icons:hover{
     color: var(--darkGray);
+}
+
+.svgIcons{
+  height: 2em;
+  color: var(--black);
+  fill: var(--black);
+
+  cursor: pointer;
+}
+
+.svgIcons:hover{
+  fill: var(--darkGray);
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--main); /* Adjust badge background color */
+  color: white; /* Adjust badge text color */
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 12px; /* Adjust badge font size */
 }
