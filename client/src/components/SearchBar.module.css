@@ -1,14 +1,17 @@
 
 .searchContainer {
-    background-color: white;
+    background-color: var(--secondary);
     border-radius: 3456789px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: fit-content;
     margin: auto;
-    width: 500px;
-    max-width: 500px;
+    width:inherit;
+  }
+  .searchContainer:hover{
+    background-color: var(--secondaryDarker);
+
   }
   
   .searchContainer input{
@@ -16,10 +19,14 @@
       border: none;
       color: var(--black);
       font-weight: bolder;
-      width: 100%;
+      width: inherit;
       padding: 0.1rem 1.5rem;
 
   
+  }
+  .searchContainer input:focus.searchContainer{
+    background-color: var(--secondary);
+
   }
   .searchContainer input:focus{
       border:transparent;

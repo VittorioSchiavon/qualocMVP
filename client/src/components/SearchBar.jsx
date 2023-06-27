@@ -8,22 +8,21 @@ const SearchBar = () => {
   const [query, setQuery] = useState(oldQuery.query);
 
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleClick = (e) => {
+e.preventDefault()
     navigate("/cerca/" + query);
   };
 
   return (
-    <form method="get" action="search.html" className={styles.searchContainer}>
+    <form method="get"  className={styles.searchContainer}>
       <input
         type="text"
         value={query}
         placeholder="Cosa stai cercando?"
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button type="submit" onClick={handleClick}>
-        <div>
+      <button type="submit" disabled={!query} onClick={handleClick}>
           <Search />
-        </div>
       </button>
     </form>
   );
