@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   console.log(token);
   if (!token) navigate("/login");
@@ -45,6 +45,11 @@ const ProfilePage = () => {
     setUser(data);
   };
 
+  const setOffline= async () =>{
+      const response = await fetch("http://localhost:3001/users/setOffline/"+user._id, {
+        method: "GET",      });
+      const data = await response.json();
+  }
   if (!user) return null;
 
   return (
@@ -58,6 +63,7 @@ const ProfilePage = () => {
                   <button
                     className="mainButtonGreen"
                     onClick={() => {
+                      setOffline()
                       dispatch(setLogout());
                       navigate("/");
                     }}

@@ -91,7 +91,7 @@ const Navbar = () => {
       </div>
 
 
-      <WaveSeparator />
+     {/* <WaveSeparator />*/}
       
 
     </div>

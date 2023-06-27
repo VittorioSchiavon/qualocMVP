@@ -28,7 +28,7 @@ const GenericCarousel = ({collection, type, title}) => {
           style={{ transform: "translateX(" + trans + "px)" }}
         >
           {collection.map((el) => (
-            type=="product"?  <ProductCard product={el}/> : <StoreCard store={el}/>
+            type=="product"?  <ProductCard key={el._id} product={el}/> : <StoreCard key={el._id} store={el}/>
           ))}
         </div>
         

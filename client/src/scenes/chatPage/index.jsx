@@ -3,54 +3,60 @@ import Footer from "components/Footer";
 import styles from "./chatPage.module.css";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "state";
+import { setLastAccess } from "state";
 import { useNavigate } from "react-router-dom";
 import Conversation from "components/Conversation";
 import Message from "components/Message";
 import { io } from "socket.io-client";
 //import bellSound from "../assets/bellSound.mp3"
 const ChatPage = () => {
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [notificationList, setNotificationList] = useState([]);
+  const user = useSelector((state) => state.user);
+
+  const [previousAccess, setPreviousAccess] = useState(user.lastAccess);
+
 
   const navigate = useNavigate();
   const socket = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [hidden, setHidden] = useState(false);
   const [image, setImage] = useState();
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [purchaseProposal, setPurchaseProposal] = useState({
     name: "",
     price: 0,
-    shippingCost:0,
+    shippingCost: 0,
   });
 
   const token = useSelector((state) => state.token);
-  const user = useSelector((state) => state.user);
   const divRef = useRef(null);
+  const dispatch = useDispatch();
   useEffect(() => {
     getConversations();
-
+        
     const interval = setInterval(() => {
-      getConversations()
+      getConversations();
+      dispatch(setLastAccess())
     }, 30000);
-  
-    return () => clearInterval(interval); 
+
+    return () => clearInterval(interval);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function playSound() {
     var audio = new Audio("../assets/bellSound.mp3");
-    audio.play();  }
+    audio.play();
+  }
 
-    useEffect(() => {
-    }, [conversations]);
+  useEffect(() => {}, [conversations]);
+
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
-      console.log("ciaone")
       setArrivalMessage({
         sender: data?.sender,
         text: data?.text,
@@ -59,23 +65,35 @@ const ChatPage = () => {
         conversationID: data.conversationID,
       });
     });
-    console.log("arr", arrivalMessage)
+    console.log("arr", arrivalMessage);
   }, []);
 
   useEffect(() => {
-    if(arrivalMessage){
-      console.log("arr yolo", arrivalMessage)
-      !notificationList.includes(arrivalMessage.conversationID) && setNotificationList([...notificationList, arrivalMessage.conversationID])
-      console.log(notificationList)
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUsers", (users) => {
+    });
+  }, [user]);
+
+  useEffect(() => {
+    if (arrivalMessage) {
+
+      !notificationList.includes(arrivalMessage.conversationID) &&
+        arrivalMessage.conversationID != currentChat?._id &&
+        setNotificationList([
+          ...notificationList,
+          arrivalMessage.conversationID,
+        ]);
+      console.log(notificationList);
     }
 
-    if(arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)){
+    if (
+      arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender)
+    ) {
       setMessages((prev) => [...prev, arrivalMessage]);
       playSound();
-
     }
-
-  }, [arrivalMessage/*, currentChat*/]);
+  }, [arrivalMessage /*, currentChat*/]);
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
@@ -87,10 +105,30 @@ const ChatPage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    setConversations([]);
-    setConversations(data);
+    if(conversations==null) {
+      setConversations(data);
+      setNotificationWhileOffline(data)
+    }else{
+      setConversations(data);
+
+    }
+    
+
   };
 
+  const setNotificationWhileOffline = (data)=>{
+        console.log("i'm checking past convs")
+    const filteredConversations = data?.filter(
+      (conversation) =>{ 
+        console.log("conversation.lastMessage", conversation.lastMessage)
+        console.log("user.lastAccess", user.lastAccess)
+        return new Date(conversation.lastMessage) > new Date(previousAccess)}
+    )
+    .forEach((conversation) => !notificationList.includes(conversation._id) &&
+    conversation._id != currentChat?._id && setNotificationList([...notificationList, conversation._id]));
+    console.log("notificationList", notificationList);
+    console.log("filteredConversations", filteredConversations);
+  }
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
     divRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -112,14 +150,14 @@ const ChatPage = () => {
     };
     getMessages();
     divRef?.current?.scrollIntoView({ behavior: "smooth" });
-    if(currentChat){
-    var tempList= notificationList
-    const index = notificationList.indexOf(currentChat?._id);
-    const x = tempList.splice(index, 1);
-    console.log("I've removed", currentChat?._id)
-    console.log("the res is", tempList)
-    setNotificationList(tempList)
-    console.log("the actysa res is", notificationList)
+    if (currentChat) {
+      var tempList = notificationList;
+      const index = notificationList.indexOf(currentChat?._id);
+      const x = tempList.splice(index, 1);
+      console.log("I've removed", currentChat?._id);
+      console.log("the res is", tempList);
+      setNotificationList(tempList);
+      console.log("the actysa res is", notificationList);
     }
   }, [currentChat]);
 
@@ -157,15 +195,15 @@ const ChatPage = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var content=newMessage
-    var type=""
-    if (image){
+    var content = newMessage;
+    var type = "";
+    if (image) {
       content = await submitImage();
-      type="image"
-    } 
-    if (showForm){
-      content=await submitProposal();
-      type="product"
+      type = "image";
+    }
+    if (showForm) {
+      content = await submitProposal();
+      type = "product";
     }
 
     const message = {
@@ -201,10 +239,8 @@ const ChatPage = () => {
     setMessages([...messages, savedMessage]);
     setNewMessage("");
     setImage("");
-    setPurchaseProposal({    name: "",
-    price: 0,
-    shippingCost:0,})
-    setShowForm(false)
+    setPurchaseProposal({ name: "", price: 0, shippingCost: 0 });
+    setShowForm(false);
   };
 
   return (
@@ -213,12 +249,13 @@ const ChatPage = () => {
         className={styles.container}
         style={{ transform: hidden ? "translateX(100%)" : "translateX(200%)" }}
       >
-
         <button
           className={styles.showButton}
           onClick={() => setHidden(!hidden)}
         >
-          {notificationList.length!=0 && <div className={styles.notification} >!</div>}
+          {notificationList.length != 0 && (
+            <div className={styles.notification}>!</div>
+          )}
 
           <svg
             className={styles.showButtonIcon}
@@ -233,7 +270,7 @@ const ChatPage = () => {
             <div className={styles.listTitle}>Chat</div>
             {conversations != null &&
               conversations.map((el) => (
-                <div
+                <div key={el._id}
                   onClick={() => {
                     setCurrentChat(el);
                   }}
@@ -268,7 +305,7 @@ const ChatPage = () => {
             </div>
             <div className={styles.mexContainer}>
               {messages.map((m) => (
-                <Message message={m} own={m.senderID === user._id} />
+                <Message key={m._id} message={m} own={m.senderID === user._id} />
               ))}
               <div ref={divRef} />
             </div>
@@ -307,10 +344,12 @@ const ChatPage = () => {
                 </svg>
                 <span>Invia immagine</span>
               </label>
-              {user.isOwner &&<button type="button" onClick={() => setShowForm(!showForm)}>
-                Crea Proposta di Acquisto
-              </button>}
-              {(showForm&& user.isOwner==true) && (
+              {user.isOwner && (
+                <button type="button" onClick={() => setShowForm(!showForm)}>
+                  Crea Proposta di Acquisto
+                </button>
+              )}
+              {showForm && user.isOwner == true && (
                 <div class={styles.proposalContainer}>
                   <form class={styles.proposalForm}>
                     <button
@@ -321,15 +360,39 @@ const ChatPage = () => {
                       X
                     </button>
                     <div>Invia una proposta di Acquisto</div>
-                    <input type="text" placeholder="Nome prodotto"  value={purchaseProposal.name}            onChange={(e) => {
-                  setPurchaseProposal({...purchaseProposal, name:e.target.value});
-                }}/>
-                    <input type="number" placeholder="Prezzo" value={purchaseProposal.price}  onChange={(e) => {
-                  setPurchaseProposal({...purchaseProposal, price:e.target.value});
-                }}/>
-                    <input type="number" value={purchaseProposal.shippingCost} placeholder="spedizione"  onChange={(e) => {
-                  setPurchaseProposal({...purchaseProposal, shippingCost:e.target.value});
-                }}/>
+                    <input
+                      type="text"
+                      placeholder="Nome prodotto"
+                      value={purchaseProposal.name}
+                      onChange={(e) => {
+                        setPurchaseProposal({
+                          ...purchaseProposal,
+                          name: e.target.value,
+                        });
+                      }}
+                    />
+                    <input
+                      type="number"
+                      placeholder="Prezzo"
+                      value={purchaseProposal.price}
+                      onChange={(e) => {
+                        setPurchaseProposal({
+                          ...purchaseProposal,
+                          price: e.target.value,
+                        });
+                      }}
+                    />
+                    <input
+                      type="number"
+                      value={purchaseProposal.shippingCost}
+                      placeholder="spedizione"
+                      onChange={(e) => {
+                        setPurchaseProposal({
+                          ...purchaseProposal,
+                          shippingCost: e.target.value,
+                        });
+                      }}
+                    />
 
                     <button type="submit" onClick={handleSubmit}>
                       Invia

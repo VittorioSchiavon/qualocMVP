@@ -22,10 +22,13 @@ export const authSlice = createSlice({
         },
         setIsOwner: (state) =>{
             state.user.isOwner = true
-        }
+        },
+        setLastAccess: (state) =>{
+            state.user.lastAccess = new Date()
+        },
 
     }
 })
 
-export const {setLogin, setLogout, setIsOwner} =authSlice.actions
+export const {setLogin, setLogout, setIsOwner, setLastAccess} =authSlice.actions
 export default authSlice.reducer
