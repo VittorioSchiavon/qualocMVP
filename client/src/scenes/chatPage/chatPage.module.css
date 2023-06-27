@@ -217,3 +217,19 @@ z-index: -1;
   justify-content: center;
 
 }
+
+
+.notification{
+  background-color: var(--red);
+  border-radius: 3456789px;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  font-weight: 900;
+  transform: translateX(20px) translateY(-20px);
+
+}

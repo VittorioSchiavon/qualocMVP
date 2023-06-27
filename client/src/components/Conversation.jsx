@@ -26,7 +26,8 @@ const Conversation = (props) => {
   return <>
 
 <div className={styles.conversation} style={ props.isActive ? { backgroundColor:'var(--white)'}: {}}>
-      
+      {props.hasNotification &&
+      <div className={styles.notification} >!</div>}
 
 {friend?.picturePath ? (
               <img

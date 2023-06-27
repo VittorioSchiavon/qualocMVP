@@ -7,7 +7,7 @@ export const getUserConversations = async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.user.id] },
-    });
+    }).sort({lastMessage:-1});
     res.status(200).json(conversation);
   } catch (err) {
     res.status(404).json({ message: err.message });

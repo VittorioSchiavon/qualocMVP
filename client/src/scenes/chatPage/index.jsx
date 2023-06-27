@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Conversation from "components/Conversation";
 import Message from "components/Message";
 import { io } from "socket.io-client";
-import Dropzone from "react-dropzone";
 //import bellSound from "../assets/bellSound.mp3"
 const ChatPage = () => {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [notificationList, setNotificationList] = useState([]);
+
   const navigate = useNavigate();
   const socket = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -32,27 +33,49 @@ const ChatPage = () => {
   const divRef = useRef(null);
   useEffect(() => {
     getConversations();
+
+    const interval = setInterval(() => {
+      getConversations()
+    }, 30000);
+  
+    return () => clearInterval(interval); 
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function playSound() {}
+  function playSound() {
+    var audio = new Audio("../assets/bellSound.mp3");
+    audio.play();  }
+
+    useEffect(() => {
+    }, [conversations]);
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
+      console.log("ciaone")
       setArrivalMessage({
-        sender: data.senderId,
-        text: data.text,
+        sender: data?.sender,
+        text: data?.text,
         type: data?.type,
         createdAt: Date.now(),
+        conversationID: data.conversationID,
       });
     });
-    playSound();
+    console.log("arr", arrivalMessage)
   }, []);
 
   useEffect(() => {
-    arrivalMessage &&
-      currentChat?.members.includes(arrivalMessage.sender) &&
+    if(arrivalMessage){
+      console.log("arr yolo", arrivalMessage)
+      !notificationList.includes(arrivalMessage.conversationID) && setNotificationList([...notificationList, arrivalMessage.conversationID])
+      console.log(notificationList)
+    }
+
+    if(arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)){
       setMessages((prev) => [...prev, arrivalMessage]);
-  }, [arrivalMessage, currentChat]);
+      playSound();
+
+    }
+
+  }, [arrivalMessage/*, currentChat*/]);
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
@@ -64,6 +87,7 @@ const ChatPage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    setConversations([]);
     setConversations(data);
   };
 
@@ -88,6 +112,15 @@ const ChatPage = () => {
     };
     getMessages();
     divRef?.current?.scrollIntoView({ behavior: "smooth" });
+    if(currentChat){
+    var tempList= notificationList
+    const index = notificationList.indexOf(currentChat?._id);
+    const x = tempList.splice(index, 1);
+    console.log("I've removed", currentChat?._id)
+    console.log("the res is", tempList)
+    setNotificationList(tempList)
+    console.log("the actysa res is", notificationList)
+    }
   }, [currentChat]);
 
   const submitProposal = async () => {
@@ -147,6 +180,7 @@ const ChatPage = () => {
     );
     socket.current.emit("sendMessage", {
       senderID: user._id,
+      receiverId,
       text: content,
       type: type,
       conversationID: currentChat._id,
@@ -179,10 +213,13 @@ const ChatPage = () => {
         className={styles.container}
         style={{ transform: hidden ? "translateX(100%)" : "translateX(200%)" }}
       >
+
         <button
           className={styles.showButton}
           onClick={() => setHidden(!hidden)}
         >
+          {notificationList.length!=0 && <div className={styles.notification} >!</div>}
+
           <svg
             className={styles.showButtonIcon}
             viewBox="0 0 24 24"
@@ -204,6 +241,7 @@ const ChatPage = () => {
                   <Conversation
                     conversation={el}
                     isActive={el == currentChat}
+                    hasNotification={notificationList.includes(el._id)}
                   />
                 </div>
               ))}

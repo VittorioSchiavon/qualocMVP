@@ -30,14 +30,16 @@ const io = require("socket.io")(8900, {
     });
   
     //send and get message
-    socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-      const user = getUser(receiverId);
-      console.log("Message sent");
+    socket.on("sendMessage", (data) => {
+      const user = getUser(data.receiverId);
       var id= user?.socketId
       if (!id) id= 0
       io.to(user?.socketId).emit("getMessage", {
-        senderId,
-        text,
+        text: data.text,
+        type: data.type,
+        sender: data.senderID,
+        conversationID: data.conversationID,
+
       });
     });
   
