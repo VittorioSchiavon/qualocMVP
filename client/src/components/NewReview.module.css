@@ -4,10 +4,16 @@
 }
 .container{
     display: flex;
+    flex-wrap: wrap;
     width: 80%;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     align-items: center;
     padding: 2em;
+    background-color: var(--secondary);
+    border-radius: 24px;
 }
 .userImage{
     height: 70px;
@@ -34,6 +40,9 @@
     display: block;
     padding: 2em;
     margin: 3em;
+    border: none;
+    border-radius: 24px;
+    outline: none;
 }
 
 .title{
@@ -41,6 +50,7 @@
     color: var(--main);
     margin: 1em;
     text-align: center;
+    width: 100%;
 
 }
 
@@ -70,6 +80,7 @@
 
 .ratingsContainer{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -77,4 +88,16 @@
 .form button{
     margin: auto;
     margin-top: 1em;
+}
+
+.sent{
+    font-weight: 800;
+    color: var(--black);
+    text-align: center;
+    margin: auto;
+}
+
+.ratingLable{
+    font-weight: 700;
+    text-align: center;
 }

@@ -40,7 +40,7 @@ const OrdersSection = ({type}) => {
     <>
     <div className={styles.container}>
       
-    <select value={filter} onChange={handleFilterChange}>
+    <select className={styles.selection} value={filter} onChange={handleFilterChange}>
         <option value="tutti">Tutti gli ordini</option>
           <option value={"created"}>Ordini Creati</option>
           <option value={"confirmed"}>Ordini Confermati</option>

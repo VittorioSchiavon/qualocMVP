@@ -1,17 +1,11 @@
-import styles from "./GenericCarousel.module.css";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from "./GenericDisplay.module.css";
 import ProductCard from "./ProductCard";
 import StoreCard from "./StoreCard";
 
 const GenericDisplay = ({collection, type, title}) => {
-  const navigate = useNavigate();
-
   return (
-
     <>
       <div className="mainTitle">{title}</div>
-
       <div className={styles.container}>
         <div
           className={styles.carousel}
@@ -23,7 +17,6 @@ const GenericDisplay = ({collection, type, title}) => {
       
       </div>
     </>
-
   );
 };
 

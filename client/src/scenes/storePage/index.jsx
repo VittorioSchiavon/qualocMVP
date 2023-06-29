@@ -2,29 +2,31 @@ import styles from "./storePage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ProductCarousel from "components/ProductCarousel";
 import RatingStars from "components/RatingStars";
+import Badge from "components/Badge";
+
 import SendMessage from "components/SendMessage";
 import ImageDisplay from "components/ImageDisplay";
-
+import { useSelector } from "react-redux";
+import GenericDisplay from "components/GenericDisplay";
 const StorePage = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
 
   var storeId = useParams();
-  console.log("ciao");
-  console.log(storeId.id);
-  //var storeId="64688294cd9a48ecdfeac97a"
-  if (!storeId) storeId = "64688294cd9a48ecdfeac97a";
   const [store, setStore] = useState(null);
+  const [user, setUser] = useState(null);
+  const [products, setProducts] = useState(null);
+  
+
+
   const [fullDescription, setFullDescription] = useState(false);
 
   useEffect(() => {
     getStore();
+    getProducts()
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getStore = async () => {
@@ -32,25 +34,18 @@ const StorePage = () => {
       method: "GET",
     });
     const data = await response.json();
-    setStore(data);
-    console.log("🚀 ~ file: index.jsx:29 ~ getStore ~ data:", data);
+    setStore(data.store);
+    setUser(data.user);
+
   };
 
-  const createConversation = async () => {
-    const conv = { receiverID: store.ownerID };
-    const savedConversationResponse = await fetch(
-      "http://localhost:3001/conversations/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(conv),
-      }
-    );
-    const savedConversation = await savedConversationResponse.json();
-    navigate("/chat");
+  const getProducts = async () => {
+    var link = "http://localhost:3001/products/store/" + storeId.id;
+    const response = await fetch(link, {
+      method: "GET",
+    });
+    const data = await response.json();
+    setProducts(data);
   };
 
   if (!store) return null;
@@ -59,16 +54,12 @@ const StorePage = () => {
     <>
       <Navbar />
       <div className={styles.container}>
-        <button className="mainButtonGreen" onClick={createConversation}>
-          Manda un messaggio!
-        </button>
-
         <div className={styles.tagContainer}>
           {store.tags != null &&
             store.tags.map((el) => {
               return (
                 <div
-                  className="mainButtonYellow"
+                  className="tag"
                   onClick={() => {
                     navigate("/cerca/" + el);
                   }}
@@ -83,7 +74,7 @@ const StorePage = () => {
 
           <div className={styles.dataContainer}>
           <div className={styles.firstRow}>
-            {store.rating != 0 && <RatingStars rating={store.rating} />}
+            <RatingStars rating={store.rating? store.rating: 0} />
 
             <div className={styles.social}>
               <svg
@@ -110,6 +101,21 @@ const StorePage = () => {
             </div>
           </div>
           <div className={styles.titlo}>{store.name}</div>
+          <Badge name={user.firstName + " "+user.lastName} image={user?.picturePath}/>
+          {/*
+          <div className={styles.owner}>
+          {user?.picturePath ? (
+              <img
+                src={"http://localhost:3001/assets/" + user?.picturePath}
+                alt=""
+                className={styles.userImage}
+              />
+            ) : (
+<div
+        className={styles.userName }>Negozio di</div>
+            )}
+            <div className={styles.userName}>{user.firstName + " "+user.lastName}</div>
+          </div>*/}
 
             <div className={styles.address}>
               {store.street +
@@ -150,11 +156,9 @@ const StorePage = () => {
           </div>
         )}
 
-        <SendMessage store={store}/>
+        <SendMessage store={store} user={user}/>
 
-        <div className={styles.secondContainer}>
-Z          <ProductCarousel storeID={store._id} />
-        </div>
+          <GenericDisplay collection={products} type={"product"} title={"I prodotti di "+ store.name } storeID={store._id} />
       </div>
       <Footer />
     </>

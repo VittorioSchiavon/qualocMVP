@@ -47,3 +47,11 @@
     font-weight: 500;
     margin: 2em;
 }
+
+.selection{
+    padding: 10px 20px;
+    border: none;
+    display: block;
+    border-radius: 20px;
+    
+}

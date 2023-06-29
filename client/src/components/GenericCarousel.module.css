@@ -54,3 +54,7 @@
 .buttonArrowRight:hover{
     transform: scale(1.1);
 }
+
+.totContainer{
+    margin: 10px;
+}

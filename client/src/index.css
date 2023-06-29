@@ -10,6 +10,10 @@ body,
 
 }
 
+body{
+  max-width: 100%;
+
+}
 :root {
   --main: #31851e;
   --mainDarker: #1b4a11;
@@ -48,6 +52,7 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
+  /*box-shadow: 0 3px 5px 0 #0000001A;*/
 }
 .mainButtonGreen:hover{
   background-color: var(--main);
@@ -100,7 +105,21 @@ button:disabled{
   width: 100%;
   text-align: center;
   font-size: 2em;
-  color: var(--main);
+  color: var(--mainDarker);
   font-weight: 900;
+  margin: 10px;
 
+}
+
+
+.tag{
+  border-radius: 45678px;
+  background-color: var(--lightYellow);
+  padding: 10px 20px;
+  font-weight: 700;
+  color: var(--black);
+  cursor: pointer;
+}
+.tag:hover{
+  background-color: var(--yellow);
 }

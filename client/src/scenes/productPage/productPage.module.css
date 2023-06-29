@@ -1,21 +1,25 @@
 .name{
-    font-family: "Fredoka", sans-serif;
-    font-size: 3em;
-    color: var(--black);
+    font-size: 2em;
+    color: var(--mainDarker);
+    margin: 10px;
+    font-weight: 900;
+    text-align: left;
 }
-
 .container{
     padding: 1em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    column-gap: 3em;
+
 }
 
 
 .dataContainer{
     width: 500px;
+    padding: 20px;
+    max-width: 700px;
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+
 }
 
 
@@ -40,11 +44,21 @@
 
 
 .tagContainer{
-    width: 80vw;
-    margin: 0.5em;
     display: flex;
+    justify-content: center;
     gap: 1em;
-    justify-content: end;
+    font-size: 1em;
+}
+
+.productRow{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 2em;
+
 }
 
 .price{
@@ -70,8 +84,25 @@
 }
 
 .description{
-    padding: 1.5em;
+    max-width: 700px;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--black);
+    margin: auto;
+    margin-top: 2em;
+
 }
+
+.showMore{
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    color: var(--mainDarker);
+    margin: 0.5em;
+
+}
+
 
 .label{
     font-weight: 700;
@@ -119,10 +150,18 @@
 .actionContainer{
     width: 100%;
     display: flex;
-    justify-content:space-between;
+    justify-content:left;
+    gap: 30px;
 }
 
 .addToCartIcon{
     width: 2em;
     fill: var(--mainDarker);
+}
+
+.action{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }

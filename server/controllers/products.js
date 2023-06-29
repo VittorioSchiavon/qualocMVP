@@ -6,7 +6,10 @@ import Store from "../models/Store.js";
 export const getProduct = async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });
-    return res.status(200).json(product);
+    const store = await Store.findOne({ _id: product.shopID });
+    product.storeName=store?.name;
+    product.storeImage= store?.picture[0]
+    return res.status(200).json({product: product, store:store});
   } catch (err) {
     res.status(400).send(err);
   }
@@ -32,7 +35,6 @@ export const deleteProduct = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   try {
-    console.log("req",req.body)
     const editProduct = await Product.findByIdAndUpdate(req.body.productID,
       { name: req.body.name,
       description: req.body.description,
@@ -87,9 +89,7 @@ export const addProduct = async (req, res) => {
 
 
 export const addTempProduct = async (req, res) => {
-  console.log("i'm heree")
   const store = await Store.findOne({ ownerID: req.user.id });
-  console.log("temp producttttttreq.body\n", req.body)
   const product = new Product({
     name: req.body.name,
     price: req.body.price,

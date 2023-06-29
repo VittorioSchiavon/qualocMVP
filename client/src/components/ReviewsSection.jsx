@@ -2,12 +2,10 @@ import styles from "./ReviewsSection.module.css";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GenericCarousel from "./GenericCarousel";
 import NewReview from "./NewReview";
 import ReviewCard from "./ReviewCard";
 
 const ReviewsSection = ({ productID }) => {
-  const navigate = useNavigate();
   //var storeId = useParams();
   const [reviews, setReviews] = useState(null);
   useEffect(() => {

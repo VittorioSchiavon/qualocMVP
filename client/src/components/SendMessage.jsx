@@ -1,16 +1,15 @@
 import styles from "./SendMessage.module.css";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GenericCarousel from "./GenericCarousel";
 import { useSelector } from "react-redux";
 
 const SendMessage = ({ store }) => {
-  const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
-
-  //var storeId = useParams();
   const [content, setContent] = useState("");
+  const [sent, setSent] = useState(false);
+  const [close, setClose] = useState(false);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,17 +31,24 @@ const SendMessage = ({ store }) => {
       }
 
     );
-
     const savedMessage = await savedMessagetResponse.json();
-    console.log(savedMessage)
-    //navigate("/chat")
-    console.log("savedMessaget",savedMessage)
+    if (savedMessagetResponse.status === 200) {
+      console.log("hi")
+    setSent(true) }
+
+
   };
 
   return (
     <>
+    {!close &&
       <div className={styles.container}>
-      <div className={styles.title}>Contatta il Negozio</div>
+              <button  className={styles.closeButton} onClick={()=>{setClose(true)}}>x</button>
+
+      <div className={styles.title}>Contatta "{store.name}"</div>
+      {sent?
+        (<div  className={styles.messageSent}>Messaggio inviato!</div>)
+        :<>
 
         <div className={styles.userData}>
           {user?.picturePath ? (
@@ -62,22 +68,26 @@ const SendMessage = ({ store }) => {
           )}
           <div className={styles.userName}>{user?.firstName}</div>
         </div>
+         
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
           type="text"
-            className={styles.content}
+            id={styles.content}
             value={content}
             onChange={(e) => {
               setContent(e.target.value);
             }}
             placeholder="Scrivi il messaggio"
           />
-          <button type="submit" className="mainButtonGreen">
+          <button type="submit" className={styles.submitButton}>
           <svg width="24" height="24" className={styles.sendIcon} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.815 12.197-7.532 1.256a.5.5 0 0 0-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 0 0 0-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 0 0 .386.319l7.532 1.255a.2.2 0 0 1 0 .394Z" /></svg>
 
           </button>
         </form>
+        </>
+}
       </div>
+}
     </>
   );
 };

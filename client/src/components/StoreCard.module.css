@@ -1,25 +1,26 @@
 .card{
-    min-width: 200px;
-    height: 300px;
-    background-color: var(--secondary);
-
+    min-width: 400px;
+    height: 200px;
     border-radius: 10px;
     cursor: pointer;
     color: var(--mainDarker);
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 1px 4px 6px 1px #0000001A;
 
 }
 
 .icon{
-    height: 150px;
+    height: 100%;
     width: 200px;
     mix-blend-mode: darken;
     transition: 1s;
     object-fit: cover;
 }
 
-.card:hover .icon{
-    transform: scale(1.05);
+.card:hover{
+    box-shadow: 3px 8px 9px 3px #0000001A;
 }
 
 .name{

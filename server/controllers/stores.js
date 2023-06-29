@@ -6,7 +6,8 @@ import mongoose from "mongoose";
 export const getStore = async (req, res) => {
   try {
     const store = await Store.findOne({ _id: req.params.id });
-    res.status(200).json(store);
+    const user = await User.findOne({ _id: store.ownerID });
+    res.status(200).json({store: store, user: user});
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

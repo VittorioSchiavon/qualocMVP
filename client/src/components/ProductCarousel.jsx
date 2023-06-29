@@ -31,7 +31,7 @@ const ProductCarousel = ({ storeID }) => {
   if (!products) return null;
   return (
     <>
-    <GenericCarousel type={"product"} collection={products} title={"I Migliori Prodotti"}/>
+    <GenericCarousel type={"product"} collection={products} title={"I migliori prodotti"}/>
     </>
   );
 };

@@ -1,5 +1,6 @@
 .activeImg{
     width: 400px;
+    max-width: 80vw;
     border-radius: 10px;
     cursor: pointer;
 
@@ -8,6 +9,7 @@
     width: 100px;
     border-radius: 10px;
     cursor: pointer;
+
 }
 .fullImageList{
     display: flex;

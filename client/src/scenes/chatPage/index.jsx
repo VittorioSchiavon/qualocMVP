@@ -18,7 +18,7 @@ const ChatPage = () => {
   const user = useSelector((state) => state.user);
 
   const [previousAccess, setPreviousAccess] = useState(user.lastAccess);
-
+  const [firstCheck, setFirstCheck] = useState(false);
 
   const navigate = useNavigate();
   const socket = useRef();
@@ -38,10 +38,10 @@ const ChatPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     getConversations();
-        
+
     const interval = setInterval(() => {
       getConversations();
-      dispatch(setLastAccess())
+      dispatch(setLastAccess());
     }, 30000);
 
     return () => clearInterval(interval);
@@ -70,13 +70,11 @@ const ChatPage = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (users) => {
-    });
+    socket.current.on("getUsers", (users) => {});
   }, [user]);
 
   useEffect(() => {
     if (arrivalMessage) {
-
       !notificationList.includes(arrivalMessage.conversationID) &&
         arrivalMessage.conversationID != currentChat?._id &&
         setNotificationList([
@@ -105,30 +103,28 @@ const ChatPage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    if(conversations==null) {
-      setConversations(data);
-      setNotificationWhileOffline(data)
-    }else{
-      setConversations(data);
-
-    }
-    
-
+    setConversations(data);
+    !firstCheck && setNotificationWhileOffline(data);
   };
 
-  const setNotificationWhileOffline = (data)=>{
-        console.log("i'm checking past convs")
-    const filteredConversations = data?.filter(
-      (conversation) =>{ 
-        console.log("conversation.lastMessage", conversation.lastMessage)
-        console.log("user.lastAccess", user.lastAccess)
-        return new Date(conversation.lastMessage) > new Date(previousAccess)}
-    )
-    .forEach((conversation) => !notificationList.includes(conversation._id) &&
-    conversation._id != currentChat?._id && setNotificationList([...notificationList, conversation._id]));
+  const setNotificationWhileOffline = (data) => {
+    console.log("i'm checking past convs");
+    const filteredConversations = data
+      ?.filter((conversation) => {
+        console.log("conversation.lastMessage", conversation.lastMessage);
+        console.log("user.lastAccess", user.lastAccess);
+        return new Date(conversation.lastMessage) > new Date(previousAccess);
+      })
+      .forEach(
+        (conversation) =>
+          !notificationList.includes(conversation._id) &&
+          conversation._id != currentChat?._id &&
+          setNotificationList([...notificationList, conversation._id])
+      );
     console.log("notificationList", notificationList);
     console.log("filteredConversations", filteredConversations);
-  }
+    setFirstCheck(true);
+  };
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
     divRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -270,7 +266,8 @@ const ChatPage = () => {
             <div className={styles.listTitle}>Chat</div>
             {conversations != null &&
               conversations.map((el) => (
-                <div key={el._id}
+                <div
+                  key={el._id}
                   onClick={() => {
                     setCurrentChat(el);
                   }}
@@ -305,7 +302,11 @@ const ChatPage = () => {
             </div>
             <div className={styles.mexContainer}>
               {messages.map((m) => (
-                <Message key={m._id} message={m} own={m.senderID === user._id} />
+                <Message
+                  key={m._id}
+                  message={m}
+                  own={m.senderID === user._id}
+                />
               ))}
               <div ref={divRef} />
             </div>

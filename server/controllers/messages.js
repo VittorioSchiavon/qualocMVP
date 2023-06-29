@@ -17,20 +17,23 @@ export const getConversationMessages = async (req, res) => {
 
 
 export const sendMessage = async (req, res) => {
+  console.log("i'm terying to send message")
   try {
 
     var convID=req.body.conversationID
+    if(convID){
     const conversation = await Conversation.findById(req.body.conversationID);
     conversation.lastMessage=new Date()
     const savedConv= await conversation.save()
-    if(!convID){
+    }else{
       const conversation = await Conversation.findOne({
         members: { $all: [req.user.id, req.body.receiverID] },
       });
-      conversation.lastMessage=new Date()
-      const savedConv= await conversation.save()
-      if(conversation) convID=conversation._id
-      if(!conversation){
+      if(conversation){
+        convID=conversation._id
+        conversation.lastMessage=new Date()
+        const savedConv= await conversation.save()
+      }else{
       const newConversation = new Conversation({
         members: [req.user.id, req.body.receiverID],
         lastMessage: new Date()

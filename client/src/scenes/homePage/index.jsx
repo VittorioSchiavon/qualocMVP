@@ -3,48 +3,44 @@ import Footer from "components/Footer";
 import styles from "./homepage.module.css";
 import StoreCarousel from "components/StoreCarousel";
 import ProductCarousel from "components/ProductCarousel";
+import { useMediaQuery } from "@mui/material";
 const HomePage = () => {
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
   return (
     <div>
       <Navbar />
       <div className={styles.firstRow}>
+         <div className={styles.hpBackground}>
+          <img src="/assets/hpBackground.png" alt="" />
+        </div>
         <div className={styles.leftSection}>
           <div className={styles.preMotto}>
             Di più, per <span>tutti</span>
           </div>
           <div className={styles.motto}>
-            la bellezza del commercio locale,<br></br>la comodità dello shopping
+            la bellezza del<br></br> commercio locale,<br></br>la comodità dello<br></br> shopping
             online
           </div>
           <div className={styles.proContainer}>
             <div className={styles.pro}>
-              <div className={styles.proIcon}>v</div>
-              <div className={styles.proText}>Spedizioni Rapide</div>
+              <div className={styles.proText}>qualità</div>
             </div>
             <div className={styles.pro}>
-              <div className={styles.proIcon}>v</div>
-              <div className={styles.proText}>Prodotti di qualità</div>
+              <div className={styles.proText}>etica</div>
             </div>
             <div className={styles.pro}>
-              <div className={styles.proIcon}>v</div>
-              <div className={styles.proText}>Supporto alla comunità</div>
-            </div>
-            <div className={styles.pro}>
-              <div className={styles.proIcon}>v</div>
-              <div className={styles.proText}>Guida alla vendita</div>
+              <div className={styles.proText}>comodità</div>
             </div>
           </div>
           <button
-            className="mainButtonGreen"
+            className={`${styles.cta} mainButtonGreen`}
             onClick={() => {
               window.location = "/CreaNegozio";
             }}
           >
             Crea un negozio
           </button>
-        </div>
-        <div className={styles.rightSection}>
-          <img src="/assets/flaticon.png" alt="" />
         </div>
       </div>
       <svg
@@ -71,19 +67,16 @@ const HomePage = () => {
             <div className={styles.num}>🎯</div>
             <div className={styles.text}>trova il prodotto che desideri</div>
           </div>
-          <div className={styles.step}>
+          <div className={styles.step}       style={{
+        transform: 'translateY(50px)',
+      }}>
             <div className={styles.num}>👩‍💻</div>
             <div className={styles.text}>contatta il venditore</div>
           </div>
-          <div className={styles.step}>
-            <div className={styles.num}>💳</div>
-            <div className={styles.text}>procedi con l'acquisto</div>
-          </div>
-          <div className={styles.step}>
+          <div className={styles.step} >
             <div className={styles.num}>📦</div>
             <div className={styles.text}>ricevi a casa il prodotto</div>
           </div>
-          <br></br>
         </div>
         <button
           className="mainButtonGreen"

@@ -4,10 +4,11 @@
   justify-content: center;
   flex-wrap: wrap-reverse;
   padding: 2em;
+  max-width: 100%;
 }
 
 .leftSection {
-  width: 50vw;
+  width: 40vw;
   align-items: center;
   text-align: center;
 }
@@ -44,8 +45,8 @@
 
 .secondRow {
   background-color: var(--main);
-  transform: translateY(-5px);
-  padding: 4em;
+  transform: translateY(-30px);
+  padding: 20px;
 }
 
 .title {
@@ -59,7 +60,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 1.5em;
+  margin: 2em;
 }
 .step {
   text-align: center;
@@ -71,7 +72,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1em;
+  padding: 20px;
   margin: 1em;
 }
 .step .num {
@@ -87,7 +88,7 @@
 }
 
 .reverseWave {
-  transform: rotate(180deg) translateY(10px);
+  transform: rotate(180deg) translateY(51px);
 }
 
 .secondRow button {
@@ -101,4 +102,51 @@
   justify-content: center;
   width: 300px;
   margin: auto;
+}
+
+.pro{
+  background-color: var(--lightYellow);
+  margin: 1em;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.hpBackground{
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+
+}
+
+
+.hpBackground img{
+  width: 70vw;
+  z-index: -300;
+  opacity: 0.7;
+  animation: 1s ease-in-out 0s 1 load;
+  pointer-events: none;
+
+}
+
+@keyframes load {
+  0% {
+      transform: scale(0.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+
+.cta{
+  text-align: center;
+  margin: auto !important;
+display: block;
+
 }
