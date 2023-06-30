@@ -8,15 +8,32 @@
     border-radius: 20px;
     padding: 2em;
     margin: 1em;
+    text-align: left;
 }
 
 .image{
     height: 100px;
     max-width: 200px;
     mix-blend-mode: darken;
+    border-radius: 20px;
 }
 
 
 .name{
     font-weight: bolder;
+    font-size: 1.2em;
+    max-width: 200px;
+}
+
+.price{
+    font-size: 1.2em;
+    color: var(--mainDarker);
+    font-weight: 700;
+}
+
+.info{
+}
+
+.lable{
+    font-weight: 700;
 }

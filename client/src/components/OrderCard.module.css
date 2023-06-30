@@ -22,9 +22,30 @@
 
 .name{
     font-size: 1.2em;
+    color: var(--mainDarker);
 }
 
 .info{
     font-size: 0.9em;
 
+}
+
+.showMore{
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: right;
+    font-weight: 600;
+    color: var(--black);
+    width: 100%;
+
+
+}
+
+
+.actionList{
+    width: 100%;
+}
+
+.productList{
+    width: 100%;
 }

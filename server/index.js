@@ -19,6 +19,7 @@ import checkoutRoutes from "./routes/checkout.js"
 import ordersRoutes from "./routes/orders.js"
 import reviewRoutes from "./routes/reviews.js"
 import productRoutes from "./routes/products.js"
+import searchRoutes from "./routes/search.js"
 import StripeWebhookRoute from "./routes/stripeWebhook.js"
 import ConversationRoutes from "./routes/conversations.js";
 import MessagesRoutes from "./routes/messages.js";
@@ -99,7 +100,7 @@ app.use("/messages", MessagesRoutes);
 app.use("/reviews", reviewRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/orders', ordersRoutes);
-
+app.use('/search', searchRoutes);
 /* ROUTES WITH FILES 
 app.use("/posts", postRoutes);
 */

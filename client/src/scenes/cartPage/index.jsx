@@ -2,28 +2,24 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import styles from "./cartPage.module.css";
 import { useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "state";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import CartProduct from "components/CartProduct";
 import { PopupContext } from "App";
 import ProductCarousel from "components/ProductCarousel";
-
 
 const CartPage = () => {
   const [cart, setCart] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const token = useSelector((state) => state.token);
-  const userId = useSelector((state) => state.user._id);
-  const [popup, setPopup] =useContext(PopupContext)
+  const [popup, setPopup] = useContext(PopupContext);
 
   useEffect(() => {
     getCart();
-    setTot()
+    setTot();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setTot()
+    setTot();
   }, [cart]);
   const getCart = async () => {
     const response = await fetch(`http://localhost:3001/carts/`, {
@@ -32,7 +28,7 @@ const CartPage = () => {
     });
     const data = await response.json();
     setCart(data);
-    setTot()
+    setTot();
   };
 
   const checkout = async () => {
@@ -42,37 +38,36 @@ const CartPage = () => {
     });
     const data = await response.json();
     console.log(data);
-    window.location=data.url
-  
+    window.location = data.url;
   };
 
-  const setTot = ()=>{
+  const setTot = () => {
     var tot = 0;
     cart?.products.map((prod) => {
-      tot = tot + prod.price*prod.quantity;
+      tot = tot + prod.price * prod.quantity;
     });
     setTotalPrice(tot);
-  }
+  };
 
-      
-  const removeProduct = async (prod) =>{
-
-        const savedStoreResponse = await fetch(
+  const removeProduct = async (prod) => {
+    const savedStoreResponse = await fetch(
       "http://localhost:3001/carts/removeProduct",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` 
-      },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(prod),
       }
-    )
-       if (savedStoreResponse.statusText!="OK") setPopup({type:"error", message:"operazione non riuscita"})
-       if (savedStoreResponse.statusText=="OK"){
-        setPopup({type:"success", message:"Prodotto rimosso dal carrello"})
-        getCart()
-       }
+    );
+    if (savedStoreResponse.statusText != "OK")
+      setPopup({ type: "error", message: "operazione non riuscita" });
+    if (savedStoreResponse.statusText == "OK") {
+      setPopup({ type: "success", message: "Prodotto rimosso dal carrello" });
+      getCart();
+    }
   };
-
 
   if (!cart) return;
 
@@ -81,26 +76,32 @@ const CartPage = () => {
       <Navbar />
 
       <div className={styles.container}>
-        <div className={styles.title}>Carrello ({cart?.products?.length} {cart?.products?.length==1?"prodotto": "prodotti"})</div>
+        <div className={styles.title}>
+          Carrello ({cart?.products?.length}{" "}
+          {cart?.products?.length == 1 ? "prodotto" : "prodotti"})
+        </div>
         <div className={styles.contentContainer}>
           {cart?.products.length != 0 ? (
             cart?.products.map((prod) => {
-              return <CartProduct product={prod} removeProduct={removeProduct}/>;
+              return (
+                <CartProduct product={prod} removeProduct={removeProduct} />
+              );
             })
           ) : (
             <div className={styles.noProd}>nessun prodotto nel carrello</div>
           )}
-          <div className={styles.tot}>
-            totale: {totalPrice} €
-          </div>
-          <button className="mainButtonGreen" disabled={!(cart?.products?.length>0)}
-          
-          onClick={checkout}>Procedi all'acquisto</button>
-
+          {cart?.products.length != 0 && (
+            <>
+              <div className={styles.tot}>totale: {totalPrice} €</div>
+              <button id={styles.checkout} className="mainButtonGreen" onClick={checkout}>
+                Procedi all'acquisto
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div>
-        <ProductCarousel storeID={""}/>
+        <ProductCarousel storeID={""} />
       </div>
       <Footer />
     </>

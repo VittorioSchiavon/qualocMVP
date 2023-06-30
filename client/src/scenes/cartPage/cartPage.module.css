@@ -4,6 +4,9 @@
     border-radius: 30px;
     gap: 2em;
     text-align: center;
+    background-color: var(--secondary);
+    padding: 1em;
+
 }
 .left{
     align-items: center;
@@ -76,5 +79,11 @@
 .noProd{
     font-size: 1.2em;
     font-weight: 600;
-    margin: 2em;
+    padding: 5em;
+}
+
+#checkout{
+
+margin: auto;
+    font-size: 1em;
 }

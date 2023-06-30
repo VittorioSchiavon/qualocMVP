@@ -5,6 +5,8 @@ const Badge = ({ name, image, path }) => {
   const navigate = useNavigate();
 
   return (
+
+    
     <>
       <div className={styles.container} onClick={() => path && navigate(path)} 
       style={{
@@ -17,7 +19,7 @@ const Badge = ({ name, image, path }) => {
             className={styles.image}
           />
         ) : (
-          <div className={styles.Icon}>{name[0]}</div>
+          <div className={styles.Icon}>{name && name[0]}</div>
         )}
         <div className={styles.name}>{name}</div>
       </div>

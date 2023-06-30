@@ -24,7 +24,7 @@ const SearchPage = () => {
 
   const getProducts = async () => {
     const response = await fetch(
-      "http://localhost:3001/products/search/" + params.query,
+      "http://localhost:3001/search/" + params.query,
       {
         method: "GET",
       }

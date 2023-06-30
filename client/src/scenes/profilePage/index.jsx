@@ -64,7 +64,9 @@ const ProfilePage = () => {
         <div className={styles.container}>
           <div className="mainTitle">Il mio profilo</div>
           <div className={styles.dataContainer}>
-            <ImageDisplay collection={[user.picturePath]}/>
+          <img src={"http://localhost:3001/assets/" + user?.picturePath}
+            className={styles.img}
+          />
 
             <div className={styles.textData}>
               <div className={styles.actionsContainer}>
