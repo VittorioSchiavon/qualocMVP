@@ -7,10 +7,9 @@ const NewStorePage = () => {
   return (
     <>
       <Navbar />
-
       <div className={styles.container}>
-        <div className={styles.contentContainer}>
-            <Form />
+        <div  className={`${styles.dataContainer} shadow`}>
+          <Form />
         </div>
       </div>
       <Footer />

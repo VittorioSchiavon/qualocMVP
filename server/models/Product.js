@@ -45,7 +45,11 @@ const ProductSchema= new mongoose.Schema({
     rating:{
         type: Number,
         default:0
-    }
+    },
+    additionalData: {
+        type: mongoose.Schema.Types.Mixed,
+        default:""
+      }
 })
 
 const Product = mongoose.model("Product", ProductSchema);

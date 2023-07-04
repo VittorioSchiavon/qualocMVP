@@ -125,12 +125,7 @@ const ProfilePage = () => {
             </div>
             
           </div>
-          <div className={styles.secondContainer}>
-            <div className={styles.box}>
-              I miei ordini
               <OrdersSection type={"client"} />
-            </div>
-          </div>
         </div>
       ) : (
         <a href="/login">please login</a>

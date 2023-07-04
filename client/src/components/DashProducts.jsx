@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NewProductForm from "components/ProductForm";
+import Loader from "./Loader";
 
 const DashProducts = (props) => {
   const navigate = useNavigate();
@@ -85,6 +86,7 @@ const DashProducts = (props) => {
 
   return (
     <>
+    {!products? <Loader/>:
       <div className={styles.container}>
         {type == "productView" && (<>
                   <button
@@ -201,6 +203,7 @@ const DashProducts = (props) => {
           </div>
         }
       </div>
+}
     </>
   );
 };

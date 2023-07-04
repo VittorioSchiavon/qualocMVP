@@ -9,9 +9,9 @@ const LoginPage = () => {
 
   return (
     <>
+    <Navbar/>
       <div className={styles.container}>
         <div  className={`${styles.dataContainer} shadow`}>
-          <img className={styles.logo} src="/assets/logo.png" alt="" onClick={() => navigate('/')} />
           <Form />
         </div>
       </div>
@@ -20,3 +20,6 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+
+//          <img className={styles.logo} src="/assets/logo.png" alt="" onClick={() => navigate('/')} />

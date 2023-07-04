@@ -40,7 +40,7 @@ const ChatPage = () => {
     getConversations();
 
     const interval = setInterval(() => {
-      getConversations();
+      //getConversations();
       dispatch(setLastAccess());
     }, 30000);
 
@@ -243,7 +243,7 @@ const ChatPage = () => {
     <div className={styles.totContainer}>
       <div
         className={styles.container}
-        style={{ transform: hidden ? "translateX(100%)" : "translateX(200%)" }}
+        style={{ transform: hidden ? "translateX(0)" : "translateX(100%)" }}
       >
         <button
           className={styles.showButton}
@@ -263,7 +263,26 @@ const ChatPage = () => {
         </button>
         {!currentChat && (
           <div className={styles.list}>
-            <div className={styles.listTitle}>Chat</div>
+            <div className={styles.listTitle}>
+              <button
+                className={styles.backButtonList}
+                onClick={() => setHidden(!hidden)}
+              >
+                <svg
+                  className={styles.backButtonListIcon}
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12l7.852-8.313Z" />
+                </svg>
+              </button>
+              <img
+          src="/assets/logo.png"
+          alt="logo"
+          className={styles.logo}
+        />
+             {" "} Chat
+            </div>
             {conversations != null &&
               conversations.map((el) => (
                 <div

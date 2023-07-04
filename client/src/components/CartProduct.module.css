@@ -1,6 +1,5 @@
 .card{
     height: fit-content;
-    background-color: var(--secondary);
     display: flex;
     flex-wrap: wrap ;
     align-items: center;
@@ -9,8 +8,14 @@
     padding: 2em;
     margin: 1em;
     text-align: left;
+    gap: 1em;
 }
-
+/*
+.card > *{
+    flex:1;
+    flex-basis: 100px;
+}
+*/
 .image{
     height: 100px;
     max-width: 200px;

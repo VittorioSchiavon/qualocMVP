@@ -4,8 +4,8 @@
     border-radius: 30px;
     gap: 2em;
     text-align: center;
-    background-color: var(--secondary);
     padding: 1em;
+    box-shadow: 1px 4px 6px 1px #0000001A;
 
 }
 .left{

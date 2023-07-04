@@ -29,11 +29,15 @@ io.on("connection", (socket) => {
   //take userId and socketId from user
   socket.on("addUser", async (userId) => {
     addUser(userId, socket.id);
-    
+    try{
     const response = await fetch("http://localhost:3001/users/setOnline/"+userId, {
       method: "GET",
     });
     const data = await response.json();
+  }catch (err) {
+    console.log(err.message);
+    res.status(500).json({ error: err.message });
+  }
     io.emit("getUsers", users);
   });
 
@@ -55,11 +59,15 @@ io.on("connection", (socket) => {
     console.log("a user disconnected!: ", socket.id);
     const user = getUserBySocketId(socket.id);
     console.log("id:", user?.userId);
-
+    try{
     const response = await fetch("http://localhost:3001/users/setOffline/"+user?.userId, {
       method: "GET",
     });
     const data = await response.json();
+  }catch (err) {
+      console.log(err.message);
+      res.status(500).json({ error: err.message });
+    }
 
     removeUser(socket.id);
     io.emit("getUsers", users);

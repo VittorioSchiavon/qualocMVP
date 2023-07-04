@@ -4,6 +4,7 @@ import styles from "./homepage.module.css";
 import StoreCarousel from "components/StoreCarousel";
 import ProductCarousel from "components/ProductCarousel";
 import { useMediaQuery } from "@mui/material";
+import Loader from "components/Loader";
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 

@@ -1,16 +1,21 @@
 .container{
-    height: 100vh;
     display: flex;
-    background-color: var(--secondary);
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
 }
 
 .dataContainer{
     height: fit-content;
-    width: 500px;
-    background-color: var(--white);
+    width: 90%;
+    max-width: 500px;
+
     text-align: center;
     margin: auto;
-    padding: 4em;
+    padding: 2em;
     border-radius: 20px;
     gap: 2em;
     text-align: center;
@@ -18,7 +23,8 @@
 
 
 .logo{
-    height: 4em;
+    width: 50%;
+    min-width: 100px;
     cursor: pointer;
 }
 
@@ -30,7 +36,10 @@
 
 
 .form button{
-    margin: 2em;
+    margin: auto;
+    margin-top:1em ;
+    margin-bottom:1em ;
+
 }
 
 .titleForm{
@@ -39,8 +48,6 @@
     padding: 1em;
     margin: auto;
     font-weight: 900;
-
-    margin-bottom: 1em;
     color: var(--main);
 
 }
@@ -49,10 +56,10 @@
     border-radius: 5px;
     width: 90%;
     display: block;
-    margin: 20px;
     height: 40px;
     border: 2px solid var(--main);
     padding: 5px;
+    margin-top: 1em;
     padding-left: 20px;
     font-size: 1em;
     font-weight: 500;
@@ -65,12 +72,26 @@
 }
 
 .dropFile{
-    padding: 2em;
+    box-sizing: border-box;
+    padding: 50px;
     display: flex;
-    max-width: 100%;
+    width: 100%;
     align-items: center;
     border: 2px dotted var(--mainDarker);
     justify-content: center;
     cursor: pointer;
+    margin: auto;
+    margin-top: 1em;
+
 }
 
+.inputContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+.inputContainer> *{
+    width: 90%;
+}

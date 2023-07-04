@@ -1,13 +1,17 @@
 .container{
-    background-color: var(--secondary);
+    
+    
+    box-shadow: 1px 4px 6px 1px #0000001A;
     align-items: center;
     text-align: center;
     padding: 3em;
+    border-radius: 24px;
+    max-width: 1000px;
+    margin: auto;
 
 }
 
 .card{
-    background-color: white;
     padding: 2em;
     border-radius: 20px;
     align-items: center;

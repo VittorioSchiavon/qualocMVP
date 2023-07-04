@@ -39,6 +39,8 @@ const OrdersSection = ({type}) => {
   return (
     <>
     <div className={styles.container}>
+    <div className="secondaryTitle">Il miei ordini</div>
+
       
     <select className={styles.selection} value={filter} onChange={handleFilterChange}>
         <option value="tutti">Tutti gli ordini</option>

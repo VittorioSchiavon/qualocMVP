@@ -1,6 +1,7 @@
 import styles from "./Conversation.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "./Loader";
 
 const Conversation = (props) => {
   const [friend, setFriend] = useState(null);
@@ -23,6 +24,7 @@ const Conversation = (props) => {
   };
 
   return <>
+  {!friend? <Loader/>:
 
 <div className={styles.conversation} style={ props.isActive ? { backgroundColor:'var(--white)'}: {}}>
       {props.hasNotification &&
@@ -40,6 +42,7 @@ const Conversation = (props) => {
             )}
       <span className={styles.conversationName}>{friend?.firstName+" "+ friend?.lastName}</span>
     </div>
+}
   </>
 };
 

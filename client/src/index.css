@@ -111,6 +111,17 @@ button:disabled{
 
 }
 
+.secondaryTitle{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--black);
+  font-weight: 900;
+  margin: 10px;
+
+}
+
 
 .tag{
   border-radius: 45678px;

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import OrdersSection from "./OrdersSection";
 
 const DashOrders = () => {
+  /*
   const navigate = useNavigate();
   //var storeId = useParams();
   const [orders, setOrders] = useState(null);
@@ -28,7 +29,7 @@ const DashOrders = () => {
     setOrders(data);
     console.log("ordini", data)
   };
-
+*/
   return (
     <>
     <OrdersSection type="store"/>

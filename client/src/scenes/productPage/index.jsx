@@ -10,6 +10,7 @@ import ReviewsSection from "components/ReviewsSection";
 import RatingStars from "components/RatingStars";
 import ImageDisplay from "components/ImageDisplay";
 import Badge from "components/Badge";
+import Loader from "components/Loader";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const ProductPage = () => {
     getProduct();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {}, [option]);
+
   const getProduct = async () => {
     const response = await fetch(
       `http://localhost:3001/products/${productId.id}`,
@@ -69,6 +71,7 @@ const ProductPage = () => {
   return (
     <>
       <Navbar />
+      {!product? <Loader/>:<>
       <div className={styles.container}>
         <div className={styles.tagContainer}>
           {product?.tags.map((tag) => (
@@ -176,6 +179,7 @@ const ProductPage = () => {
         )}
       </div>
       <ReviewsSection productID={product._id} />
+            </>}
       <Footer />
     </>
   );

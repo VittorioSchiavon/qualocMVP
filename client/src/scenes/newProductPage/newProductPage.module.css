@@ -1,76 +1,132 @@
-.container{
-    height: 100vh;
-    display: flex;
-    background-color: var(--secondary);
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.dataContainer{
-    height: fit-content;
-    width: 500px;
-    background-color: var(--white);
-    text-align: center;
-    margin: auto;
-    padding: 4em;
-    border-radius: 20px;
-    gap: 2em;
-    text-align: center;
+.dataContainer {
+  height: fit-content;
+  width: 90%;
+  max-width: 1000px;
+
+  text-align: center;
+  margin: auto;
+  padding: 2em;
+  border-radius: 20px;
+  gap: 2em;
+  text-align: center;
 }
 
-
-.logo{
-    height: 4em;
-    cursor: pointer;
+.logo {
+  width: 50%;
+  min-width: 100px;
+  cursor: pointer;
 }
 
-.changeType{
-    text-decoration: underline;
-    color: var(--main);
-    cursor: pointer;
+.changeType {
+  text-decoration: underline;
+  color: var(--main);
+  cursor: pointer;
 }
 
-
-.form button{
-    margin: 2em;
+.form button {
+  margin: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-.titleForm{
-    font-size: 2em;
-    width: fit-content;
-    padding: 1em;
-    margin: auto;
-    font-weight: 900;
-
-    margin-bottom: 1em;
-    color: var(--main);
-
+.titleForm {
+  font-size: 2em;
+  width: fit-content;
+  padding: 1em;
+  margin: auto;
+  font-weight: 900;
+  color: var(--main);
 }
 
-.input{
-    border-radius: 5px;
-    width: 90%;
-    display: block;
-    margin: 20px;
-    height: 40px;
-    border: 2px solid var(--main);
-    padding: 5px;
-    padding-left: 20px;
-    font-size: 1em;
-    font-weight: 500;
-
+.input {
+  border-radius: 5px;
+  width: 90%;
+  display: block;
+  height: 40px;
+  border: 2px solid var(--main);
+  padding: 5px;
+  margin-top: 1em;
+  padding-left: 20px;
+  font-size: 1em;
+  font-weight: 500;
 }
 
-.addImageIcon{
-    width: 2em;
-    fill: var(--mainDarker);
+.addImageIcon {
+  width: 2em;
+  fill: var(--mainDarker);
 }
 
-.dropFile{
-    padding: 2em;
-    display: flex;
-    max-width: 100%;
-    align-items: center;
-    border: 2px dotted var(--mainDarker);
-    justify-content: center;
-    cursor: pointer;
+.dropFile {
+  box-sizing: border-box;
+  padding: 50px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border: 2px dotted var(--mainDarker);
+  justify-content: center;
+  cursor: pointer;
+  margin: auto;
+  margin-top: 1em;
 }
 
+.inputContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+.inputContainer > div {
+  width: 450px;
+}
+
+.tagForm {
+  border-radius: 5px;
+  width: 90%;
+  border: 2px solid var(--main);
+  padding: 10px;
+  margin-top: 1em;
+  padding-left: 20px;
+  font-size: 1em;
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.tagForm .tagInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+  min-width: 50px;
+  border-bottom: 1px solid var(--main);
+  padding-bottom: 5px;
+}
+
+.tagButton {
+  box-sizing: border-box;
+  display: none;
+  width: 0;
+}
+
+.tag {
+  background-color: var(--main);
+  border-radius: 20px;
+  padding: 0.7em;
+  color: white;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1em;
+}

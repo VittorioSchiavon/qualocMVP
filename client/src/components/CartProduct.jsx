@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Alert } from "@mui/material";
 import { PopupContext } from "App";
+import Loader from "./Loader";
 
 const CartProduct = (props) => {
   const productId = props.product.productID;
@@ -34,9 +35,9 @@ const CartProduct = (props) => {
     setStore(data.store)
   };
 
-  if (!product) return null;
   return (
     <>
+    {!product? <Loader/>:
       <div className={styles.card}>
         
        {
@@ -66,6 +67,7 @@ const CartProduct = (props) => {
           X
         </button>
       </div>
+}
     </>
   );
 };

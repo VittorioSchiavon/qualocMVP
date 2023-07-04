@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GenericCarousel from "./GenericCarousel";
+import Loader from "./Loader";
 
 const StoreCarousel = () => {
   const [stores, setStores] = useState(null);
@@ -14,11 +15,12 @@ const StoreCarousel = () => {
     const data = await response.json();
     setStores(data);
   };
-
-  if (!stores) return null;
-  console.log(stores)
-  return (
-    <GenericCarousel type={"store"} collection={stores} title={"I migliori negozi della tua zona"}/>
+  return (<>
+    {!stores ? (<Loader/>)
+    :
+    (<GenericCarousel type={"store"} collection={stores} title={"I migliori negozi della tua zona"}/>)
+  }
+  </>
   );
 };
 

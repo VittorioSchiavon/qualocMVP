@@ -9,7 +9,7 @@ const NewProductPage = () => {
       <Navbar />
 
       <div className={styles.container}>
-        <div className={styles.contentContainer}>
+        <div className={`${styles.dataContainer} shadow`}>
             <Form />
         </div>
       </div>

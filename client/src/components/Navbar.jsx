@@ -20,7 +20,6 @@ import SearchBar from "./SearchBar";
 import ChatPage from "scenes/chatPage";
 
 const Navbar = () => {
-  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
