@@ -131,6 +131,7 @@ const Form = () => {
                 />
               <Field
                 className={styles.input}
+                as="textArea"
                 label="Descrizione"
                 onBlur={handleBlur}
                 onChange={handleChange}

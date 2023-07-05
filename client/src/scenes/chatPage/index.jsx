@@ -81,7 +81,6 @@ const ChatPage = () => {
           ...notificationList,
           arrivalMessage.conversationID,
         ]);
-      console.log(notificationList);
     }
 
     if (
@@ -108,11 +107,8 @@ const ChatPage = () => {
   };
 
   const setNotificationWhileOffline = (data) => {
-    console.log("i'm checking past convs");
     const filteredConversations = data
       ?.filter((conversation) => {
-        console.log("conversation.lastMessage", conversation.lastMessage);
-        console.log("user.lastAccess", user.lastAccess);
         return new Date(conversation.lastMessage) > new Date(previousAccess);
       })
       .forEach(
@@ -121,8 +117,6 @@ const ChatPage = () => {
           conversation._id != currentChat?._id &&
           setNotificationList([...notificationList, conversation._id])
       );
-    console.log("notificationList", notificationList);
-    console.log("filteredConversations", filteredConversations);
     setFirstCheck(true);
   };
   useEffect(() => {
@@ -150,10 +144,7 @@ const ChatPage = () => {
       var tempList = notificationList;
       const index = notificationList.indexOf(currentChat?._id);
       const x = tempList.splice(index, 1);
-      console.log("I've removed", currentChat?._id);
-      console.log("the res is", tempList);
       setNotificationList(tempList);
-      console.log("the actysa res is", notificationList);
     }
   }, [currentChat]);
 

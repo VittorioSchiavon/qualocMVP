@@ -11,6 +11,8 @@ import { fileURLToPath } from "url";
 
 import {registerUser } from "./controllers/auth.js"
 import { addProduct } from "./controllers/products.js";
+import { addPost } from "./controllers/posts.js";
+
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import storeRoutes from "./routes/stores.js"
@@ -23,6 +25,7 @@ import searchRoutes from "./routes/search.js"
 import StripeWebhookRoute from "./routes/stripeWebhook.js"
 import ConversationRoutes from "./routes/conversations.js";
 import MessagesRoutes from "./routes/messages.js";
+import PostsRoutes from "./routes/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createStore } from "./controllers/stores.js";
 import { uploadMessageImage } from "./controllers/messages.js";
@@ -86,6 +89,9 @@ app.post("/stores/createStore", verifyToken , upload.any("picture"), createStore
 
 app.post("/products/addProduct", verifyToken, upload.any("picture"), addProduct)
 
+app.post("/posts/addPost", verifyToken, upload.single("picture"), addPost)
+
+
 //app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 
@@ -101,6 +107,8 @@ app.use("/reviews", reviewRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/search', searchRoutes);
+app.use('/post', PostsRoutes);
+
 /* ROUTES WITH FILES 
 app.use("/posts", postRoutes);
 */

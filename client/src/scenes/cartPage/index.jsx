@@ -14,6 +14,7 @@ const CartPage = () => {
   const [popup, setPopup] = useContext(PopupContext);
 
   useEffect(() => {
+    document.title = 'Qualoc Carrello';
     getCart();
     setTot();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

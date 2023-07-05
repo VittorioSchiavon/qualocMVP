@@ -1,0 +1,46 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 1em;
+    border-bottom: 1px solid var(--mainDarker);
+    padding-bottom:1em ;
+
+}
+
+.container>*{
+    width: 30%;
+}
+
+.image{
+    width: 5em;
+    height: 5em;
+    cursor: pointer;
+
+}
+
+.image:hover{
+    transform: scale(1.05);
+}
+.name{
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--mainDarker);
+    cursor: pointer;
+
+}
+
+.name:hover{
+    color: var(--main);
+}
+
+
+.buttonContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

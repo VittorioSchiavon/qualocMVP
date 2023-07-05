@@ -1,8 +1,9 @@
 .titlo{
-    font-family: "Fredoka", sans-serif;
     font-size: 2em;
+    color: var(--mainDarker);
+    margin: 10px;
+    font-weight: 900;
     text-align: left;
-    color: var(--main);
 }
 
 .container{
@@ -18,10 +19,14 @@
 }
 
 .dataContainer{
-    width: 80%;
-    margin: auto;
+    max-width: 700px;
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    padding: 20px;
 }
-.dataContainer div{
+.data{
     font-weight: bold;
     font-size: 1.2em;
     color: var(--main);
@@ -29,14 +34,16 @@
 
 
 .secondContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+
     margin: 2em;
 
 }
-
+.secondContainer .title{
+    text-align: center;
+    font-size: 2em;
+    font-weight: 900;
+    color: var(--main);
+}
 .box{
     text-align: center;
     width: 300px;
@@ -46,28 +53,117 @@
     font-weight: bolder;
 }
 
-.navbar{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
-    
+.storeImg{
+    height: 300px;
+    text-align: center;
+    margin: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
 }
-.navbar li{
-    text-decoration: none;
-    list-style-type: none;
+
+.tagContainer{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    font-size: 1em;
+}
+
+.storeRow{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 2em;
+
+}
+
+.address{
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--black);
+    margin: 1em;
+}
+
+
+
+
+
+.socialIcon{
+    fill: var(--main);
+    height: 1.5em;
+}
+
+.socialIcon:hover{
+    fill: var(--mainDarker);
     cursor: pointer;
-    background-color: var(--secondary);
-    width: 100px;
-    height: 100%;
-    padding: 1em;
+}
+.social{
+    text-align: center;
+    display: flex;
+    gap: 1em;
+}
+
+.description{
+    max-width: 700px;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--black);
+    margin: auto;
+    margin-top: 2em;
+
+}
+
+.showMore{
+    text-decoration: underline;
+    cursor: pointer;
     text-align: center;
     font-weight: 600;
-    border-radius: 20px;
+    color: var(--mainDarker);
+    margin: 0.5em;
+
 }
 
-.navbar li:hover{
-    color: var(--main);
-    background-color: white;
 
+.firstRow{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: space-between;
+    
+}
+
+
+.owner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin: 10px;
+}
+
+.userImage{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.userName{
+    color: var(--black);
+    font-weight: 700;
+
+}
+
+.carousel{
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+.ordersSection{
+    margin: 20px;
 }
