@@ -35,15 +35,24 @@ export const deleteProduct = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   try {
-    const editProduct = await Product.findByIdAndUpdate(req.body.productID,
+    var imageNames =[req.body.picture]
+    req.files.forEach(image=> imageNames.push(image.filename))
+
+    console.log("got: ", req.body)
+    const product = await Product.findById(req.body._id);
+    console.log("product",product)
+    const editProduct = await Product.findByIdAndUpdate(req.body._id,
       { name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       brand: req.body.brand,
       shippingCost: req.body.shippingCost,
-      tags: req.body.tags,
-      options: req.body.options,
-  });
+      tags: req.body.tags.split(","),
+      options: req.body.options.split(","),
+      picture: imageNames
+
+  },{ new: true });
+  console.log("cianeo")
     res.status(200).json(editProduct);
   } catch (err) {
     console.log(err)
@@ -56,6 +65,7 @@ export const getStoreProduct = async (req, res) => {
     const products = await Product.find({ shopID: req.params.id, isTemp: false });
     res.json(products);
   } catch (err) {
+    
     res.status(400).send(err);
   }
 };

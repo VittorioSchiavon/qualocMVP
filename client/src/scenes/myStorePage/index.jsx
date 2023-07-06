@@ -145,7 +145,7 @@ const MyStorePage = () => {
         <div className="mainTitle">I miei Prodotti</div>
 
         <div className={styles.carousel}>
-        <button className="mainButtonGreen">+ Aggiungi un Prodotto</button>
+        <button className="mainButtonGreen" onClick={()=>navigate("/aggiungiProdotto")}>+ Aggiungi un Prodotto</button>
 
           {products?.map((el) => (
             <StoreProduct product={el} />

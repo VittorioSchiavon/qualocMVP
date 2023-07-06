@@ -25,7 +25,7 @@ const StoreProduct = (props) => {
         )}
         <div className={styles.name} onClick={() => navigate("/prodotto/"+product._id)}>{product.name}</div>
         <div className={styles.buttonContainer}>
-          <button className="mainButtonYellow">modifica</button>
+          <button onClick={() => navigate("/modificaProdotto/"+product._id)} className="mainButtonYellow">modifica</button>
           <button className="mainButtonRed">rimuovi</button>
         </div>
         

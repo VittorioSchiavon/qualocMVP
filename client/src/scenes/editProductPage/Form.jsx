@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
-import styles from "./newProductPage.module.css";
+import styles from "./editProductPage.module.css";
 import { PopupContext } from "App";
 
 const productSchema = yup.object().shape({
@@ -17,29 +17,32 @@ const productSchema = yup.object().shape({
   options: yup.string(),
 });
 
-var initialValuesProduct = {
-  name: "",
-  description: "",
-  price: "",
-  brand: "",
-  shippingCost: "",
-  tags: "",
-  options: "",
-};
 
-const Form = () => {
+
+const Form = ({existingProduct}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
-  const [images, setImages] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [images, setImages] = useState(existingProduct?.picture);
+  const [tags, setTags] = useState(existingProduct?.tags);
   const [writingTag, setWritingTag] = useState("");
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(existingProduct.options);
   const [writingOptions, setWritingOptions] = useState("");
 
-  const addProduct = async (values, onSubmitProps) => {
+  var initialValuesProduct = {
+    name: existingProduct?.name,
+    description: existingProduct?.description,
+    price: existingProduct?.price,
+    brand: existingProduct?.brand,
+    shippingCost: existingProduct?.shippingCost,
+    tags: existingProduct?.tags.toString(),
+    options: existingProduct?.options.toString(),
+  };
+
+  const editProduct = async (values, onSubmitProps) => {
     values.options=options.toString()
     values.tags=tags.toString()
+    values._id=existingProduct._id
     const formData = new FormData();
     for (let value in values) {
       console.log(values[value]);
@@ -52,7 +55,7 @@ const Form = () => {
       formData.append("picture", image);
     });
     const savedProductResponse = await fetch(
-      "http://localhost:3001/products/addProduct",
+      "http://localhost:3001/products/editProduct",
       {
         method: "POST",
         headers: {
@@ -66,7 +69,7 @@ const Form = () => {
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     console.log("heresubmit");
-    await addProduct(values, onSubmitProps);
+    await editProduct(values, onSubmitProps);
   };
   const removeTag = (index) => {
     var tempTags= tags
@@ -112,7 +115,7 @@ const Form = () => {
       }) => (
         <form onSubmit={handleSubmit} className={styles.form}>
           <div>
-            <div className={styles.titleForm}>{"Aggiungi un prodotto"}</div>
+            <div className={styles.titleForm}>{"Modifica prodotto"}</div>
 
             <div className={styles.inputContainer}>
               <div>
@@ -131,7 +134,7 @@ const Form = () => {
                 />
               <Field
                 className={styles.input}
-                as="textArea"
+                as="textarea"
                 label="Descrizione"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -270,7 +273,7 @@ const Form = () => {
             {/* BUTTONS */}
             <div>
               <button className="mainButtonGreen" type="submit">
-                Aggiungi
+                Modifica
               </button>
             </div>
           </div>

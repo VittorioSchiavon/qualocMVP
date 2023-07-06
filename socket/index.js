@@ -36,7 +36,6 @@ io.on("connection", (socket) => {
     const data = await response.json();
   }catch (err) {
     console.log(err.message);
-    res.status(500).json({ error: err.message });
   }
     io.emit("getUsers", users);
   });

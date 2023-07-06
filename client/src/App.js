@@ -15,6 +15,7 @@ import { createContext, useState } from 'react';
 import MessagePage from 'scenes/messagePage';
 import FAQPage from 'scenes/aboutUsPage';
 import AboutUsPage from 'scenes/aboutUsPage';
+import EditProductPage from 'scenes/editProductPage';
 
 
 export const PopupContext= createContext();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/negozio/:id" element={<StorePage/>}/>
         <Route path="/carrello" element={<CartPage/>}/>
         <Route path="/aggiungiProdotto" element={<NewProductPage/>}/>
+        <Route path="/modificaProdotto/:id" element={<EditProductPage/>}/>
         <Route path="/prodotto/:id" element={<ProductPage/>}/>
         <Route path="/chat" element={<ChatPage/>}/>
         <Route path="/cerca/:query" element={<SearchPage/>}/>

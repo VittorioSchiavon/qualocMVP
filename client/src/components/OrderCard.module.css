@@ -1,15 +1,16 @@
 .status{
-    font-size: 1em;
+    font-size: 1.1em;
     color: var(--main);
+    font-weight: 800;
 }
 
 .container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+
+
     padding: 1em;
-    align-items: center;
     border-bottom: 2px solid var(--main);
+    text-align: left;
+    font-weight: 500;
 
 }
 
@@ -44,8 +45,45 @@
 
 .actionList{
     width: 100%;
+    display: flex;
+    justify-content: right;
+    gap: 20px;
 }
 
 .productList{
     width: 100%;
+}
+
+.lable{
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-right: 20px;
+}
+
+.player{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.bill
+{
+    text-align: right;
+    margin: 1em;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dataRow{
+    display: flex;
+    margin: 10px;
+    flex-wrap: wrap;
+
+}
+.dataRow>*{
+    flex-basis: 200px;
 }

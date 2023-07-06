@@ -10,7 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import {registerUser } from "./controllers/auth.js"
-import { addProduct } from "./controllers/products.js";
+import { addProduct , editProduct} from "./controllers/products.js";
 import { addPost } from "./controllers/posts.js";
 
 import authRoutes from "./routes/auth.js"
@@ -88,6 +88,7 @@ app.post("/stores/createStore", verifyToken , upload.any("picture"), createStore
 
 
 app.post("/products/addProduct", verifyToken, upload.any("picture"), addProduct)
+app.post("/products/editProduct", verifyToken, upload.any("picture"), editProduct)
 
 app.post("/posts/addPost", verifyToken, upload.single("picture"), addPost)
 

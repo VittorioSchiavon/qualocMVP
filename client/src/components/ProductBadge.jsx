@@ -7,10 +7,10 @@ const ProductBadge = ({ product }) => {
 
     
     <>
-      <div className={styles.container} onClick={() => navigate("/prodotto"+product._id)} 
+      <div className={styles.container} onClick={() => navigate("/prodotto/" + product._id)} 
       style={{
         cursor: 'pointer'
-      }}>{/** 
+      }}>
         {product?.picture ? (
           <img
             src={"http://localhost:3001/assets/" + product?.picture}
@@ -19,7 +19,7 @@ const ProductBadge = ({ product }) => {
           />
         ) : (
           <div className={styles.Icon}>{product.name}</div>
-        )}*/}
+        )}
         <div className={styles.name}>{product.name} <span className={styles.info}>(qnt:{product.quantity} - opz: {product.option} - prezzo:  
                   {product.price}€)</span></div>
 
