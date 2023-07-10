@@ -130,3 +130,9 @@
   flex-wrap: nowrap;
   gap: 1em;
 }
+
+.removeImages{
+  color: var(--mainDarker);
+  text-decoration: underline;
+  cursor: pointer;
+}

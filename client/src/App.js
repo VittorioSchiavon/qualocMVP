@@ -16,7 +16,9 @@ import MessagePage from 'scenes/messagePage';
 import FAQPage from 'scenes/aboutUsPage';
 import AboutUsPage from 'scenes/aboutUsPage';
 import EditProductPage from 'scenes/editProductPage';
-
+import EditStorePage from 'scenes/editStorePage';
+import ProtectedRoute from 'state/ProtectedRoute';
+import StoreProtectedRoute from 'state/StoreProtectedRoute copy';
 
 export const PopupContext= createContext();
 
@@ -31,16 +33,19 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/creaNegozio" element={<NewStorePage/>}/>
+        <Route path="/creaNegozio" element={<ProtectedRoute><NewStorePage/></ProtectedRoute>}/>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/ilMioProfilo" element={<ProfilePage/>}/>
-        <Route path="/ilMioNegozio" element={<MyStorePage/>}/>
+        <Route path="/ilMioProfilo" element={        <ProtectedRoute>
+          <ProfilePage/>
+        </ProtectedRoute>}/>
+        <Route path="/ilMioNegozio" element={<StoreProtectedRoute><MyStorePage/></StoreProtectedRoute>}/>
+        <Route path="/modificaNegozio/:id" element={<StoreProtectedRoute><EditStorePage/></StoreProtectedRoute>}/>
         <Route path="/negozio/:id" element={<StorePage/>}/>
-        <Route path="/carrello" element={<CartPage/>}/>
-        <Route path="/aggiungiProdotto" element={<NewProductPage/>}/>
-        <Route path="/modificaProdotto/:id" element={<EditProductPage/>}/>
+        <Route path="/carrello" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
+        <Route path="/aggiungiProdotto" element={<StoreProtectedRoute><NewProductPage/></StoreProtectedRoute>}/>
+        <Route path="/modificaProdotto/:id" element={<StoreProtectedRoute><EditProductPage/></StoreProtectedRoute>}/>
         <Route path="/prodotto/:id" element={<ProductPage/>}/>
-        <Route path="/chat" element={<ChatPage/>}/>
+        <Route path="/chat" element={<ProtectedRoute><ChatPage/></ProtectedRoute>}/>
         <Route path="/cerca/:query" element={<SearchPage/>}/>
         <Route path="/404" element={<MessagePage message={"404"}/>} />
         <Route path="/successo" element={<MessagePage message={"successo"}/>} />

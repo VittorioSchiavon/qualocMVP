@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  getStore, getStores, getMyStore, createStore} from "../controllers/stores.js";
+  getStore, getStores, getMyStore, createStore, editStore} from "../controllers/stores.js";
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -9,6 +9,7 @@ const router = express.Router();
 router.get("/myStore",verifyToken, getMyStore);
 router.get("/:id", getStore);
 router.get("/", getStores);
+router.post("/editStore", verifyToken, editStore)
 
 
 /* UPDATE */

@@ -37,6 +37,22 @@ const MyStorePage = () => {
     const data = await response.json();
     setStore(data);
   };
+  const deleteProduct = async (id) => {
+    console.log("deletingggg")
+    const response = await fetch(`http://localhost:3001/products/deleteProduct/`+id, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (response.ok ){
+      console.log("dleeted success")
+
+      const newList = products.filter((item) => item._id !== id);
+      setProducts(newList)
+    }
+  };
 
   const getProducts = async () => {
     var link = "http://localhost:3001/products/store/" + store?._id;
@@ -74,7 +90,7 @@ const MyStorePage = () => {
           <div className={styles.dataContainer}>
             <div className={styles.firstRow}>
               <RatingStars rating={store.rating ? store.rating : 0} />
-
+{/*
               <div className={styles.social}>
                 <svg
                   className={styles.socialIcon}
@@ -97,7 +113,9 @@ const MyStorePage = () => {
                 >
                   <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
                 </svg>
-              </div>
+          </div>*/}
+                  <button className="mainButtonGreen" onClick={()=>navigate("/modificaNegozio/"+store?._id)}>Modifica negozio</button>
+
             </div>
             <div className={styles.titlo}>{store.name}</div>
             <Badge
@@ -148,7 +166,7 @@ const MyStorePage = () => {
         <button className="mainButtonGreen" onClick={()=>navigate("/aggiungiProdotto")}>+ Aggiungi un Prodotto</button>
 
           {products?.map((el) => (
-            <StoreProduct product={el} />
+            <StoreProduct product={el} deleteFunction={deleteProduct}/>
           ))}
         </div>
         <div className={styles.ordersSection}>

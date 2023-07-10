@@ -252,7 +252,7 @@ const Form = () => {
                 <button className="mainButtonGreen" type="submit">
                   {isLogin ? "Accedi" : "Registrati"}
                 </button>
-                <div
+<div
                   className={styles.changeType}
                   onClick={() => {
                     setPageType(isLogin ? "register" : "login");
@@ -263,6 +263,8 @@ const Form = () => {
                     ? "Non hai un account? Registrati."
                     : "Hai già un account? Accedi."}
                 </div>
+                {!isLogin && <div className={styles.agreement}>Cliccando su "Registrati" acconsenti ai <a href="/terminiECondizioni">termini e condizioni</a> di qualoc</div>
+                }
               </div>
             </div>
           </form>

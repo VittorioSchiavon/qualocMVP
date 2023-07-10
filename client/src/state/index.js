@@ -24,7 +24,9 @@ export const authSlice = createSlice({
             state.user.isOwner = true
         },
         setLastAccess: (state) =>{
-            state.user.lastAccess = new Date()
+            const now= new Date().toISOString()
+            console.log("now", now)
+            state.user.lastAccess = now
         },
 
     }

@@ -84,3 +84,36 @@ export const createStore = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+export const editStore = async (req, res) => {
+  try {
+
+    var imageNames=[]
+    console.log("req.body.picture",req.body.picture)
+    if(req.body.picture!=null && !Array.isArray(req.body.picture)) imageNames=[req.body.picture]
+    if(req.body.picture!=null && Array.isArray(req.body.picture)) imageNames.push(req.body.picture)
+
+    req.files.forEach(image=> imageNames.push(image.filename))
+
+    const editStore = await Store.findByIdAndUpdate(req.body._id,
+      { name: req.body.name,
+      tags: req.body.tags.split(","),
+      description:req.body.description,
+      street:req.body.streetNumber,
+      streetNumber:req.body.streetNumber,
+      city:req.body.city,
+      country:req.body.country,
+      postalCode:req.body.postalCode,
+      phone:req.body.phone,
+
+  },{ new: true });
+  console.log("cianeo")
+  console.log("editStore",editStore)
+
+    res.status(200).json(editStore);
+  } catch (err) {
+    console.log(err)
+    res.status(404).json({ message: err.message });
+  }
+};

@@ -27,7 +27,7 @@ export const getProducts = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const removedProduct = await Product.deleteOne({ _id: req.params.productID });
-    res.status(200);
+    res.status(200).json({message: "product deleted"});
   } catch (err) {
     res.status(400).send(err);
   }
@@ -35,8 +35,16 @@ export const deleteProduct = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   try {
-    var imageNames =[req.body.picture]
+
+    var imageNames=[]
+    console.log("req.body.picture",req.body.picture)
+    if(req.body.picture!=null && !Array.isArray(req.body.picture)) imageNames=[req.body.picture]
+    if(req.body.picture!=null && Array.isArray(req.body.picture)) imageNames.push(req.body.picture)
+
+    console.log("imageNames",imageNames)
+
     req.files.forEach(image=> imageNames.push(image.filename))
+    console.log("imageNames",imageNames)
 
     console.log("got: ", req.body)
     const product = await Product.findById(req.body._id);
@@ -53,6 +61,8 @@ export const editProduct = async (req, res) => {
 
   },{ new: true });
   console.log("cianeo")
+  console.log("editProduct",editProduct)
+
     res.status(200).json(editProduct);
   } catch (err) {
     console.log(err)

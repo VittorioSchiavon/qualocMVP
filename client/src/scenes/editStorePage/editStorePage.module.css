@@ -11,7 +11,7 @@
 .dataContainer{
     height: fit-content;
     width: 90%;
-    max-width: 500px;
+    max-width: 1000px;
 
     text-align: center;
     margin: auto;
@@ -87,21 +87,61 @@
 
 .inputContainer{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: row;
     overflow: hidden;
     flex-wrap: wrap;
+    gap: 1em;
 }
-.inputContainer> *{
+.inputContainer> div{
+    width: 450px;
+}
+
+.tagForm{
+    border-radius: 5px;
     width: 90%;
+    border: 2px solid var(--main);
+    padding: 10px;
+    margin-top: 1em;
+    padding-left: 20px;
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
 }
 
+.tagForm .tagInput{
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 500;
+    min-width: 50px;
+    border-bottom: 1px solid var(--main);
+    padding-bottom: 5px;
 
-.agreement{
-    color: gray;
-    margin: 1em;
 }
 
-.agreement a{
-    color: var(--main);
+.tagButton{
+    box-sizing: border-box;
+    display: none;
+    width: 0;
 }
+
+.tag{
+    background-color: var(--main);
+    border-radius: 20px;
+    padding: 0.7em;
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1em;
+}
+
+.removeImages{
+    color: var(--mainDarker);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  

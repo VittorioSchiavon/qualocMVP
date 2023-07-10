@@ -15,7 +15,7 @@ const StoreProduct = (props) => {
       <div className={styles.container} >
         {product?.picture ? (
           <img
-            src={"http://localhost:3001/assets/" + product?.picture}
+            src={Array.isArray(product?.picture)? "http://localhost:3001/assets/"+product?.picture[0]: "http://localhost:3001/assets/"+product?.picture} 
             alt=""
             className={styles.image}
             onClick={() => navigate("/prodotto/"+product._id)}
@@ -26,7 +26,7 @@ const StoreProduct = (props) => {
         <div className={styles.name} onClick={() => navigate("/prodotto/"+product._id)}>{product.name}</div>
         <div className={styles.buttonContainer}>
           <button onClick={() => navigate("/modificaProdotto/"+product._id)} className="mainButtonYellow">modifica</button>
-          <button className="mainButtonRed">rimuovi</button>
+          <button onClick={() => props.deleteFunction(product._id)} className="mainButtonRed">rimuovi</button>
         </div>
         
       </div>

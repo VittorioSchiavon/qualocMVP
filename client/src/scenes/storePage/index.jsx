@@ -36,6 +36,7 @@ const StorePage = () => {
     const data = await response.json();
     setStore(data.store);
     setUser(data.user);
+    console.log("store",store)
 
   };
 

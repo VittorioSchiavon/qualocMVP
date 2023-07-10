@@ -27,7 +27,7 @@ import ConversationRoutes from "./routes/conversations.js";
 import MessagesRoutes from "./routes/messages.js";
 import PostsRoutes from "./routes/posts.js";
 import { verifyToken } from "./middleware/auth.js";
-import { createStore } from "./controllers/stores.js";
+import { createStore, editStore } from "./controllers/stores.js";
 import { uploadMessageImage } from "./controllers/messages.js";
 
 //CONFIG
@@ -85,6 +85,7 @@ app.post("/auth/registerUser", upload.single("picture"), registerUser);
 app.post("/messages/uploadImage",verifyToken, upload.single("picture"), uploadMessageImage);
 
 app.post("/stores/createStore", verifyToken , upload.any("picture"), createStore);
+app.post("/stores/editStore", verifyToken, upload.any("picture"), editStore)
 
 
 app.post("/products/addProduct", verifyToken, upload.any("picture"), addProduct)

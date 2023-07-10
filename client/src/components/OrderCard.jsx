@@ -38,7 +38,6 @@ const OrderCard = ({ order, type }) => {
       product.picture = data.product.picture;
       setProducts([...products, product]);
       setStore(data.store);
-      console.log(data.store)
       //tempProd = [...tempProd, data];
     }
   };
@@ -55,7 +54,6 @@ const OrderCard = ({ order, type }) => {
     });
     const data = await response.json();
     orderState.status = newStatus;
-    console.log("ordini", data);
   };
 
   const getClient = async () => {
@@ -66,7 +64,6 @@ const OrderCard = ({ order, type }) => {
       }
     );
     const data = await response.json();
-    console.log(user)
     setUser(data);
   };
 

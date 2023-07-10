@@ -157,8 +157,7 @@ const Form = ({existingProduct}) => {
                 error={Boolean(touched.price) && Boolean(errors.price)}
                 helperText={touched.price && errors.price}
               />
-              </div>
-              <div>
+              
               <Field
                 className={styles.input}
                 label="Brand"
@@ -170,6 +169,8 @@ const Form = ({existingProduct}) => {
                 error={Boolean(touched.brand) && Boolean(errors.brand)}
                 helperText={touched.brand && errors.brand}
               />
+              </div>
+              <div>
               <Field
                 className={styles.input}
                 label="Costo di spedizione"
@@ -216,6 +217,7 @@ const Form = ({existingProduct}) => {
                   </div>
                 )}
               </Dropzone>
+              <div className={styles.removeImages}onClick={()=>setImages([])}>rimuovi immagini inserite</div>
               </div>
               <form className={styles.tagForm} onSubmit={addTag}>
                   {tags.map((tag,index) => {
