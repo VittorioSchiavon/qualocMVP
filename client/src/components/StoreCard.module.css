@@ -6,7 +6,6 @@
     color: var(--mainDarker);
     overflow: hidden;
     display: flex;
-    flex-wrap: wrap;
     box-shadow: 1px 4px 6px 1px #0000001A;
 
 }

@@ -106,11 +106,11 @@ async function createOrders(cart, session, lineItems) {
             const tempProduct = {
               productID: element.price.product.metadata.productId,
               quantity: element.quantity,
-              price: element.amount_total,
+              price: element.amount_total*0.01,
               option: element.price.product.metadata.productOption,
             };
             activeProducts.push(tempProduct);
-            totalProductPrice += element.amount_total * element.quantity;
+            totalProductPrice += element.amount_total*0.01;
             /*shippingCost =
               shippingCost > element.product.shippingCost
                 ? shippingCost

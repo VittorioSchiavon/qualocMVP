@@ -44,7 +44,7 @@ const CartProduct = (props) => {
         product.picture[0]?
         <img className={styles.image} src={"http://localhost:3001/assets/" + product.picture[0]}/>
         :
-        <img className={styles.image} src={"/productIcon.png"}/>
+        <img className={styles.image} src={"/assets/product.png"}/>
        } 
 <div>
         <div

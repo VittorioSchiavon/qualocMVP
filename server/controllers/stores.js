@@ -67,7 +67,7 @@ export const createStore = async (req, res) => {
     });
 
     const store = await Store.findOne({ ownerID: req.user.id });
-    if(!store){
+    if(store){
       console.log("esiste già uno store")
       return res.status(400).json({ error: "esiste già uno store" });
     }else{

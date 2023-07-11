@@ -9,19 +9,19 @@ const ImageDisplay = ({ collection }) => {
   return (
     <>
       <div className={styles.imagesContainer}>
-        {collection.length == 0 && (
+        {collection.length == 0 ?(
           <img
-            src="/assets/storeIcon.png"
+            src="/assets/product.png"
             className={styles.activeImg}
           />
-        )}
+        ):(
         <a href={`http://localhost:3001/assets/${activeImage}`}>
           {" "}
           <img
             src={"http://localhost:3001/assets/" + activeImage}
             className={styles.activeImg}
           />
-        </a>
+        </a>)}
         {collection?.length > 1 && (
           <div className={styles.fullImageList}>
             {collection?.map((img) => (

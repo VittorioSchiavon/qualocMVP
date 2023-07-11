@@ -28,7 +28,7 @@ const getProduct = async () => {
     }
   );
   const data = await response.json();
-  setProduct(data);
+  setProduct(data.product);
 };
 
 const addToCart = async () => {

@@ -90,7 +90,7 @@ const ProductPage = () => {
           ))}
         </div>
         <div className={styles.productRow}>
-          <ImageDisplay collection={product.picture} />
+          <ImageDisplay collection={product?.picture} />
 
           <div className={styles.dataContainer}>
             <RatingStars rating={product.rating} />

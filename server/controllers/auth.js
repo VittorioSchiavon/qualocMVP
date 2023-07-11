@@ -23,7 +23,7 @@ export const registerUser = async (req, res) => {
       phone,
       address,
       isOwner,
-      verified: false,
+      verified: true,
     });
     const savedUser = await newUser.save();
 
