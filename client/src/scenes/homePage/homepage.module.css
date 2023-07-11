@@ -1,26 +1,29 @@
 .firstRow {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap-reverse;
   padding: 2em;
-  max-width: 100%;
+  gap: 3em;
+  max-width: 90vw;
+  margin: auto;
 }
 
 .leftSection {
-  width: 40vw;
-  align-items: center;
-  text-align: center;
+  width: 30vw;
+  text-align: left;
 }
 
 .motto {
   font-weight: 900;
   color: var(--main);
-  font-family: "Fredoka", sans-serif;
   font-size: 3em;
-  text-align: center;
+  text-align: left;
   margin: auto;
 }
+
+
 .spiegazione {
   margin: auto;
   display: block;
@@ -60,7 +63,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 2em;
+  margin-bottom: 3em;
 }
 .step {
   text-align: center;
@@ -72,13 +75,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
   margin: 1em;
 }
 .step .num {
   color: var(--main);
   font-family: "Fredoka", Arial, Helvetica, sans-serif;
   font-size: 4em;
+}
+.stepImg{
+  height: 80px;
 }
 .step .text {
   font-size: 1.5em;
@@ -99,13 +105,14 @@
 
 .proContainer{
   display: flex;
-  justify-content: center;
-  width: 300px;
-  margin: auto;
+  justify-content: left;
 }
 
 .pro{
-  background-color: var(--lightYellow);
+  background-color: var(--mainDarker);
+  height: 50px;
+  width: 50px;
+
   margin: 1em;
   padding: 1em;
   display: flex;
@@ -113,8 +120,13 @@
   align-items: center;
   border-radius: 50%;
 }
+.proText{
+  font-weight: 900;
+  font-family: 1.2em;
+  color: white;
+}
 .hpBackground{
-  width: 100vw;
+  width: 100%;
   position: absolute;
   display: flex;
   align-items: center;
@@ -124,15 +136,6 @@
 
 }
 
-
-.hpBackground img{
-  width: 70vw;
-  z-index: -300;
-  opacity: 0.7;
-  animation: 1s ease-in-out 0s 1 load;
-  pointer-events: none;
-
-}
 
 @keyframes load {
   0% {
@@ -149,4 +152,14 @@
   margin: auto !important;
 display: block;
 
+}
+
+.container{
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing:border-box;
+}
+
+.firstIcon{
+  width: 400px;
 }

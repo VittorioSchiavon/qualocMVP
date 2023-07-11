@@ -8,6 +8,8 @@
   right: 0;
   z-index: 89999;
   pointer-events:all;
+    box-shadow: var(--shadow);
+
 
 
 }
@@ -166,7 +168,7 @@ transform: scale(1.05);
   left: -150px;
   bottom: +50px;
   border-radius: 2345678px;
-  background-color: var(--mainDarker);
+  background-color: var(--gold);
   border: 2px solid white;
   padding: 20px;
   cursor: pointer;
@@ -187,7 +189,7 @@ transform: scale(1.05);
 }
 
 .showButtonIcon{
-fill: white;  
+fill: var(--mainDarker);  
 }
 
 .fileInput{  width: 0.1px;

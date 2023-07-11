@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import RatingStars from "./RatingStars";
 const ProductCard = (props) => {
   const product = props.product;
+  console.log(product)
   const navigate = useNavigate();
   if (!product) return null;
   return (
@@ -14,14 +15,14 @@ const ProductCard = (props) => {
         }}
       >
 
-        {product?.picture ? (
+        {product?.picture!=null && typeof(product?.picture)!=undefined && product?.picture.length!=0  ? (
                 <img
-                  src={"http://localhost:3001/assets/" + product?.picture[0]}
+                src={"http://localhost:3001/assets/" + product?.picture[0]}
                   alt=""
                   className={styles.icon}
                 />
               ) : (
-<img src="/assets/productIcon.png" alt="" className={styles.icon}/>
+<img src="/assets/product.png" alt="" className={styles.noIcon}/>
               )}
         <div className={styles.textDataContainer}>
 

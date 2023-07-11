@@ -20,7 +20,7 @@ const Conversation = (props) => {
 
     const data = await response.json();
     setFriend(data);
-    setFirstLetter(friend?.firstName[0]);
+    setFirstLetter(data?.firstName[0]);
   };
 
   return <>
@@ -38,7 +38,7 @@ const Conversation = (props) => {
               />
             ) : (
 <div
-        className={styles.conversationIcon}>j</div>
+        className={styles.conversationIcon}>{friend?.firstName[0]}</div>
             )}
       <span className={styles.conversationName}>{friend?.firstName+" "+ friend?.lastName}</span>
     </div>

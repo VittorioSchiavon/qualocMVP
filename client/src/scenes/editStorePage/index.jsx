@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const EditStorePage = () => {
+  useEffect(() => {
+    document.title = "qualoc Modifica Negozio";  
+
+  }, []);
   
   var params = useParams();
   const [store, setStore] = useState(null);

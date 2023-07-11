@@ -20,6 +20,17 @@
     object-fit: cover;
 }
 
+.noIcon{
+    height:150px;
+    display: block;
+    margin: auto;
+    mix-blend-mode: darken;
+    transition: 1s;
+    object-fit:scale-down;
+    object-position: center;
+
+}
+
 
 .card:hover{
     box-shadow: 3px 8px 9px 3px #0000001A;

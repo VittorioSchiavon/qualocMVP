@@ -1,7 +1,7 @@
 import styles from "./storePage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import RatingStars from "components/RatingStars";
@@ -11,9 +11,13 @@ import SendMessage from "components/SendMessage";
 import ImageDisplay from "components/ImageDisplay";
 import { useSelector } from "react-redux";
 import GenericDisplay from "components/GenericDisplay";
+import { PopupContext } from "App";
+
 const StorePage = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
+  const [popup, setPopup] = useContext(PopupContext);
+
 
   var storeId = useParams();
   const [store, setStore] = useState(null);
@@ -25,6 +29,8 @@ const StorePage = () => {
   const [fullDescription, setFullDescription] = useState(false);
 
   useEffect(() => {
+    document.title = "qualoc Negozio";  
+
     getStore();
     getProducts()
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -33,11 +39,15 @@ const StorePage = () => {
     const response = await fetch(`http://localhost:3001/stores/${storeId.id}`, {
       method: "GET",
     });
-    const data = await response.json();
-    setStore(data.store);
-    setUser(data.user);
-    console.log("store",store)
-
+   
+    if (!response.ok) {
+      setPopup({ type: "error", message: "Errore nel server, per cortesia riprovare" });
+    }else{
+      const data = await response.json();
+      setStore(data.store);
+      setUser(data.user);
+      console.log("store",data.user)
+    }
   };
 
   const getProducts = async () => {
@@ -45,8 +55,13 @@ const StorePage = () => {
     const response = await fetch(link, {
       method: "GET",
     });
-    const data = await response.json();
-    setProducts(data);
+
+    if (!response.ok) {
+      setPopup({ type: "error", message: "Errore nel server, per cortesia riprovare" });
+    }else{
+      const data = await response.json();
+      setProducts(data);
+    }
   };
 
   if (!store) return null;
@@ -56,8 +71,8 @@ const StorePage = () => {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.tagContainer}>
-          {store.tags != null &&
-            store.tags.map((el) => {
+          {store?.tags != null &&
+            store?.tags.map((el) => {
               return (
                 <div
                   className="tag"
@@ -76,7 +91,8 @@ const StorePage = () => {
           <div className={styles.dataContainer}>
           <div className={styles.firstRow}>
             <RatingStars rating={store.rating? store.rating: 0} />
-
+            {!user.isOnline && <div className={styles.address}>Negozio Aperto!</div>}
+{/*
             <div className={styles.social}>
               <svg
                 className={styles.socialIcon}
@@ -99,7 +115,7 @@ const StorePage = () => {
               >
                 <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
               </svg>
-            </div>
+            </div>*/}
           </div>
           <div className={styles.titlo}>{store.name}</div>
           <Badge name={user.firstName + " "+user.lastName} image={user?.picturePath}/>

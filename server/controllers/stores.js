@@ -100,7 +100,7 @@ export const editStore = async (req, res) => {
       { name: req.body.name,
       tags: req.body.tags.split(","),
       description:req.body.description,
-      street:req.body.streetNumber,
+      street:req.body.street,
       streetNumber:req.body.streetNumber,
       city:req.body.city,
       country:req.body.country,

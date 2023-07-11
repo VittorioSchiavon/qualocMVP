@@ -44,3 +44,8 @@
     font-size: 0.9em;
     font-weight: 600;
 }
+
+.tag{
+    font-size: 0.8em;
+    width: fit-content;
+}

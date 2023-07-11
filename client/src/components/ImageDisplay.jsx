@@ -11,7 +11,7 @@ const ImageDisplay = ({ collection }) => {
       <div className={styles.imagesContainer}>
         {collection.length == 0 && (
           <img
-            src={"http://localhost:3001/assets/storeIcon.png"}
+            src="/assets/storeIcon.png"
             className={styles.activeImg}
           />
         )}

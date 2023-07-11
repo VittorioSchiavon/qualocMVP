@@ -9,14 +9,14 @@ const store= props.store
   <div className={styles.card}             onClick={() => {
               navigate("/negozio/"+store._id);
             }}>
-            {store?.picture ? (
+            {store?.picture!=null && typeof(store?.picture)!=undefined && store?.picture.length!=0 ? (
                 <img
                   src={"http://localhost:3001/assets/" + store?.picture[0]}
                   alt=""
                   className={styles.icon}
                 />
               ) : (
-<img src="/assets/storeIcon.png" alt="" className={styles.icon}/>
+<img src="/assets/store.png" alt="" className={styles.icon}/>
               )}
 
     <div className={styles.textDataContainer}>
@@ -24,7 +24,7 @@ const store= props.store
 
 
     <div className={styles.name}>{store.name}</div>
-    <div className={styles.tag}>{store.tags[0]}</div>
+    <div className={`${styles.tag} tag`}>{store.tags[0]}</div>
 
 
     </div>

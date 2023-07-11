@@ -3,8 +3,13 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const MessagePage = ({message}) => {
+  useEffect(() => {
+    document.title = "qualoc";  
+
+  }, []);
   const navigate = useNavigate();
 
   return (

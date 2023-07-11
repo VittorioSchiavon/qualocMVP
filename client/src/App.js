@@ -13,12 +13,13 @@ import SearchPage from 'scenes/SearchPage';
 import Popup from 'components/Popup';
 import { createContext, useState } from 'react';
 import MessagePage from 'scenes/messagePage';
-import FAQPage from 'scenes/aboutUsPage';
+import FAQPage from 'scenes/FAQPage';
 import AboutUsPage from 'scenes/aboutUsPage';
 import EditProductPage from 'scenes/editProductPage';
 import EditStorePage from 'scenes/editStorePage';
 import ProtectedRoute from 'state/ProtectedRoute';
 import StoreProtectedRoute from 'state/StoreProtectedRoute copy';
+import VerifyEmailPage from 'scenes/VerifyEmailPage';
 
 export const PopupContext= createContext();
 
@@ -52,6 +53,7 @@ function App() {
         <Route path="/fallimento" element={<MessagePage message={"fallimento"}/>} />
         <Route path="/FAQ" element={<FAQPage/>} />
         <Route path="/chiSiamo" element={<AboutUsPage/>} />
+        <Route path="/verificaEmail" element={<VerifyEmailPage/>} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
       </BrowserRouter>

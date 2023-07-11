@@ -11,6 +11,10 @@ const EditProductPage = () => {
   useEffect(() => {
     getProduct();
   }, []); 
+  useEffect(() => {
+    document.title = "qualoc Modifica Prodotto";  
+
+  }, []);
 
 
   const getProduct = async () => {

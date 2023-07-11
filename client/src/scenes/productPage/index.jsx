@@ -26,6 +26,8 @@ const ProductPage = () => {
 
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
+    document.title = "qualoc Prodotto";  
+
     getProduct();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {}, [option]);
@@ -131,7 +133,7 @@ const ProductPage = () => {
               </span>
             </div>
 
-            <button className="mainButtonGreen" onClick={addToCart}>
+            <button className="cta" onClick={addToCart}>
               <svg
                 className={styles.addToCartIcon}
                 viewBox="0 0 24 24"

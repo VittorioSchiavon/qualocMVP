@@ -79,7 +79,15 @@ export const getStoreProduct = async (req, res) => {
     res.status(400).send(err);
   }
 };
-
+export const getStoreTempProduct = async (req, res) => {
+  try {
+    const products = await Product.find({ shopID: req.params.id, isTemp: true });
+    res.json(products);
+  } catch (err) {
+    
+    res.status(400).send(err);
+  }
+};
 export const addProduct = async (req, res) => {
   /*NON E' SAFE !!!*/
   var imageNames =[]

@@ -7,6 +7,7 @@ import { setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import OrdersSection from "components/OrdersSection";
 import ImageDisplay from "components/ImageDisplay";
+import { PopupContext } from "App";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -17,6 +18,9 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUser();
+      document.title = "qualoc Il Mio Profilo";  
+
+  
   }, []);
 
   console.log(token);
@@ -64,14 +68,14 @@ const ProfilePage = () => {
         <div className={styles.container}>
           <div className="mainTitle">Il mio profilo</div>
           <div className={styles.dataContainer}>
-          <img src={"http://localhost:3001/assets/" + user?.picturePath}
+          <img src={user?.picturePath ? "http://localhost:3001/assets/" + user?.picturePath :  "/assets/user.png"}
             className={styles.img}
           />
 
             <div className={styles.textData}>
               <div className={styles.actionsContainer}>
                 <button
-                  className="mainButtonRed"
+                  className="redLink"
                   onClick={() => {
                     setOffline();
                     dispatch(setLogout());

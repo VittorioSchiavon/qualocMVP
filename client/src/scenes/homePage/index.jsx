@@ -5,44 +5,46 @@ import StoreCarousel from "components/StoreCarousel";
 import ProductCarousel from "components/ProductCarousel";
 import { useMediaQuery } from "@mui/material";
 import Loader from "components/Loader";
+import { useEffect } from "react";
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  useEffect(() => {
+    document.title = "qualoc Homepage";  
+
+  }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
       <div className={styles.firstRow}>
          <div className={styles.hpBackground}>
-          <img src="/assets/hpBackground.png" alt="" />
         </div>
         <div className={styles.leftSection}>
-          <div className={styles.preMotto}>
-            Di più, per <span>tutti</span>
-          </div>
           <div className={styles.motto}>
-            la bellezza del<br></br> commercio locale,<br></br>la comodità dello<br></br> shopping
-            online
+            il meglio di Padova,<br></br>a un click da <span className={styles.highlight}>te</span>
           </div>
           <div className={styles.proContainer}>
             <div className={styles.pro}>
-              <div className={styles.proText}>qualità</div>
+              <div className={styles.proText}>pratico</div>
             </div>
             <div className={styles.pro}>
-              <div className={styles.proText}>etica</div>
+              <div className={styles.proText}>veloce</div>
             </div>
             <div className={styles.pro}>
-              <div className={styles.proText}>comodità</div>
+              <div className={styles.proText}>etico</div>
             </div>
           </div>
           <button
-            className={`${styles.cta} mainButtonGreen`}
+            className={`cta`}
             onClick={() => {
               window.location = "/CreaNegozio";
             }}
           >
-            Crea un negozio
+            Scopri tutti i Negozi
           </button>
         </div>
+        <img src="/assets/online-store.png" alt="store icon" className={styles.firstIcon} />
+
       </div>
       <svg
         id="wave"
@@ -52,8 +54,8 @@ const HomePage = () => {
       >
         <defs>
           <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-            <stop stop-color="rgba(49, 133, 30, 1)" offset="0%"></stop>
-            <stop stop-color="rgba(49, 133, 30, 1)" offset="100%"></stop>
+            <stop stop-color="rgba(34, 130, 28)" offset="0%"></stop>
+            <stop stop-color="rgba(34, 130, 28)" offset="100%"></stop>
           </linearGradient>
         </defs>
         <path
@@ -66,17 +68,17 @@ const HomePage = () => {
         <div className={styles.steps}>
           <div className={styles.step}>
             <div className={styles.num}>🎯</div>
-            <div className={styles.text}>trova il prodotto che desideri</div>
+            <div className={styles.text}>trova il prodotto che cerchi</div>
           </div>
           <div className={styles.step}       style={{
         transform: 'translateY(50px)',
       }}>
-            <div className={styles.num}>👩‍💻</div>
+            <div className={styles.num}><img className={styles.stepImg}src="/assets/megaphone.png" alt="" /></div>
             <div className={styles.text}>contatta il venditore</div>
           </div>
           <div className={styles.step} >
-            <div className={styles.num}>📦</div>
-            <div className={styles.text}>ricevi a casa il prodotto</div>
+            <div className={styles.num}><img className={styles.stepImg}src="/assets/shopping.png" alt="" /></div>
+            <div className={styles.text}>ricevilo a casa in poche ore</div>
           </div>
         </div>
         <button
@@ -96,8 +98,8 @@ const HomePage = () => {
       >
         <defs>
           <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-            <stop stop-color="rgba(49, 133, 30, 1)" offset="0%"></stop>
-            <stop stop-color="rgba(49, 133, 30, 1)" offset="100%"></stop>
+            <stop stop-color="rgba(34, 130, 28)" offset="0%"></stop>
+            <stop stop-color="rgba(34, 130, 28)" offset="100%"></stop>
           </linearGradient>
         </defs>
         <path

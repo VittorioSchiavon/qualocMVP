@@ -5,27 +5,31 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RatingStars from "components/RatingStars";
 import Badge from "components/Badge";
-
-import SendMessage from "components/SendMessage";
 import ImageDisplay from "components/ImageDisplay";
 import { useSelector } from "react-redux";
-import GenericDisplay from "components/GenericDisplay";
 import StoreProduct from "components/StoreProduct";
 import OrdersSection from "components/OrdersSection";
+
 const MyStorePage = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const [store, setStore] = useState(null);
   const [products, setProducts] = useState(null);
+  const [tempProducts, setTempProducts] = useState(null);
+
   const user = useSelector((state) => state.user);
 
   const [fullDescription, setFullDescription] = useState(false);
+  useEffect(() => {
+    document.title = "qualoc Il Mio Negozio";  
 
+  }, []);
   useEffect(() => {
     getStore();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     getProducts();
+    getTempProducts()
   }, [store]);
   const getStore = async () => {
     const response = await fetch(`http://localhost:3001/stores/myStore`, {
@@ -37,7 +41,7 @@ const MyStorePage = () => {
     const data = await response.json();
     setStore(data);
   };
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (isTemp, id) => {
     console.log("deletingggg")
     const response = await fetch(`http://localhost:3001/products/deleteProduct/`+id, {
       method: "GET",
@@ -61,6 +65,14 @@ const MyStorePage = () => {
     });
     const data = await response.json();
     setProducts(data);
+  };
+  const getTempProducts = async () => {
+    var link = "http://localhost:3001/products/store/temp/" + store?._id;
+    const response = await fetch(link, {
+      method: "GET",
+    });
+    const data = await response.json();
+    setTempProducts(data);
   };
 
   if (!store) return null;
@@ -167,6 +179,14 @@ const MyStorePage = () => {
 
           {products?.map((el) => (
             <StoreProduct product={el} deleteFunction={deleteProduct}/>
+          ))}
+        </div>
+        
+        <div className="mainTitle">I miei Prodotti Temporanei</div>
+
+        <div className={styles.carousel}>
+          {tempProducts?.map((el) => (
+            <StoreProduct product={el} deleteFunction={deleteProduct} type={"temp"}/>
           ))}
         </div>
         <div className={styles.ordersSection}>

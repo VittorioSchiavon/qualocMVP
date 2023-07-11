@@ -1,14 +1,16 @@
 import styles from "./searchPage.module.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import GenericDisplay from "components/GenericDisplay";
 import Loader from "components/Loader";
+import { PopupContext } from "App";
 
 const SearchPage = () => {
   const navigate = useNavigate();
+  const [popup, setPopup] = useContext(PopupContext);
 
   var params = useParams();
 
@@ -20,6 +22,8 @@ const SearchPage = () => {
 
 
   useEffect(() => {
+    document.title = "qualoc cerca:'"+params.query+"'";  
+
     getProducts();
     getStores();
     getStoresGPT();
@@ -32,9 +36,14 @@ const SearchPage = () => {
         method: "GET",
       }
     );
-    const data = await response.json();
+    if (!response.ok) {
+      setPopup({ type: "error", message: "Errore nel server, per cortesia riprovare" });
+    }else{
+      const data = await response.json();
 
-    setProducts(data);
+      setProducts(data);
+    }
+
   };
   
   const getStores = async () => {
@@ -44,9 +53,14 @@ const SearchPage = () => {
         method: "GET",
       }
     );
-    const data = await response.json();
+    if (!response.ok) {
+      setPopup({ type: "error", message: "Errore nel server, per cortesia riprovare" });
+    }else{
+      const data = await response.json();
 
-    setStores(data);
+      setStores(data);
+    }
+
   };
 
   
@@ -57,9 +71,12 @@ const SearchPage = () => {
         method: "GET",
       }
     );
-    const data = await response.json();
-
-    setStoresGPT(data);
+    if (!response.ok) {
+      setPopup({ type: "error", message: "Errore nel server, per cortesia riprovare" });
+    }else{
+      const data = await response.json();
+      setStoresGPT(data);
+    }
   };
 
 

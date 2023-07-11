@@ -14,7 +14,7 @@ const CartPage = () => {
   const [popup, setPopup] = useContext(PopupContext);
 
   useEffect(() => {
-    document.title = 'Qualoc Carrello';
+    document.title = 'qualoc Carrello';
     getCart();
     setTot();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -94,7 +94,7 @@ const CartPage = () => {
           {cart?.products.length != 0 && (
             <>
               <div className={styles.tot}>totale: {totalPrice} €</div>
-              <button id={styles.checkout} className="mainButtonGreen" onClick={checkout}>
+              <button id={styles.checkout} className="cta" onClick={checkout}>
                 Procedi all'acquisto
               </button>
             </>

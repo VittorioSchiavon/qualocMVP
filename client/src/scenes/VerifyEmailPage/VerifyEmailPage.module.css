@@ -1,0 +1,34 @@
+.container{
+    padding: 1em;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.negativeMex{
+    font-weight: 900;
+    font-size: 2em;
+    color: var(--red);
+}
+.positiveMex{
+    font-weight: 900;
+    font-size: 2em;
+    color: var(--main);
+    margin: 1em;
+}
+.positiveMexParag{
+    font-weight: 700;
+    font-size: 1.2em;
+    color: var(--mainDarker);
+}
+.link{
+    cursor: pointer;
+    text-decoration: underline;
+    margin: 1em;
+    font-weight: 500;
+
+}

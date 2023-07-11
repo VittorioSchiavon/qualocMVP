@@ -40,7 +40,7 @@ const ChatPage = () => {
     getConversations();
 
     const interval = setInterval(() => {
-      //getConversations();
+      getConversations();
       dispatch(setLastAccess());
     }, 30000);
 

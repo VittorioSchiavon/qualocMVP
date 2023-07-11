@@ -77,12 +77,12 @@ const Form = ({ existingStore }) => {
     //onSubmitProps.resetForm();
     if (savedStore) {
       dispatch(setIsOwner());
-      setPopup({ type: "success", message: "Negozio creato con successo" });
+      setPopup({ type: "success", message: "Negozio modificato con successo" });
       //navigate("/")
     } else {
       setPopup({
         type: "error",
-        message: "Negozio NON creato, per favore riprova",
+        message: "Negozio NON modificato, per favore riprova",
       });
     }
   };

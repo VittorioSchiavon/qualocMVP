@@ -83,7 +83,9 @@
 }
 
 #checkout{
-
 margin: auto;
-    font-size: 1em;
+margin-right: 2em;
+margin-top: 2em;
+
+    font-size: 0.9em;
 }

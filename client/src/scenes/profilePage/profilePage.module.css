@@ -21,9 +21,10 @@
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: left;
     padding: 10px;
     align-items: center;
+    gap: 2em;
 }
 
 
@@ -101,8 +102,8 @@
 }
 
 .img{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
     border-radius: 10px;
 }

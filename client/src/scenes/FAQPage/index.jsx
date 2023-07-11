@@ -2,16 +2,17 @@ import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
 import React, { useEffect, useState } from 'react';
 
-const AboutUsPage = () => {
+const FAQPage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-
   useEffect(() => {
-    document.title = "qualoc Chi Siamo";  
+    document.title = "qualoc FAQ";  
 
   }, []);
+
+
   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -78,36 +79,44 @@ const AboutUsPage = () => {
   return (
     <>
     <Navbar/>
-
-    <div className="about-us-container">
-      <h1 className="about-us-title">About Us</h1>
-      <div className="about-us-content">
-        <p className="about-us-description">
-          Welcome to our website! We are a team of dedicated individuals passionate about delivering high-quality products and services to our customers.
-        </p>
-        <div className="about-us-mission">
-          <h2 className="about-us-mission-title">Our Mission</h2>
-          <p className="about-us-mission-description">
-            Our mission is to provide innovative solutions that meet the needs of our clients and exceed their expectations. We strive to deliver excellence in every project we undertake, leveraging cutting-edge technologies and a customer-centric approach.
-          </p>
-        </div>
-        <div className="about-us-values">
-          <h2 className="about-us-values-title">Our Values</h2>
-          <ul className="about-us-values-list">
-            <li className="about-us-value">Quality: We are committed to delivering products and services of the highest quality, ensuring customer satisfaction.</li>
-            <li className="about-us-value">Innovation: We embrace innovation, constantly seeking new ideas and technologies to stay at the forefront of our industry.</li>
-            <li className="about-us-value">Collaboration: We foster a collaborative environment, working closely with our clients and partners to achieve shared success.</li>
-            <li className="about-us-value">Integrity: We uphold the highest ethical standards, prioritizing transparency, honesty, and trust in all our interactions.</li>
-          </ul>
-        </div>
-        <p className="about-us-explore">
-          Feel free to explore our website and learn more about what we do. We are dedicated to providing exceptional experiences and value to our customers.
-        </p>
-      </div>
+    <div className="faq-page">
+      <h1>Frequently Asked Questions</h1>
+      <div className="faq-container">{renderFAQItems()}</div>
     </div>
+    
+    {isFormSubmitted ? (
+        <div className="form-success-message">
+          Thank you for your message! We will get back to you soon.
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="custom-email-form">
+          <h2>Can't find your question?</h2>
+          <p>Send us your question, and we'll get back to you via email.</p>
+          <div className="form-group">
+            <label htmlFor="email">Your Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="message">Your Question:</label>
+            <textarea
+              id="message"
+              value={message}
+              onChange={handleMessageChange}
+              required
+            />
+          </div>
+          <button type="submit">Send</button>
+        </form>
+      )}
     <Footer/>
     </>
   );
 };
 
-export default AboutUsPage;
+export default FAQPage;

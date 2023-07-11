@@ -15,11 +15,17 @@ body{
 
 }
 :root {
-  --main: #31851e;
-  --mainDarker: #1b4a11;
-  --mainLighter: #caf1c2;
-  --secondary:#f8f4ea;
-  --secondaryDarker:#ece8de;
+  --main: #22821c;
+  --mainLighter: #bfe8bc;
+
+  --mainDarker: #083b06;
+  --gold: #FFC800;
+  --goldLighter: #fff1c0;
+  --goldDarker: #5b4700;
+
+
+  --secondary:#FFF3D1;
+  --secondaryDarker:#D0C5AB;
 
   --red:#851e1e;
   --lightRed: #eab8b8;
@@ -33,6 +39,7 @@ body{
   --darkGray:#5b5b5b;
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
+  --shadow: 1px 1px 6px 1px #C9C9C9;
 
 }
 *{
@@ -125,12 +132,45 @@ button:disabled{
 
 .tag{
   border-radius: 45678px;
-  background-color: var(--lightYellow);
+  border: 2px solid var(--main);
   padding: 10px 20px;
+  font-size: 1em;
   font-weight: 700;
-  color: var(--black);
+  color: var(--mainDarker);
   cursor: pointer;
 }
 .tag:hover{
-  background-color: var(--yellow);
+  background-color: var(--main);
+  color: white;
+}
+
+
+.cta{
+  background-color: var(--gold);
+  color: var(--goldDarker);
+  font-weight: 800;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 34567px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*box-shadow: 0 3px 5px 0 #0000001A;*/
+}
+.cta:hover{
+  background-color: var(--goldDarker);
+  color: white;
+}
+
+
+.redLink{
+  all: unset;
+  text-decoration: underline;
+  color: var(--red);
+  font-weight: 700;
+  text-align: right;
+  width: 100%;
+  cursor: pointer;
 }

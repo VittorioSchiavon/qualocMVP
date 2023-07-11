@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
-import { TextField } from "@mui/material";
 import styles from "./loginPage.module.css";
-import Popup from "components/Popup";
 import { PopupContext } from "App";
 
 const registerSchema = yup.object().shape({
@@ -68,8 +66,8 @@ const Form = () => {
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
     if (savedUser) {
-      setPageType("login");
-        setPopup({ type: "success", message: "Account creato con successo, per favore accedi" });      
+      navigate("/verificaEmail")
+        setPopup({ type: "success", message: "Account creato con successo" });      
     }else{
       setPopup({ type: "error", message: "Account NON creato, per favore riprova" });
     }
@@ -84,7 +82,6 @@ const Form = () => {
     if (loggedInResponse.ok){
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
-    console.log("here oklgofk");
     console.log(loggedIn);
     if (loggedIn) {
       dispatch(

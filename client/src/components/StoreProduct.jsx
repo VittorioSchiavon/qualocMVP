@@ -1,10 +1,5 @@
 import styles from "./StoreProduct.module.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import { useSelector } from "react-redux";
-import { PopupContext } from "App";
-import Loader from "./Loader";
-
 const StoreProduct = (props) => {
   const product = props.product;
   const navigate = useNavigate();
@@ -13,7 +8,7 @@ const StoreProduct = (props) => {
   return (
     <>
       <div className={styles.container} >
-        {product?.picture ? (
+        {product?.picture!=null && typeof(product?.picture)!=undefined && product?.picture.length!=0 && !product.isTemp? (
           <img
             src={Array.isArray(product?.picture)? "http://localhost:3001/assets/"+product?.picture[0]: "http://localhost:3001/assets/"+product?.picture} 
             alt=""
@@ -21,12 +16,12 @@ const StoreProduct = (props) => {
             onClick={() => navigate("/prodotto/"+product._id)}
           />
         ) : (
-          <img src="/assets/productIcon.png" />
+          <img  className={styles.image} src="/assets/product.png" />
         )}
         <div className={styles.name} onClick={() => navigate("/prodotto/"+product._id)}>{product.name}</div>
         <div className={styles.buttonContainer}>
           <button onClick={() => navigate("/modificaProdotto/"+product._id)} className="mainButtonYellow">modifica</button>
-          <button onClick={() => props.deleteFunction(product._id)} className="mainButtonRed">rimuovi</button>
+          <button onClick={() => props.deleteFunction(props.type=="temp", product._id)} className="mainButtonRed">rimuovi</button>
         </div>
         
       </div>
